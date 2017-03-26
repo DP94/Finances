@@ -1,0 +1,42 @@
+.login-input {
+	display: inline-block;
+}
+
+.login-user-input {
+	display: block;
+}
+
+.login-form {
+	display: inline-block;
+	position: absolute;
+    left: 19%;
+    top: 33%;
+}
+
+
+.login-container {
+	padding-top: 1%;
+	background-color: white;
+	border-radius: 5px;
+	text-align: center;
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -100px 0 0 -150px;
+}
+
+.login-form-padded {
+	padding: 5px;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.success {
+	color: green;
+	font-weight: bold;
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="FinancesEAR">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
+        <dependent-module archiveName="FinancesClient.jar" deploy-path="/lib" handle="module:/resource/FinancesClient/FinancesClient">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="FinancesWeb-1.war" deploy-path="/" handle="module:/resource/FinancesWeb/FinancesWeb">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="FinancesEJB-1.jar" deploy-path="/" handle="module:/resource/FinancesEJB/FinancesEJB">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javax.ejb-api-3.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/javax/ejb/javax.ejb-api/3.2/javax.ejb-api-3.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javax.transaction-api-1.2.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/javax/transaction/javax.transaction-api/1.2/javax.transaction-api-1.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="FinancesEJBClient-1.jar" deploy-path="/lib" handle="module:/resource/FinancesEJBClient/FinancesEJBClient">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="FinancesJPA-1.jar" deploy-path="/lib" handle="module:/resource/FinancesJPA/FinancesJPA">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>

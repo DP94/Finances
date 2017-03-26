@@ -1,0 +1,83 @@
+.nav-header {
+	background: rgba(35, 35, 35, 0.63);
+    border-bottom: 1px solid gray;
+}
+
+.nav-sidebar {
+	height: 120px;
+	width: 265px;
+	background: #555;
+	position: absolute;
+	z-index: 20;
+}
+
+.nav-header-button {
+	background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    outline: none;
+}
+
+.nav-header-button:hover {
+	text-shadow: 2px 2px 6px #807C6E;
+}
+
+.options-item-glyph, .options-item-action {
+	display: inline-block;
+}
+
+.options-item {
+	cursor: pointer;
+}
+
+.options-item-glyph {
+    font-size: 32px;
+    height: 60px;
+    width: 60px;
+    padding: 13px;
+    text-align: center;
+}
+
+.options-item-action {
+    font-size: 24px;
+    height: 100%;
+    width: 75%;
+    position: relative;
+    bottom: 5px;
+}
+
+.nav-sidebar-options-item:hover {
+	background: green;
+}
+
+.content-panel {
+	padding: 5px;
+}
+
+.perspective-content {
+	background: lightblue;
+	height: 300px;
+}
+
+.finances-menu-button {
+	width: 100%;
+	text-align: left;
+	font-size: 24px;
+	background: green;
+	border: none;
+	outline: none;
+	color: white;
+	padding: 5px;
+	border-bottom: 1px solid black;
+}
+
+.finances-menu-button-icon {
+	font-size: 32px;
+}
+
+.finances-menu-button-label {
+	position: relative;
+	top: -4px;
+	left: 20px;
+}

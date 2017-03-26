@@ -1,0 +1,3 @@
+# Module Finances
+# RPC service class, partial path of RPC policy file
+com.gwtplatform.dispatch.rpc.shared.DispatchService, 7A5477C61DBAD44478CC21E3E5BE6EDE.gwt.rpc

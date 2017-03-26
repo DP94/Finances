@@ -1,0 +1,23 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <g:HTMLPanel>
+    	<div class="login-container">
+    		<div class = "login-feedback">
+	    			<g:Label ui:field="feedbackLabel" styleName="login-feedback-label"></g:Label>
+    		</div>
+	    	<div class="login-form">
+	    		<div class="login-input">
+				    <div class="user-input-username login-form-padded">
+				    	<g:TextBox ui:field="username" styleName="login-user-input"></g:TextBox>
+				    </div>
+				    <div class="user-input-password login-form-padded">
+				    	<g:PasswordTextBox ui:field="password" styleName="login-user-input"></g:PasswordTextBox>
+				    </div>
+				</div>
+				<div class="login-submit">
+			    	<g:Button ui:field="submit">Go</g:Button>
+			    </div>
+			</div>
+		</div>
+    </g:HTMLPanel>
+</ui:UiBinder>
