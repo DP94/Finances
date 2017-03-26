@@ -24,12 +24,12 @@
    
    <hibernate.version>5.2.6.Final</hibernate.version>
    
-   <gwt.version>2.7.0</gwt.version>
-        <gwtp.version>1.4</gwtp.version>
+ 		<version.wildfly.maven.plugin>1.1.0.Final</version.wildfly.maven.plugin>
+   		<gwt.version>2.8.0</gwt.version>
+        <gwtp.version>1.6</gwtp.version>
         <gin.version>2.1.2</gin.version>
         <!-- server -->
-        <guice.version>3.0</guice.version>
-        <appengine.version>1.9.17</appengine.version>
+        <guice.version>4.1.0</guice.version>
         <objectify.version>5.1.4</objectify.version>
         
         <!-- testing -->
@@ -39,7 +39,7 @@
         <java.ejb.version>3.2</java.ejb.version>
 
         <!-- maven -->
-        <gwt-maven-plugin.version>2.7.0</gwt-maven-plugin.version>
+        <gwt-maven-plugin.version>2.8.0</gwt-maven-plugin.version>
         <maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
         <maven-war-plugin.version>2.5</maven-war-plugin.version>
@@ -78,6 +78,16 @@
             <artifactId>gwtp-dispatch-rpc-shared</artifactId>
             <version>${gwtp.version}</version>
         </dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<version>${gwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-dev</artifactId>
+			<version>${gwt.version}</version>
+		</dependency>
 		
 		<dependency>
 			<groupId>org.gwtbootstrap3</groupId>
@@ -106,36 +116,7 @@
             <artifactId>gin</artifactId>
             <version>${gin.version}</version>
         </dependency>
-        
-        <!-- Google App Engine dependencies -->
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-api-1.0-sdk</artifactId>
-            <version>${appengine.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-api-labs</artifactId>
-            <version>${appengine.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-api-stubs</artifactId>
-            <version>${appengine.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-testing</artifactId>
-            <version>${appengine.version}</version>
-            <scope>test</scope>
-        </dependency>
 
-        <dependency>
-            <groupId>com.googlecode.objectify</groupId>
-            <artifactId>objectify</artifactId>
-            <version>${objectify.version}</version>
-        </dependency>
 		<!-- https://mvnrepository.com/artifact/javax.ejb/javax.ejb-api -->
 		<dependency>
 		    <groupId>javax.ejb</groupId>
@@ -200,6 +181,14 @@
 	                    <encoding>${project.build.sourceEncoding}</encoding>
 	                </configuration>
 	            </plugin>
+	            <plugin>
+					<groupId>org.wildfly.plugins</groupId>
+					<artifactId>wildfly-maven-plugin</artifactId>
+					<version>${version.wildfly.maven.plugin}</version>
+					<configuration>
+						<skip>true</skip>
+					</configuration>
+				</plugin>
 	   </plugins>
    </build>
 </project>
