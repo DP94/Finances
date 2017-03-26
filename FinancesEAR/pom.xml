@@ -21,7 +21,7 @@
              <jarModule>
 		  		<groupId>FinancesClient</groupId>
 		  		<artifactId>FinancesClient</artifactId>
-		  		<bundleFileName>FinancesClient.jar</bundleFileName>
+		  		<bundleFileName>FinancesClient-1.jar</bundleFileName>
              </jarModule>
           </modules>
         </configuration>
