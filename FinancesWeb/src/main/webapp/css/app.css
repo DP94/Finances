@@ -4,3 +4,50 @@
 	padding: 0px;
 	margin: 0px;
 }
+
+.perspective-content {
+	background: white;
+    height: 600px;
+}
+
+.perspective-content-topbar {
+	color: white;
+	background: #008aff;
+    height: 10%;
+    border-bottom: 3px solid #727272;
+}
+
+.perspective-content-close {
+	background: none;
+    border: none;
+    color: white;
+    outline: none;
+    float: right;
+    padding: 10px;
+}
+
+.perspective-content-main {
+    border: 3px solid rgba(114, 114, 114, 0.5);
+}
+
+.content-currency, .perspective-content-close {
+	font-size: 32px;
+}
+
+.content {
+	display: inline-block;
+	padding: 10px;
+}
+
+.perspective-content-bar-content {
+	font-size: 24px;
+}
+
+.content-currency {
+	float: left;
+}
+
+.content-title {
+	position: relative;
+    left: 42%;
+}

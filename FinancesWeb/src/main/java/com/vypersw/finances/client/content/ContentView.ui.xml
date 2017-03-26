@@ -1,10 +1,19 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui">
-    <g:HTMLPanel ui:field="main">
+    <g:HTMLPanel ui:field="main" styleName="perspective-content-main">
     	<div class="perspective-content">
-    		<g:Label ui:field="title"></g:Label>
-    		<g:Button ui:field="close">Close</g:Button>
+    		<div class="perspective-content-topbar">
+    			<div class="perspective-content-bar-content">
+    				<span class="content content-currency"><g:Label ui:field="currency" styleName="glyphicon glyphicon-gbp"></g:Label></span>
+		   			<span class="content content-title"><g:Label ui:field="title"></g:Label></span>
+		    		<g:Button ui:field="close" styleName="perspective-content-close">
+		    			<span class="glyphicon glyphicon-remove"/>
+		    		</g:Button>
+		    	</div>
+    		</div>
+    		<div class="perspective-content-body">
+    		</div>
     	</div>
     </g:HTMLPanel>
 </ui:UiBinder>
