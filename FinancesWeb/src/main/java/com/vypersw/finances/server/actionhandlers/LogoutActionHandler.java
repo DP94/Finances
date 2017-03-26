@@ -32,14 +32,11 @@ public class LogoutActionHandler implements ActionHandler<LogoutAction, LogoutAc
 
 	@Override
 	public Class<LogoutAction> getActionType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void undo(LogoutAction action, LogoutActionResult result, ExecutionContext context) throws ActionException {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	

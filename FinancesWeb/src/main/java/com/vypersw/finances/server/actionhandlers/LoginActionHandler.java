@@ -13,9 +13,9 @@ public class LoginActionHandler implements ActionHandler<LoginAction, LoginActio
 	private LoginService service = (LoginService) LocalEJBServiceLocator.getInstance().getLoginService();
 	
 	@Override
-	public LoginActionResult execute(LoginAction arg0, ExecutionContext arg1) throws ActionException {
-		String username = arg0.getUsername();
-		String password = arg0.getPassword();
+	public LoginActionResult execute(LoginAction action, ExecutionContext context) throws ActionException {
+		String username = action.getUsername();
+		String password = action.getPassword();
 
 		boolean test = service.login(username, password);
 		
@@ -27,14 +27,11 @@ public class LoginActionHandler implements ActionHandler<LoginAction, LoginActio
 
 	@Override
 	public Class<LoginAction> getActionType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void undo(LoginAction arg0, LoginActionResult arg1, ExecutionContext arg2) throws ActionException {
-		// TODO Auto-generated method stub
-		
+	public void undo(LoginAction arg0, LoginActionResult arg1, ExecutionContext arg2) throws ActionException {	
 	}
 
 

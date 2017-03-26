@@ -22,7 +22,6 @@ public class LoginBean extends AbstractBean implements LoginService {
      * Default constructor. 
      */
     public LoginBean() {
-        // TODO Auto-generated constructor stub
     }
 
 	@Override

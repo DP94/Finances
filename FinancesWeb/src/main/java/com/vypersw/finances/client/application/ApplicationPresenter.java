@@ -65,7 +65,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 
 	@Override
 	protected void onReset() {
-		// TODO Auto-generated method stub
 		super.onReset();
 	}
 

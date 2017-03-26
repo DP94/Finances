@@ -80,7 +80,6 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 		
 		@Override
 		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
 			Window.alert(caught.getMessage());
 		}
 	};

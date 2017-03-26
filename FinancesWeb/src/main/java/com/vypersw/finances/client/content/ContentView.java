@@ -34,7 +34,6 @@ public class ContentView extends ViewWithUiHandlers<ContentUiHandlers> implement
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
 				getUiHandlers().closePerspective();
 			}
 		});
