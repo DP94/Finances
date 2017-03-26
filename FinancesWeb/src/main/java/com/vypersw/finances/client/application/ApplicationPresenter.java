@@ -84,6 +84,9 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 		@Override
 		public void onSuccess(LogoutActionResult result) {
 			getView().closeMenu();
+			for(ContentPresenter presenter : perspectives.values()) {
+				removeFromSlot(SLOT_content, presenter);
+			}
 			PlaceRequest request = new PlaceRequest.Builder()
 					.nameToken(NameTokens.login)
 					.with("feedbackText", "Successfully logged out")
@@ -94,18 +97,19 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 	};
 
 	@Override
-	public void openPerspective() {
+	public void openPerspective(ContentType type) {
 		ContentPresenter presenter = presenterProvider.get();
-		presenter.updateTitle("Add expense");
-		perspectives.put(ContentType.ADD_EXPENSE, presenter);
+		presenter.updateTitle(type.getName());
+		presenter.setType(type);
+		perspectives.put(type, presenter);
 		setInSlot(SLOT_content, presenter);
 		getView().closeMenu();
 	}
 	
 	@Override
-	public void closePerspective() {
-		ContentPresenter presenter = perspectives.get(ContentType.ADD_EXPENSE);
+	public void closePerspective(ContentType type) {
+		ContentPresenter presenter = perspectives.get(type);
 		removeFromSlot(SLOT_content, presenter);
-		perspectives.remove(ContentType.ADD_EXPENSE);
+		perspectives.remove(type);
 	}
 }

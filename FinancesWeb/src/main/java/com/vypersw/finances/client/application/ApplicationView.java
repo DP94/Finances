@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.vypersw.finances.client.content.ContentType;
 import com.vypersw.finances.client.widget.MenuButton;
 
 public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> implements ApplicationPresenter.MyView {
@@ -36,7 +37,19 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     MenuButton logout;
     
     @UiField
-    MenuButton add;
+    MenuButton addExpense;
+    
+    @UiField
+    MenuButton addIncome;
+    
+    @UiField
+    MenuButton accountManagement;
+    
+    @UiField
+    MenuButton reports;
+    
+    @UiField
+    MenuButton userManagement;
 
     @Inject
     public ApplicationView(Binder uiBinder) {
@@ -59,11 +72,43 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
 			}
 		});
     	
-    	add.addClickHandler(new ClickHandler() {
+    	addExpense.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				getUiHandlers().openPerspective();
+				getUiHandlers().openPerspective(ContentType.ADD_EXPENSE);
+			}
+		});
+    	
+    	addIncome.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				getUiHandlers().openPerspective(ContentType.ADD_INCOME);
+			}
+		});
+    	
+    	accountManagement.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				getUiHandlers().openPerspective(ContentType.ACCOUNT_MANAGEMENT);
+			}
+		});
+    	
+    	reports.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				getUiHandlers().openPerspective(ContentType.REPORTS);
+			}
+		});
+    	
+    	userManagement.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				getUiHandlers().openPerspective(ContentType.USER_SETTINGS);
 			}
 		});
     }

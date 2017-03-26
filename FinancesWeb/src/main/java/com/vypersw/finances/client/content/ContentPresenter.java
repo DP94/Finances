@@ -19,6 +19,7 @@ public class ContentPresenter extends PresenterWidget<ContentPresenter.MyView> i
     public static final Type<RevealContentHandler<?>> SLOT_Perspective = new Type<RevealContentHandler<?>>();
 
     private ApplicationPresenter container;
+    private ContentType type;
     
 	@Inject
 	public ContentPresenter(EventBus eventBus, MyView view, ApplicationPresenter presenter) {
@@ -34,12 +35,21 @@ public class ContentPresenter extends PresenterWidget<ContentPresenter.MyView> i
     
     @Override
     public void closePerspective() {
-    	container.closePerspective();
+    	container.closePerspective(type);
     }
     
     public void updateTitle(String text) {
     	getView().setTitle(text);
     }
+    
+	public ContentType getType() {
+		return type;
+	}
+
+	public void setType(ContentType type) {
+		this.type = type;
+	}
+
 
     
 }
