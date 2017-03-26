@@ -4,11 +4,11 @@
 }
 
 .nav-sidebar {
-	height: 120px;
-	width: 265px;
+	width: 300px;
 	background: #555;
 	position: absolute;
 	z-index: 20;
+	border: 2px solid black;
 }
 
 .nav-header-button {
@@ -59,10 +59,9 @@
 	width: 100%;
 	text-align: left;
 	font-size: 24px;
-	background: green;
 	border: none;
 	outline: none;
-	color: white;
+	color: black;
 	padding: 5px;
 	border-bottom: 1px solid black;
 }

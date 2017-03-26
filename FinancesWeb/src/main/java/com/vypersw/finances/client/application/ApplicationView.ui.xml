@@ -13,7 +13,11 @@
 	    		<div class="nav-sidebar-container">
 	    			<div class="nav-sidebar-options">
    						<div class="nav-sidebar-options-container">
-							<widget:MenuButton ui:field="add" iconStyle="glyphicon glyphicon-plus options-item" text="Add"></widget:MenuButton>
+							<widget:MenuButton ui:field="add" iconStyle="glyphicon glyphicon-plus options-item" text="Add expense"></widget:MenuButton>
+							<widget:MenuButton ui:field="addIncome" iconStyle="glyphicon glyphicon-piggy-bank" text="Add income"></widget:MenuButton>
+							<widget:MenuButton ui:field="accountManagement" iconStyle="glyphicon glyphicon-folder-open" text="Account management"></widget:MenuButton>
+							<widget:MenuButton ui:field="reports" iconStyle="glyphicon glyphicon-signal" text="Reports"></widget:MenuButton>
+							<widget:MenuButton ui:field="userManagement" iconStyle="glyphicon glyphicon-user" text="User settings"></widget:MenuButton>
    							<widget:MenuButton ui:field="logout" iconStyle="glyphicon glyphicon-off" text="Logout"></widget:MenuButton>
    						</div>
 	    			</div>
