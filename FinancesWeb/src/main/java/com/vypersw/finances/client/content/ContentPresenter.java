@@ -1,4 +1,4 @@
-package com.vypersw.finances.client.perspective;
+package com.vypersw.finances.client.content;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
@@ -9,9 +9,9 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.vypersw.finances.client.application.ApplicationPresenter;
-public class PerspectivePresenter extends PresenterWidget<PerspectivePresenter.MyView> implements PerspectiveUiHandlers  {
+public class ContentPresenter extends PresenterWidget<ContentPresenter.MyView> implements ContentUiHandlers  {
 	
-    public interface MyView extends View, HasUiHandlers<PerspectiveUiHandlers>  {
+    public interface MyView extends View, HasUiHandlers<ContentUiHandlers>  {
     	void setTitle(String text);
     }
     
@@ -21,7 +21,7 @@ public class PerspectivePresenter extends PresenterWidget<PerspectivePresenter.M
     private ApplicationPresenter container;
     
 	@Inject
-	public PerspectivePresenter(EventBus eventBus, MyView view, ApplicationPresenter presenter) {
+	public ContentPresenter(EventBus eventBus, MyView view, ApplicationPresenter presenter) {
 		super(eventBus, view);
 		this.container = presenter;
 		getView().setUiHandlers(this);

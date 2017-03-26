@@ -1,12 +1,12 @@
-package com.vypersw.finances.client.perspective;
+package com.vypersw.finances.client.content;
 
-public enum PerspectiveType {
+public enum ContentType {
 	
 	ADD_EXPENSE("Add expense");
 	
 	private String name;
 	
-	PerspectiveType(String name) {
+	ContentType(String name) {
 		this.name = name;
 	}
 	

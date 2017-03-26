@@ -23,8 +23,8 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.vypersw.finances.client.actions.LogoutAction;
-import com.vypersw.finances.client.perspective.PerspectivePresenter;
-import com.vypersw.finances.client.perspective.PerspectiveType;
+import com.vypersw.finances.client.content.ContentPresenter;
+import com.vypersw.finances.client.content.ContentType;
 import com.vypersw.finances.client.place.NameTokens;
 import com.vypersw.finances.client.results.LogoutActionResult;
 
@@ -39,9 +39,9 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     private DispatchAsync dispatchAsync;
     
     @Inject
-    private Provider<PerspectivePresenter> presenterProvider;
+    private Provider<ContentPresenter> presenterProvider;
     
-    private Map<PerspectiveType, PerspectivePresenter> perspectives = new HashMap<>();
+    private Map<ContentType, ContentPresenter> perspectives = new HashMap<>();
     
     @ContentSlot
     public static final Type<RevealContentHandler<?>> SLOT_content = new Type<RevealContentHandler<?>>();
@@ -95,17 +95,17 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 
 	@Override
 	public void openPerspective() {
-		PerspectivePresenter presenter = presenterProvider.get();
+		ContentPresenter presenter = presenterProvider.get();
 		presenter.updateTitle("Add expense");
-		perspectives.put(PerspectiveType.ADD_EXPENSE, presenter);
+		perspectives.put(ContentType.ADD_EXPENSE, presenter);
 		setInSlot(SLOT_content, presenter);
 		getView().closeMenu();
 	}
 	
 	@Override
 	public void closePerspective() {
-		PerspectivePresenter presenter = perspectives.get(PerspectiveType.ADD_EXPENSE);
+		ContentPresenter presenter = perspectives.get(ContentType.ADD_EXPENSE);
 		removeFromSlot(SLOT_content, presenter);
-		perspectives.remove(PerspectiveType.ADD_EXPENSE);
+		perspectives.remove(ContentType.ADD_EXPENSE);
 	}
 }

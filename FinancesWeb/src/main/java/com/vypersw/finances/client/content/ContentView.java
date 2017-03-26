@@ -1,4 +1,4 @@
-package com.vypersw.finances.client.perspective;
+package com.vypersw.finances.client.content;
 
 import javax.inject.Inject;
 
@@ -13,8 +13,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
-public class PerspectiveView extends ViewWithUiHandlers<PerspectiveUiHandlers> implements PerspectivePresenter.MyView {
-    interface Binder extends UiBinder<Widget, PerspectiveView> {
+public class ContentView extends ViewWithUiHandlers<ContentUiHandlers> implements ContentPresenter.MyView {
+    interface Binder extends UiBinder<Widget, ContentView> {
     }
 
     @UiField
@@ -27,7 +27,7 @@ public class PerspectiveView extends ViewWithUiHandlers<PerspectiveUiHandlers> i
     Button close;
 
     @Inject
-    PerspectiveView(Binder uiBinder) {
+    ContentView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
         
         close.addClickHandler(new ClickHandler() {
@@ -42,7 +42,7 @@ public class PerspectiveView extends ViewWithUiHandlers<PerspectiveUiHandlers> i
     
     @Override
     public void setInSlot(Object slot, IsWidget content) {
-    	if (slot == PerspectivePresenter.SLOT_Perspective) {
+    	if (slot == ContentPresenter.SLOT_Perspective) {
     		main.clear();
     		if (content != null) {
     			main.add(content);
