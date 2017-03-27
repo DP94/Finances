@@ -13,12 +13,15 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
-public class ContentView extends ViewWithUiHandlers<ContentUiHandlers> implements ContentPresenter.MyView {
-    interface Binder extends UiBinder<Widget, ContentView> {
+public class ContentContainerView extends ViewWithUiHandlers<ContentContainerUiHandlers> implements ContentContainerPresenter.MyView {
+    interface Binder extends UiBinder<Widget, ContentContainerView> {
     }
 
     @UiField
     HTMLPanel main;
+    
+    @UiField
+    HTMLPanel contentContainer;
     
     @UiField
     Label title;
@@ -27,7 +30,7 @@ public class ContentView extends ViewWithUiHandlers<ContentUiHandlers> implement
     Button close;
 
     @Inject
-    ContentView(Binder uiBinder) {
+    ContentContainerView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
         
         close.addClickHandler(new ClickHandler() {
@@ -41,10 +44,10 @@ public class ContentView extends ViewWithUiHandlers<ContentUiHandlers> implement
     
     @Override
     public void setInSlot(Object slot, IsWidget content) {
-    	if (slot == ContentPresenter.SLOT_Perspective) {
-    		main.clear();
+    	if (slot == ContentContainerPresenter.SLOT_Perspective) {
+    		contentContainer.clear();
     		if (content != null) {
-    			main.add(content);
+    			contentContainer.add(content);
     		}
     	} else {
         	super.setInSlot(slot, content);

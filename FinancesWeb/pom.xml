@@ -10,7 +10,7 @@
   <packaging>war</packaging>
   
   <build>
-  	<finalName>${project.artifactId}</finalName>  
+  	<finalName>FinancesWeb</finalName>  
   	<plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -20,7 +20,6 @@
           <execution>
             <configuration>
               <module>com.vypersw.finances.Finances</module>
-              <finalName>${project.artifactId}</finalName>
             </configuration>
             <goals>
               <goal>compile</goal>

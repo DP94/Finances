@@ -127,9 +127,10 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     
     @Override
     public void removeFromSlot(Object slot, IsWidget content) {
-    	super.removeFromSlot(slot, content);
     	if (slot == ApplicationPresenter.SLOT_content) {
-    		contentPanel.clear();
+    		contentPanel.remove(content);
+    	} else {
+        	super.removeFromSlot(slot, content);
     	}
     }
 

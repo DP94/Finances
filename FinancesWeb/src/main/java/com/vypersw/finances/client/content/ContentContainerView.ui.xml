@@ -13,6 +13,8 @@
 		    	</div>
     		</div>
     		<div class="perspective-content-body">
+    			<g:HTMLPanel ui:field="contentContainer">
+    			</g:HTMLPanel>
     		</div>
     	</div>
     </g:HTMLPanel>

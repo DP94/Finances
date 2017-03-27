@@ -1,36 +1,48 @@
 package com.vypersw.finances.client.content;
 
-import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.ContentSlot;
-import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
+import com.vypersw.finances.client.abstractpresenter.AbstractContentPresenter;
 import com.vypersw.finances.client.application.ApplicationPresenter;
-public class ContentPresenter extends PresenterWidget<ContentPresenter.MyView> implements ContentUiHandlers  {
+import com.vypersw.finances.client.usermanagement.usermanagementform.UserManagementFormPresenter;
+
+public class ContentContainerPresenter extends PresenterWidget<ContentContainerPresenter.MyView> implements ContentContainerUiHandlers  {
 	
-    public interface MyView extends View, HasUiHandlers<ContentUiHandlers>  {
+    public interface MyView extends View, HasUiHandlers<ContentContainerUiHandlers>  {
     	void setTitle(String text);
     }
     
-    @ContentSlot
-    public static final Type<RevealContentHandler<?>> SLOT_Perspective = new Type<RevealContentHandler<?>>();
-
+    public static final Slot<AbstractContentPresenter<?>> SLOT_Perspective = new Slot<>();
+    
     private ApplicationPresenter container;
     private ContentType type;
+    @Inject
+    private UserManagementFormPresenter presenter;
     
 	@Inject
-	public ContentPresenter(EventBus eventBus, MyView view, ApplicationPresenter presenter) {
+	public ContentContainerPresenter(EventBus eventBus, MyView view, ApplicationPresenter presenter) {
 		super(eventBus, view);
 		this.container = presenter;
 		getView().setUiHandlers(this);
+
 
 	}
 
     protected void onBind() {
         super.onBind();
+    }
+    
+    @Override
+    protected void onReveal() {
+    	switch(type) {
+	    	case USER_SETTINGS:
+	        	setInSlot(SLOT_Perspective, presenter);
+    	}
+
     }
     
     @Override
