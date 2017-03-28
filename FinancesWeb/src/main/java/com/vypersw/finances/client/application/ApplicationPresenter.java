@@ -26,6 +26,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.vypersw.finances.client.actions.LogoutAction;
 import com.vypersw.finances.client.content.ContentContainerPresenter;
 import com.vypersw.finances.client.content.ContentType;
+import com.vypersw.finances.client.i18n.FinancesConstants;
 import com.vypersw.finances.client.place.NameTokens;
 import com.vypersw.finances.client.results.LogoutActionResult;
 
@@ -36,6 +37,9 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     
     @Inject
     private PlaceManager placeManager;
+    
+    @Inject
+    private FinancesConstants constants;
     
     private DispatchAsync dispatchAsync;
     
@@ -88,7 +92,7 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 			}
 			PlaceRequest request = new PlaceRequest.Builder()
 					.nameToken(NameTokens.login)
-					.with("feedbackText", "Successfully logged out")
+					.with("feedbackText", constants.successfullyLoggedOut())
 					.with("feedbackType", "success")
 					.build();
 			placeManager.revealPlace(request);

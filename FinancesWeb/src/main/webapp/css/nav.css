@@ -1,6 +1,7 @@
-.nav-header {
+.nav-header-app {
 	background: rgba(35, 35, 35, 0.63);
     border-bottom: 1px solid gray;
+    padding: 3px 1px;
 }
 
 .nav-sidebar {

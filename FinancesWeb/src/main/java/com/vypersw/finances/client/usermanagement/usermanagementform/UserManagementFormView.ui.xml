@@ -1,5 +1,18 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-             xmlns:g="urn:import:com.google.gwt.user.client.ui">
-    <g:HTMLPanel ui:field="main">hello</g:HTMLPanel>
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
+    <ui:with field="constants" type="com.vypersw.finances.client.i18n.FinancesConstants"/>
+    <g:HTMLPanel ui:field="main">
+    
+	    <b:TabPanel tabPosition="above">
+	    	<b:Tab heading="{constants.create}">
+	    	</b:Tab>
+	    	<b:Tab heading="{constants.modify}">
+	    	</b:Tab>
+	    	<b:Tab heading="{constants.preferences}">
+	    	</b:Tab>
+    	</b:TabPanel>
+    
+    </g:HTMLPanel>
 </ui:UiBinder>

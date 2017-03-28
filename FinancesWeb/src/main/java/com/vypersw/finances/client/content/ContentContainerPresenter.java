@@ -41,6 +41,13 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
     	switch(type) {
 	    	case USER_SETTINGS:
 	        	setInSlot(SLOT_Perspective, presenter);
+	        	break;
+	    	case ADD_EXPENSE:
+    		case ADD_INCOME:
+    		case ACCOUNT_MANAGEMENT:
+    		case REPORTS:
+	    	default:
+	        	break;
     	}
 
     }

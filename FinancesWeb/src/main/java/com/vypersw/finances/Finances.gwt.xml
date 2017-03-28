@@ -8,7 +8,7 @@
 
     <!-- Default css -->
     <inherits name='com.google.gwt.user.theme.standard.Standard' />
-	 <inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
+	<inherits name="com.github.gwtbootstrap.Bootstrap"/>
     <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
     <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
 
@@ -16,7 +16,7 @@
     <inherits name='com.gwtplatform.dispatch.rpc.DispatchRpc' />
     <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint' />
 
-	
+	<extend-property name="locale" values="en_GB"/>
 
     <source path='client' />
     <source path='shared' />
