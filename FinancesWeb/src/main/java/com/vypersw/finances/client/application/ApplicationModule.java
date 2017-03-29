@@ -1,10 +1,8 @@
 package com.vypersw.finances.client.application;
 
-import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.vypersw.finances.client.content.ContentContainerPresenter;
 import com.vypersw.finances.client.content.ContentContainerView;
-import com.vypersw.finances.client.i18n.FinancesConstants;
 import com.vypersw.finances.client.usermanagement.usermanagementform.UserManagementFormPresenter;
 import com.vypersw.finances.client.usermanagement.usermanagementform.UserManagementFormView;
 

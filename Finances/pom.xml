@@ -14,7 +14,7 @@
   	<module>../FinancesEJBClient</module>
   	<module>../FinancesEAR</module>
   </modules>
-
+	<repositories>
 	<repository>
 		<id>sonatype</id>
 		<url>http://oss.sonatype.org/content/repositories/snapshots</url>
@@ -25,7 +25,7 @@
 			<enabled>false</enabled>
 		</releases>
 	</repository>
-  
+  </repositories>
   <properties>
    <target.jdk>1.8</target.jdk>
    
@@ -101,12 +101,6 @@
 			<version>${gwt.version}</version>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.gwtbootstrap3</groupId>
-			<artifactId>gwtbootstrap3</artifactId>
-			<version>0.9.4</version>
-		</dependency>
-
         <!-- DI -->
         <dependency>
             <groupId>com.google.inject</groupId>

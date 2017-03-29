@@ -9,8 +9,8 @@
   <artifactId>FinancesWeb</artifactId>
   <packaging>war</packaging>
   
+  
   <build>
-  	<finalName>FinancesWeb</finalName>  
   	<plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -60,12 +60,6 @@
             <groupId>com.gwtplatform</groupId>
             <artifactId>gwtp-dispatch-rpc-shared</artifactId>
             </dependency>
-		
-		<dependency>
-			<groupId>org.gwtbootstrap3</groupId>
-			<artifactId>gwtbootstrap3</artifactId>
-			</dependency>
-
         <!-- DI -->
         <dependency>
             <groupId>com.google.inject</groupId>

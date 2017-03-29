@@ -17,13 +17,22 @@
         <version>2.10.1</version>
         <configuration>
            <defaultLibBundleDir>lib</defaultLibBundleDir>
-           <modules>
-             <jarModule>
-		  		<groupId>FinancesClient</groupId>
-		  		<artifactId>FinancesClient</artifactId>
-		  		<bundleFileName>FinancesClient-1.jar</bundleFileName>
-             </jarModule>
-          </modules>
+			<modules>
+				<ejbModule>
+					<groupId>FinancesEJB</groupId>
+					<artifactId>FinancesEJB</artifactId>
+				</ejbModule>
+				<webModule>
+		
+					<groupId>FinancesWeb</groupId>
+					<artifactId>FinancesWeb</artifactId>
+				</webModule>
+				<jarModule>
+					<groupId>FinancesClient</groupId>
+					<artifactId>FinancesClient</artifactId>
+					<bundleFileName>FinancesClient-1.jar</bundleFileName>
+				</jarModule>
+			</modules>
         </configuration>
       </plugin>
     </plugins>
