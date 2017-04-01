@@ -22,11 +22,20 @@ public interface FinancesConstants extends ConstantsWithLookup {
 	@DefaultStringValue("Create")
 	public String create();
 	
+	@DefaultStringValue("Currency")
+	public String currency();
+	
+	@DefaultStringValue("Email address")
+	public String emailAddress();
+	
 	@DefaultStringValue("Logout")
 	public String logout();
 	
 	@DefaultStringValue("Modify")
 	public String modify();
+	
+	@DefaultStringValue("Password")
+	public String password();
 	
 	@DefaultStringValue("Preferences")
 	public String preferences();
@@ -39,4 +48,10 @@ public interface FinancesConstants extends ConstantsWithLookup {
 	
 	@DefaultStringValue("User management")
 	public String userManagement();
+	
+	@DefaultStringValue("Username")
+	public String username();
+	
+	@DefaultStringValue("Welcome, ")
+	public String welcomeX();
 }

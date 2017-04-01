@@ -4,11 +4,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import com.github.gwtbootstrap.client.ui.ListBox;
-import com.github.gwtbootstrap.client.ui.PasswordTextBox;
-import com.github.gwtbootstrap.client.ui.TextBox;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import org.gwtbootstrap3.client.ui.Input;
+import org.gwtbootstrap3.client.ui.ListBox;
+import org.gwtbootstrap3.client.ui.TextBox;
+
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -18,18 +17,18 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFormUiHandlers> implements UserManagementFormPresenter.MyView {
     interface Binder extends UiBinder<Widget, UserManagementFormView> {
     }
-
+    
     @UiField
     HTMLPanel main;
     
     @UiField
-    TextBox userName;
+    TextBox username;
     
     @UiField
     TextBox emailAddress;
     
     @UiField
-    PasswordTextBox password;
+    Input password;
     
     @UiField
     ListBox currency;
@@ -39,14 +38,6 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
     @Inject
     public UserManagementFormView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
-        
-        password.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				
-			}
-		});
     }
 
 	@Override

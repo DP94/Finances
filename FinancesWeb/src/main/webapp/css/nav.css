@@ -18,6 +18,7 @@
     color: white;
     font-size: 24px;
     outline: none;
+    display: inline-block;
 }
 
 .nav-header-button:hover {
@@ -75,4 +76,12 @@
 	position: relative;
 	top: -4px;
 	left: 20px;
+}
+
+.nav-header-user-label {
+	display: inline-block;
+	color: white;
+	font-size: 18px;
+    position: relative;
+    top: -3px;
 }

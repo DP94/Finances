@@ -52,6 +52,11 @@
     left: 42%;
 }
 
-.form-control-group {
-	padding: 30px;
+.nav-tabs-container-div {
+	padding: 5px;
+}
+
+.finances-form {
+	width: 40%;
+	padding: 1%;
 }

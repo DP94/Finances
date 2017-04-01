@@ -73,7 +73,7 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 	@Override
 	protected void onReset() {
 		super.onReset();
-		getView().updateUserLabel(username);
+		getView().updateUserLabel(constants.welcomeX() + " " + username);
 	}
 	
 	@Override
