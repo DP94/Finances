@@ -51,6 +51,7 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
 
 	@Override
 	public void setCurrencyOptions(List<String> options) {
+		currency.clear();
 		for(String s : options) {
 			currency.addItem(s);
 		}

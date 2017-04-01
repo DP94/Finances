@@ -10,25 +10,25 @@
 	    	
 	    		<b:Form type="HORIZONTAL">
 	    			<b:Fieldset>
-	    				<b:ControlGroup>
+	    				<b:ControlGroup styleName="form-control-group">
 	    					<b:ControlLabel for="userName">User name</b:ControlLabel>
 	    					<b:Controls>
 	    						<b:TextBox ui:field="userName" b:id="userName"> </b:TextBox>
 	    					</b:Controls>
 	    				</b:ControlGroup>
-	    				<b:ControlGroup>
+	    				<b:ControlGroup styleName="form-control-group">
 		    				<b:ControlLabel for="emailAddress">Email address</b:ControlLabel>
 		    					<b:Controls>
 		    						<b:TextBox ui:field="emailAddress" b:id="emailAddress"></b:TextBox>
 		    					</b:Controls>
 	    				</b:ControlGroup>
-						<b:ControlGroup>
+						<b:ControlGroup styleName="form-control-group">
 							<b:ControlLabel for="password">Password</b:ControlLabel>
 							<b:Controls>
 								<b:PasswordTextBox ui:field="password" b:id="password"></b:PasswordTextBox>
 							</b:Controls>
 						</b:ControlGroup>
-						<b:ControlGroup>
+						<b:ControlGroup styleName="form-control-group">
 							<b:ControlLabel for="currency">Currency</b:ControlLabel>
 							<b:Controls>
 								<b:ListBox ui:field="currency" b:id="currency"></b:ListBox>

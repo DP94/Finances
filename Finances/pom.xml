@@ -7,6 +7,7 @@
   <name>Finances</name>
   <description>Finances tracking</description>
   <modules>
+  	<module>../FinancesDTO</module>
     <module>../FinancesClient</module>
     <module>../FinancesJPA</module>
   	<module>../FinancesWeb</module>
@@ -33,6 +34,7 @@
    <finances.ejb.version>1</finances.ejb.version>
    <finances.web.version>1</finances.web.version>
    <finances.ejbclient.version>1</finances.ejbclient.version>
+   <finances.dto.version>1</finances.dto.version>
    
    <hibernate.version>5.2.6.Final</hibernate.version>
    
@@ -176,6 +178,11 @@
 			<groupId>com.github.gwtbootstrap</groupId>
 			<artifactId>gwt-bootstrap</artifactId>
 			<version>2.2.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>FinancesDTO</groupId>
+			<artifactId>FinancesDTO</artifactId>
+			<version>${finances.dto.version}</version>
 		</dependency>
    	</dependencies>
    </dependencyManagement>

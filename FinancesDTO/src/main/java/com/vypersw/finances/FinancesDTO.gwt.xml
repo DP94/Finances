@@ -1,0 +1,3 @@
+<module rename-to='FinancesDTO'>
+	<source path='dto'/>
+</module>

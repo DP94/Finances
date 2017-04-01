@@ -51,3 +51,7 @@
 	position: relative;
     left: 42%;
 }
+
+.form-control-group {
+	padding: 30px;
+}

@@ -64,5 +64,9 @@
 		<groupId>FinancesJPA</groupId>
 		<artifactId>FinancesJPA</artifactId>
 	</dependency>
+	<dependency>
+		<groupId>FinancesDTO</groupId>
+		<artifactId>FinancesDTO</artifactId>
+	</dependency>
     </dependencies>
 </project>

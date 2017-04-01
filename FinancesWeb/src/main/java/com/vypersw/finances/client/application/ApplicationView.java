@@ -9,6 +9,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.vypersw.finances.client.content.ContentType;
@@ -50,6 +51,9 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     
     @UiField
     MenuButton userManagement;
+    
+    @UiField
+    Label nameLabel;
 
     @Inject
     public ApplicationView(Binder uiBinder) {
@@ -137,5 +141,10 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
 	@Override
 	public void closeMenu() {
 		sidebar.setVisible(false);
+	}
+
+	@Override
+	public void updateUserLabel(String text) {
+		nameLabel.setText(text);
 	}
 }

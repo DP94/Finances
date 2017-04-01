@@ -9,13 +9,14 @@
     <!-- Default css -->
     <inherits name='com.google.gwt.user.theme.standard.Standard' />
 	<inherits name="com.github.gwtbootstrap.Bootstrap"/>
+
     <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
     <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
 
     <!-- Other module inherits -->
     <inherits name='com.gwtplatform.dispatch.rpc.DispatchRpc' />
     <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint' />
-
+	<inherits name="com.vypersw.finances.FinancesDTO"/>
 	<extend-property name="locale" values="en_GB"/>
 
     <source path='client' />

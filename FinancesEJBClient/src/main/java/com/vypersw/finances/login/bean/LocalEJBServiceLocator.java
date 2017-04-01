@@ -6,6 +6,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import com.vypersw.finances.beans.LoginBean;
+import com.vypersw.finances.beans.currency.CurrencyBean;
+import com.vypersw.finances.services.CurrencyService;
 import com.vypersw.finances.services.LoginService;
 
 public class LocalEJBServiceLocator {
@@ -48,6 +50,10 @@ public class LocalEJBServiceLocator {
 	
 	public LoginService getLoginService() {
 		return (LoginService) lookup(LoginBean.class.getSimpleName(), LoginService.class.getName());
+	}
+	
+	public CurrencyService getCurrencyService() {
+		return (CurrencyService) lookup(CurrencyBean.class.getSimpleName(), CurrencyService.class.getName());
 	}
 
 }

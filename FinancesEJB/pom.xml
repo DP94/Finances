@@ -64,5 +64,9 @@
 		<version>5.2.6.Final</version>
 		<scope>provided</scope>
   	</dependency>
+	  	<dependency>
+	  		<groupId>FinancesDTO</groupId>
+	  		<artifactId>FinancesDTO</artifactId>
+	  	</dependency>
 	</dependencies>
 </project>

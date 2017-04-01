@@ -108,5 +108,10 @@
 			<artifactId>gwt-bootstrap</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>FinancesDTO</groupId>
+			<artifactId>FinancesDTO</artifactId>
+			<scope>provided</scope>
+		</dependency>
   </dependencies>
 </project>

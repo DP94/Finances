@@ -31,6 +31,7 @@ import com.vypersw.finances.client.results.LogoutActionResult;
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> implements ApplicationUiHandlers {
     interface MyView extends View, HasUiHandlers<ApplicationUiHandlers> {
     	void closeMenu();
+    	void updateUserLabel(String text);
     }
     
     @Inject
@@ -49,6 +50,8 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     public static final Slot<ContentContainerPresenter> SLOT_content = new Slot<>();
     
     private LinkedList<ContentContainerPresenter> openSlots = new LinkedList<>();
+    
+    private String username;
     
     @ProxyCodeSplit
     @NameToken(NameTokens.home)
@@ -70,8 +73,13 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 	@Override
 	protected void onReset() {
 		super.onReset();
+		getView().updateUserLabel(username);
 	}
-
+	
+	@Override
+	public void prepareFromRequest(PlaceRequest request) {
+		username = request.getParameter("username", "");
+	}
 	@Override
 	public void logout() {
 		LogoutAction action = new LogoutAction();

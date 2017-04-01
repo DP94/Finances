@@ -69,8 +69,8 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 		
 		@Override
 		public void onSuccess(LoginActionResult result) {
-			if (result.isSuccess()) {
-				PlaceRequest request = new PlaceRequest.Builder().nameToken(NameTokens.home).build();
+			if (result.getDto() != null) {
+				PlaceRequest request = new PlaceRequest.Builder().nameToken(NameTokens.home).with("username", result.getDto().getUsername()).build();
 				placeManager.revealPlace(request);
 			} else {
 				getView().updateFeedback("Invalid username or password", "error");

@@ -1,26 +1,22 @@
 package com.vypersw.finances.server.actionhandlers;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
 import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.vypersw.finances.client.actions.GetCurrenciesAction;
-import com.vypersw.finances.client.actions.LoginAction;
 import com.vypersw.finances.client.results.CurrenciesActionResult;
-import com.vypersw.finances.client.results.LoginActionResult;
 import com.vypersw.finances.login.bean.LocalEJBServiceLocator;
-import com.vypersw.finances.services.LoginService;
+import com.vypersw.finances.services.CurrencyService;
 
 public class GetCurrenciesActionHandler implements ActionHandler<GetCurrenciesAction, CurrenciesActionResult> {
 	
+	private CurrencyService service = LocalEJBServiceLocator.getInstance().getCurrencyService();
 	
 	@Override
 	public CurrenciesActionResult execute(GetCurrenciesAction action, ExecutionContext context) throws ActionException {
-		ArrayList<String> currencies = new ArrayList<String>();
-		currencies.add("GBP");
-		currencies.add("EUR");
-		currencies.add("USD");
+		List<String> currencies = service.getAllCurrencies();
 		CurrenciesActionResult result = new CurrenciesActionResult();
 		result.setCurrencies(currencies);
 		return result;
