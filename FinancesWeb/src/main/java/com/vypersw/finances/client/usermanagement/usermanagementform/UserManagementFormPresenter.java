@@ -19,11 +19,14 @@ public class UserManagementFormPresenter extends AbstractContentPresenter<UserMa
     }
     
     private DispatchAsync dispatchAsync;
+    
+    private EventBus eventBus;
 
 	@Inject
 	public UserManagementFormPresenter(EventBus eventBus, MyView view, DispatchAsync dispatchAsync) {
 		super(eventBus, view);
 		this.dispatchAsync = dispatchAsync;
+		this.eventBus = eventBus;
 		getView().setUiHandlers(this);
 	}
 	

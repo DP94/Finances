@@ -13,6 +13,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.vypersw.finances.client.widget.Toolbar;
 
 public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFormUiHandlers> implements UserManagementFormPresenter.MyView {
     interface Binder extends UiBinder<Widget, UserManagementFormView> {
@@ -33,11 +34,20 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
     @UiField
     ListBox currency;
     
+    @UiField
+    Toolbar toolbar;
+    
     
 
     @Inject
     public UserManagementFormView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
+        setButtons();
+    }
+    
+    public void setButtons() {
+    	toolbar.getRefresh().setVisible(true);
+    	toolbar.getSave().setVisible(true);
     }
 
 	@Override

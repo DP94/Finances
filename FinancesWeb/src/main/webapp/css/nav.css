@@ -85,3 +85,19 @@
     position: relative;
     top: -3px;
 }
+
+.toolbar-buttons {
+    display: inline-block;
+    position: absolute;
+    right: 13px;
+    top: 121px;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    padding: 5px;
+}
+
+.finances-toolbar-button {
+	border: none;
+	outline: none;
+	
+}

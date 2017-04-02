@@ -40,8 +40,14 @@ public interface FinancesConstants extends ConstantsWithLookup {
 	@DefaultStringValue("Preferences")
 	public String preferences();
 	
+	@DefaultStringValue("Refresh")
+	public String refresh();
+	
 	@DefaultStringValue("Reports")
 	public String reports();
+	
+	@DefaultStringValue("Save")
+	public String save();
 	
 	@DefaultStringValue("Successfully logged out")
 	public String successfullyLoggedOut();
