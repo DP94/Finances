@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.gwtbootstrap3.client.ui.FormGroup;
 import org.gwtbootstrap3.client.ui.Input;
 import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.constants.ValidationState;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -40,6 +42,12 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
     @UiField
     Toolbar toolbar;
     
+    @UiField
+    FormGroup usernameGroup;
+    
+    @UiField
+    FormGroup passwordGroup;
+    
     
 
     @Inject
@@ -66,7 +74,9 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
 	public void onToolbarButtonClicked(ToolbarButtonClickedEvent event) {
 		switch (event.getEventType()) {
 			case SAVE:
-				getUiHandlers().onSave();
+				if(validate()) {
+					getUiHandlers().onSave();
+				}
 				break;
 			case REFRESH:
 				Window.alert("Refresh pressed");
@@ -82,6 +92,21 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
 	@Override
 	public String getPassword() {
 		return password.getText();
+	}
+	
+	public boolean validate() {
+		
+		boolean validate = true;
+		
+		if (username.getText().equals("")) {
+			usernameGroup.setValidationState(ValidationState.ERROR);
+			validate = false;
+		}
+		if (password.getText().equals("")) {
+			passwordGroup.setValidationState(ValidationState.ERROR);
+			validate = false;
+		}
+		return validate;
 	}
     
 }

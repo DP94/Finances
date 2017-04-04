@@ -18,7 +18,7 @@
 					<g:HTMLPanel>
 							<b:Form styleName="finances-form">
 	
-								<b:FormGroup>
+								<b:FormGroup ui:field="usernameGroup">
 									<b:FormLabel for="formUsername" text="{constants.username}"></b:FormLabel>
 									<b:TextBox ui:field="username" b:id="formUsername"></b:TextBox>
 								</b:FormGroup>
@@ -28,7 +28,7 @@
 									<b:TextBox ui:field="emailAddress" b:id="formEmail"></b:TextBox>
 								</b:FormGroup>
 								
-								<b:FormGroup>
+								<b:FormGroup ui:field="passwordGroup">
 									<b:FormLabel for="formPassword" text="{constants.password}"></b:FormLabel>
 									<b:Input type="PASSWORD" ui:field="password" b:id="formPassword"></b:Input>
 								</b:FormGroup>
