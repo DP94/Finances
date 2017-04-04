@@ -2,6 +2,10 @@ package com.vypersw.finances.client.application;
 
 import javax.inject.Inject;
 
+import org.gwtbootstrap3.client.ui.html.Div;
+
+import com.google.gwt.dom.client.DivElement;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -10,6 +14,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.vypersw.finances.client.content.ContentType;
@@ -54,6 +59,9 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     
     @UiField
     Label nameLabel;
+    
+    @UiField
+    DivElement sidebarDiv;
 
     @Inject
     public ApplicationView(Binder uiBinder) {
@@ -115,6 +123,17 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
 				getUiHandlers().openPerspective(ContentType.USER_SETTINGS);
 			}
 		});
+    	
+    	RootPanel.get().addDomHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				if (!sidebarDiv.isOrHasChild(Element.as(event.getNativeEvent().getEventTarget())) && !menuButton.getElement().isOrHasChild(Element.as(event.getNativeEvent().getEventTarget())) && sidebar.isVisible()) {
+					sidebar.setVisible(false);
+				}
+				
+			}
+		}, ClickEvent.getType());
     }
     
     @Override
