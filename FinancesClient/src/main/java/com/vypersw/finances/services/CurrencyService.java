@@ -1,7 +1,7 @@
 package com.vypersw.finances.services;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface CurrencyService {
-	public List<String> getAllCurrencies();
+	public ArrayList<String> getAllCurrencies();
 }

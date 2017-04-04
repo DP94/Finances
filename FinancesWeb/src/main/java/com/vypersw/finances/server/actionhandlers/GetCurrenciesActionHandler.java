@@ -1,7 +1,6 @@
 package com.vypersw.finances.server.actionhandlers;
 
-import java.util.List;
-
+import java.util.ArrayList;
 import com.gwtplatform.dispatch.rpc.server.ExecutionContext;
 import com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
@@ -16,7 +15,7 @@ public class GetCurrenciesActionHandler implements ActionHandler<GetCurrenciesAc
 	
 	@Override
 	public CurrenciesActionResult execute(GetCurrenciesAction action, ExecutionContext context) throws ActionException {
-		List<String> currencies = service.getAllCurrencies();
+		ArrayList<String> currencies = service.getAllCurrencies();
 		CurrenciesActionResult result = new CurrenciesActionResult();
 		result.setCurrencies(currencies);
 		return result;

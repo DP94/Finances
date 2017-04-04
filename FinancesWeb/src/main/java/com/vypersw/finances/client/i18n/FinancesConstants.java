@@ -1,9 +1,6 @@
 package com.vypersw.finances.client.i18n;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.LocalizableResource.DefaultLocale;
-import com.google.gwt.i18n.client.Messages;
-import com.google.gwt.i18n.client.Constants.DefaultStringValue;
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 
 public interface FinancesConstants extends ConstantsWithLookup {

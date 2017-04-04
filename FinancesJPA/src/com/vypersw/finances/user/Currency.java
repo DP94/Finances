@@ -12,6 +12,11 @@ import javax.persistence.Table;
 @Table(name = "TBL_CURRENCY")
 public class Currency implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Currency() {
 	}
 	

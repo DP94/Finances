@@ -8,7 +8,6 @@ public class ToolbarButton extends Button {
 	
 	private SpanElement icon;
 	private SpanElement textElement;
-	private String type;
 	
 	public static final String CLASS_NAME = "finances-toolbar-button";
 	
@@ -32,10 +31,6 @@ public class ToolbarButton extends Button {
 			textElement.setClassName("finances-toolbar-button-label");
 		}
 		this.textElement.setInnerText(text);
-	}
-	
-	public void setType(String type) {
-		this.type = type;
 	}
 	
 	public SpanElement getIcon() {

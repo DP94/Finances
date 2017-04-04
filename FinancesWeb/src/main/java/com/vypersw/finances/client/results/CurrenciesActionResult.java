@@ -1,28 +1,23 @@
 package com.vypersw.finances.client.results;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import com.gwtplatform.dispatch.rpc.shared.SimpleResult;
 
 public class CurrenciesActionResult extends SimpleResult<Void> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
-	private List<String> currencies;
+	private ArrayList<String> currencies;
 	
 	public CurrenciesActionResult() {
 		super(null);
 	}
 
-	public List<String> getCurrencies() {
+	public ArrayList<String> getCurrencies() {
 		return currencies;
 	}
 
-	public void setCurrencies(List<String> currencies) {
+	public void setCurrencies(ArrayList<String> currencies) {
 		this.currencies = currencies;
 	}
 

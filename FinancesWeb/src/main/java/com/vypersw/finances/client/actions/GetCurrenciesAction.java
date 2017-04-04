@@ -7,6 +7,8 @@ import com.vypersw.finances.client.results.CurrenciesActionResult;
 
 public class GetCurrenciesAction extends ActionImpl<CurrenciesActionResult> implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	public GetCurrenciesAction() {
 		
 	}
