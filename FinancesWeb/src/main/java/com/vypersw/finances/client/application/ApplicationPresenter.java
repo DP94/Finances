@@ -109,12 +109,19 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 
 	@Override
 	public void openPerspective(ContentType type) {
-		ContentContainerPresenter presenter = presenterProvider.get();
-		presenter.updateTitle(type.getName());
-		presenter.setType(type);
-		perspectives.put(type, presenter);
-		openSlots.add(presenter);
-		setInSlot(SLOT_content, presenter);
+		if (!perspectives.containsKey(type)) {
+			ContentContainerPresenter presenter = presenterProvider.get();
+			presenter.updateTitle(type.getName());
+			presenter.setType(type);
+			perspectives.put(type, presenter);
+			openSlots.add(presenter);
+			setInSlot(SLOT_content, presenter);
+		} else {
+			ContentContainerPresenter presenter = perspectives.get(type);
+			setInSlot(SLOT_content, presenter);
+			openSlots.remove(presenter);
+			openSlots.add(presenter);
+		}
 		getView().closeMenu();
 	}
 	
