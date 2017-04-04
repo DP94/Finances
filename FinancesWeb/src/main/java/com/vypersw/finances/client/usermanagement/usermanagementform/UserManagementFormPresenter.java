@@ -10,23 +10,25 @@ import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.View;
 import com.vypersw.finances.client.abstractpresenter.AbstractContentPresenter;
+import com.vypersw.finances.client.actions.CreateUserAction;
 import com.vypersw.finances.client.actions.GetCurrenciesAction;
+import com.vypersw.finances.client.results.CreateUserActionResult;
 import com.vypersw.finances.client.results.CurrenciesActionResult;
+import com.vypersw.finances.dto.user.UserDTO;
 
 public class UserManagementFormPresenter extends AbstractContentPresenter<UserManagementFormPresenter.MyView> implements UserManagementFormUiHandlers {
     public interface MyView extends View, HasUiHandlers<UserManagementFormUiHandlers> {
     	void setCurrencyOptions(List<String> options);
+    	String getUsername();
+    	String getPassword();
     }
     
     private DispatchAsync dispatchAsync;
-    
-    private EventBus eventBus;
 
 	@Inject
 	public UserManagementFormPresenter(EventBus eventBus, MyView view, DispatchAsync dispatchAsync) {
 		super(eventBus, view);
 		this.dispatchAsync = dispatchAsync;
-		this.eventBus = eventBus;
 		getView().setUiHandlers(this);
 	}
 	
@@ -47,4 +49,27 @@ public class UserManagementFormPresenter extends AbstractContentPresenter<UserMa
 			Window.alert(caught.getMessage());
 		}
 	};
+
+	@Override
+	public void onSave() {
+		UserDTO dto = new UserDTO();
+		dto.setUsername(getView().getUsername());
+		dto.setPassword(getView().getPassword());
+		
+		CreateUserAction action = new CreateUserAction();
+		action.setDto(dto);
+		
+		dispatchAsync.execute(action, new AsyncCallback<CreateUserActionResult>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getMessage());
+			}
+
+			@Override
+			public void onSuccess(CreateUserActionResult result) {
+			}
+		});
+		
+	}
 }

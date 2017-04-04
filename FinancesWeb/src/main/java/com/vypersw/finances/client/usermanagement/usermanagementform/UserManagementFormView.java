@@ -10,12 +10,15 @@ import org.gwtbootstrap3.client.ui.TextBox;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.vypersw.finances.client.widget.Toolbar;
+import com.vypersw.finances.client.widget.ToolbarButtonClickedEvent;
+import com.vypersw.finances.client.widget.ToolbarButtonClickedEvent.ToolbarButtonClickedHandler;
 
-public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFormUiHandlers> implements UserManagementFormPresenter.MyView {
+public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFormUiHandlers> implements UserManagementFormPresenter.MyView, ToolbarButtonClickedHandler {
     interface Binder extends UiBinder<Widget, UserManagementFormView> {
     }
     
@@ -43,6 +46,7 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
     public UserManagementFormView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
         setButtons();
+        toolbar.addToolbarButtonClickedHandler(this);
     }
     
     public void setButtons() {
@@ -56,6 +60,28 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
 		for(String s : options) {
 			currency.addItem(s);
 		}
+	}
+
+	@Override
+	public void onToolbarButtonClicked(ToolbarButtonClickedEvent event) {
+		switch (event.getEventType()) {
+			case SAVE:
+				getUiHandlers().onSave();
+				break;
+			case REFRESH:
+				Window.alert("Refresh pressed");
+				break;
+		}
+	}
+
+	@Override
+	public String getUsername() {
+		return username.getText();
+	}
+
+	@Override
+	public String getPassword() {
+		return password.getText();
 	}
     
 }
