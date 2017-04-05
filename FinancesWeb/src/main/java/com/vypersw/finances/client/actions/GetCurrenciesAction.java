@@ -1,21 +1,9 @@
 package com.vypersw.finances.client.actions;
 
-import java.io.Serializable;
+import com.vypersw.finances.client.results.GetCurrenciesActionResult;
 
-import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
-import com.vypersw.finances.client.results.CurrenciesActionResult;
-
-public class GetCurrenciesAction extends ActionImpl<CurrenciesActionResult> implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
-
+public class GetCurrenciesAction extends VyperAction<GetCurrenciesActionResult> {
 	public GetCurrenciesAction() {
 		
 	}
-	
-	@Override
-	public boolean isSecured() {
-		return false;
-	}
-
 }

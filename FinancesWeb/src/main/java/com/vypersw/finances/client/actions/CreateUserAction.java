@@ -6,7 +6,7 @@ import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
 import com.vypersw.finances.client.results.CreateUserActionResult;
 import com.vypersw.finances.dto.user.UserDTO;
 
-public class CreateUserAction extends ActionImpl<CreateUserActionResult> implements Serializable {
+public class CreateUserAction extends VyperAction<CreateUserActionResult> {
 	
 	/**
 	 * 
@@ -19,11 +19,6 @@ public class CreateUserAction extends ActionImpl<CreateUserActionResult> impleme
 		
 	}
 	
-	@Override
-	public boolean isSecured() {
-		return false;
-	}
-
 	public UserDTO getDto() {
 		return dto;
 	}

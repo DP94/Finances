@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
 import com.vypersw.finances.client.results.LogoutActionResult;
 
-public class LogoutAction extends ActionImpl<LogoutActionResult> implements Serializable {
+public class LogoutAction extends VyperAction<LogoutActionResult> {
 
 	/**
 	 * 

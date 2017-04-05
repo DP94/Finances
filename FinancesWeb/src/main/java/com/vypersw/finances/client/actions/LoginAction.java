@@ -1,27 +1,19 @@
 package com.vypersw.finances.client.actions;
 
-import java.io.Serializable;
-
-import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
 import com.vypersw.finances.client.results.LoginActionResult;
 
-public class LoginAction extends ActionImpl<LoginActionResult> implements Serializable {
+public class LoginAction extends VyperAction<LoginActionResult> {
 
 	private static final long serialVersionUID = 1L;
 	private String username, password;
 	
 	public LoginAction() {
-		super();
+		
 	}
 
 	public LoginAction(String username, String password) {
 		this.username = username;
 		this.password = password;
-	}
-
-	@Override
-	public boolean isSecured() {
-		return false;
 	}
 
 	public String getUsername() {

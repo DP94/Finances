@@ -13,7 +13,7 @@ import com.vypersw.finances.client.abstractpresenter.AbstractContentPresenter;
 import com.vypersw.finances.client.actions.CreateUserAction;
 import com.vypersw.finances.client.actions.GetCurrenciesAction;
 import com.vypersw.finances.client.results.CreateUserActionResult;
-import com.vypersw.finances.client.results.CurrenciesActionResult;
+import com.vypersw.finances.client.results.GetCurrenciesActionResult;
 import com.vypersw.finances.dto.user.UserDTO;
 
 public class UserManagementFormPresenter extends AbstractContentPresenter<UserManagementFormPresenter.MyView> implements UserManagementFormUiHandlers {
@@ -37,10 +37,10 @@ public class UserManagementFormPresenter extends AbstractContentPresenter<UserMa
 		dispatchAsync.execute(new GetCurrenciesAction(), currenciesCallBack);
 	}
 	
-	private AsyncCallback<CurrenciesActionResult> currenciesCallBack = new AsyncCallback<CurrenciesActionResult>() {
+	private AsyncCallback<GetCurrenciesActionResult> currenciesCallBack = new AsyncCallback<GetCurrenciesActionResult>() {
 		
 		@Override
-		public void onSuccess(CurrenciesActionResult result) {
+		public void onSuccess(GetCurrenciesActionResult result) {
 			getView().setCurrencyOptions(result.getCurrencies());
 		}
 		

@@ -10,7 +10,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
 import com.vypersw.finances.client.actions.LogoutAction;
 import com.vypersw.finances.client.results.LogoutActionResult;
 
-public class LogoutActionHandler implements ActionHandler<LogoutAction, LogoutActionResult> {
+public class LogoutActionHandler extends VyperActionHandler<LogoutAction, LogoutActionResult> {
 
 	private Provider<HttpServletRequest> req;
 	
@@ -20,7 +20,7 @@ public class LogoutActionHandler implements ActionHandler<LogoutAction, LogoutAc
 	}
 	
 	@Override
-	public LogoutActionResult execute(LogoutAction action, ExecutionContext context) throws ActionException {
+	protected LogoutActionResult executeAction(LogoutAction action) {
 		
 		if (req.get().getSession(false) != null) {
 			req.get().getSession(false).invalidate();
@@ -30,14 +30,6 @@ public class LogoutActionHandler implements ActionHandler<LogoutAction, LogoutAc
 		return result;
 	}
 
-	@Override
-	public Class<LogoutAction> getActionType() {
-		return null;
-	}
-
-	@Override
-	public void undo(LogoutAction action, LogoutActionResult result, ExecutionContext context) throws ActionException {
-	}
 	
 	
 

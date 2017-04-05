@@ -3,16 +3,12 @@ package com.vypersw.finances.client.results;
 import java.util.ArrayList;
 import com.gwtplatform.dispatch.rpc.shared.SimpleResult;
 
-public class CurrenciesActionResult extends SimpleResult<Void> {
+public class GetCurrenciesActionResult extends VyperActionResult {
 
 	private static final long serialVersionUID = 1L;
 	
 	private ArrayList<String> currencies;
 	
-	public CurrenciesActionResult() {
-		super(null);
-	}
-
 	public ArrayList<String> getCurrencies() {
 		return currencies;
 	}
