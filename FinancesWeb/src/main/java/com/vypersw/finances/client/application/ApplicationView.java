@@ -6,6 +6,7 @@ import org.gwtbootstrap3.client.ui.html.Div;
 
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -62,6 +63,8 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     
     @UiField
     DivElement sidebarDiv;
+    
+    private boolean show = true;
 
     @Inject
     public ApplicationView(Binder uiBinder) {
@@ -73,7 +76,13 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     	menuButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				sidebar.setVisible(!sidebar.isVisible());
+				if (show) {
+					sidebar.addStyleName("nav-sidebar-visible");
+					show = false;
+				} else {
+					sidebar.removeStyleName("nav-sidebar-visible");
+					show = true;
+				}
 			}
 		});
     	
@@ -129,7 +138,10 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
 			@Override
 			public void onClick(ClickEvent event) {
 				if (!sidebarDiv.isOrHasChild(Element.as(event.getNativeEvent().getEventTarget())) && !menuButton.getElement().isOrHasChild(Element.as(event.getNativeEvent().getEventTarget())) && sidebar.isVisible()) {
-					sidebar.setVisible(false);
+					if(!show) {
+						sidebar.removeStyleName("nav-sidebar-visible");
+						show = true;
+					}
 				}
 				
 			}

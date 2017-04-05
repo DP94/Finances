@@ -14,8 +14,8 @@
 	    	</div>
 	    </g:HTMLPanel>
 	    <div ui:field="sidebarDiv">
-		    <g:HTMLPanel ui:field="sidebar" visible="false" styleName="side-bar">
-		    	<div class="nav-sidebar">
+		    <g:HTMLPanel ui:field="sidebar" styleName="nav-sidebar">
+		    	<div>
 		    		<div class="nav-sidebar-container">
 		    			<div class="nav-sidebar-options">
 	   						<div class="nav-sidebar-options-container">

@@ -6,10 +6,16 @@
 
 .nav-sidebar {
 	width: 300px;
-	background: #555;
-	position: absolute;
-	z-index: 20;
-	border: 2px solid black;
+    background: #555;
+    position: absolute;
+    left: -300px;
+    z-index: 20;
+    border: 2px solid black;
+    transition: 0.5s;
+}
+
+.nav-sidebar-visible {
+	left: 0px;	
 }
 
 .nav-header-button {
