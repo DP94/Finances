@@ -22,11 +22,13 @@ public class Currency implements Serializable {
 	
 	@Id
 	@Column(name = "CURRENCY_ID")
-	@GeneratedValue
 	private Long currencyId;
 	
 	@Column(name = "CURRENCY_CODE")
 	private String currencyCode;
+	
+	@Column(name = "SYMBOL")
+	private String symbol;
 	
 	public Long getCurrencyId() {
 		return currencyId;
@@ -42,5 +44,13 @@ public class Currency implements Serializable {
 
 	public void setCurrencyCode(String currencyCode) {
 		this.currencyCode = currencyCode;
+	}
+
+	public String getSymbol() {
+		return symbol;
+	}
+
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
 }

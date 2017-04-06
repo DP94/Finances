@@ -21,12 +21,15 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+import com.vypersw.finances.client.actions.InitSessionAction;
 import com.vypersw.finances.client.actions.LogoutAction;
 import com.vypersw.finances.client.content.ContentContainerPresenter;
 import com.vypersw.finances.client.content.ContentType;
 import com.vypersw.finances.client.i18n.FinancesConstants;
 import com.vypersw.finances.client.place.NameTokens;
+import com.vypersw.finances.client.results.InitSessionActionResult;
 import com.vypersw.finances.client.results.LogoutActionResult;
+import com.vypersw.finances.dto.user.UserDTO;
 
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> implements ApplicationUiHandlers {
     interface MyView extends View, HasUiHandlers<ApplicationUiHandlers> {
@@ -50,8 +53,8 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     public static final Slot<ContentContainerPresenter> SLOT_content = new Slot<>();
     
     private LinkedList<ContentContainerPresenter> openSlots = new LinkedList<>();
-    
-    private String username;
+
+    private UserDTO userDTO;
     
     @ProxyCodeSplit
     @NameToken(NameTokens.home)
@@ -66,46 +69,54 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     }
 	
 	@Override
+	protected void onReveal() {
+		super.onReveal();
+		dispatchAsync.execute(new InitSessionAction(), new AsyncCallback<InitSessionActionResult>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getMessage());
+			}
+
+			@Override
+			public void onSuccess(InitSessionActionResult result) {
+				userDTO = result.getDto();
+				getView().updateUserLabel(constants.welcomeX() + " " + userDTO.getUsername());
+			}
+		});
+	}
+	
+	@Override
 	protected void revealInParent() {
 		RevealRootContentEvent.fire(this, this);
 	}
-
-	@Override
-	protected void onReset() {
-		super.onReset();
-		getView().updateUserLabel(constants.welcomeX() + " " + username);
-	}
 	
-	@Override
-	public void prepareFromRequest(PlaceRequest request) {
-		username = request.getParameter("username", "");
-	}
 	@Override
 	public void logout() {
 		LogoutAction action = new LogoutAction();
-		dispatchAsync.execute(action, callback);
-	}
-	
-	private AsyncCallback<LogoutActionResult> callback = new AsyncCallback<LogoutActionResult>() {
-		@Override
-		public void onFailure(Throwable caught) {
-			Window.alert(caught.getMessage());
-		}
+		dispatchAsync.execute(action, new AsyncCallback<LogoutActionResult>() {
 
-		@Override
-		public void onSuccess(LogoutActionResult result) {
-			getView().closeMenu();
-			for(ContentContainerPresenter presenter : perspectives.values()) {
-				removeFromSlot(SLOT_content, presenter);
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getMessage());
 			}
-			PlaceRequest request = new PlaceRequest.Builder()
-					.nameToken(NameTokens.login)
-					.with("feedbackText", constants.successfullyLoggedOut())
-					.with("feedbackType", "success")
-					.build();
-			placeManager.revealPlace(request);
-		}
-	};
+
+			@Override
+			public void onSuccess(LogoutActionResult result) {
+				getView().closeMenu();
+				//Is this needed? Shouldn't we just leave it and let it clear from memory?
+				for(ContentContainerPresenter presenter : perspectives.values()) {
+					removeFromSlot(SLOT_content, presenter);
+				}
+				PlaceRequest request = new PlaceRequest.Builder()
+						.nameToken(NameTokens.login)
+						.with("feedbackText", constants.successfullyLoggedOut())
+						.with("feedbackType", "success")
+						.build();
+				placeManager.revealPlace(request);
+			}
+		});
+	}
 
 	@Override
 	public void openPerspective(ContentType type) {
@@ -119,7 +130,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 		} else {
 			ContentContainerPresenter presenter = perspectives.get(type);
 			setInSlot(SLOT_content, presenter);
-			openSlots.remove(presenter);
 			openSlots.add(presenter);
 		}
 		getView().closeMenu();
@@ -132,7 +142,17 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 		if (openSlots.size() > 1) {
 			openSlots.remove(presenter);
 			setInSlot(SLOT_content, openSlots.getLast());
+		} else {
+			openSlots.remove(presenter);
 		}
 		perspectives.remove(type);
+	}
+
+	public UserDTO getUserDTO() {
+		return userDTO;
+	}
+
+	public void setUserDTO(UserDTO userDTO) {
+		this.userDTO = userDTO;
 	}
 }

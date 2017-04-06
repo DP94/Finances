@@ -171,7 +171,8 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
 
 	@Override
 	public void closeMenu() {
-		sidebar.setVisible(false);
+		sidebar.removeStyleName("nav-sidebar-visible");
+		show = true;
 	}
 
 	@Override

@@ -2,6 +2,8 @@ package com.vypersw.finances.dto.user;
 
 import java.io.Serializable;
 
+import com.vypersw.finances.dto.currency.CurrencyDTO;
+
 public class UserDTO implements Serializable {
 
 	/**
@@ -9,8 +11,8 @@ public class UserDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Long id;
-	private String username;
-	private String password;
+	private String username, password, email;
+	private CurrencyDTO currencyDTO;
 	
 	public UserDTO() {
 		
@@ -38,5 +40,21 @@ public class UserDTO implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public CurrencyDTO getCurrencyDTO() {
+		return currencyDTO;
+	}
+
+	public void setCurrencyDTO(CurrencyDTO currencyDTO) {
+		this.currencyDTO = currencyDTO;
 	}
 }

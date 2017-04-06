@@ -14,6 +14,7 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 	
     public interface MyView extends View, HasUiHandlers<ContentContainerUiHandlers>  {
     	void setTitle(String text);
+    	void setCurrencyText(String text);
     }
     
     public static final Slot<AbstractContentPresenter<?>> SLOT_Perspective = new Slot<>();
@@ -28,8 +29,6 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 		super(eventBus, view);
 		this.container = presenter;
 		getView().setUiHandlers(this);
-
-
 	}
 
     protected void onBind() {
@@ -49,7 +48,7 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 	    	default:
 	        	break;
     	}
-
+    	getView().setCurrencyText(container.getUserDTO().getCurrencyDTO().getSymbol());
     }
     
     @Override
@@ -67,8 +66,5 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 
 	public void setType(ContentType type) {
 		this.type = type;
-	}
-
-
-    
+	}    
 }
