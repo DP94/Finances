@@ -17,7 +17,7 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
     	void setCurrencyText(String text);
     }
     
-    public static final Slot<AbstractContentPresenter<?>> SLOT_Perspective = new Slot<>();
+    public static final Slot<AbstractContentPresenter<?,?>> SLOT_Perspective = new Slot<>();
     
     private ApplicationPresenter container;
     private ContentType type;
@@ -25,14 +25,15 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
     private UserManagementFormPresenter presenter;
     
 	@Inject
-	public ContentContainerPresenter(EventBus eventBus, MyView view, ApplicationPresenter presenter) {
+	public ContentContainerPresenter(EventBus eventBus, MyView view, ApplicationPresenter container) {
 		super(eventBus, view);
-		this.container = presenter;
+		this.container = container;
 		getView().setUiHandlers(this);
 	}
 
     protected void onBind() {
         super.onBind();
+		presenter.setData(container.getUserDTO());
     }
     
     @Override
@@ -40,6 +41,7 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
     	switch(type) {
 	    	case USER_SETTINGS:
 	        	setInSlot(SLOT_Perspective, presenter);
+	        	//presenter.setData(container.getUserDTO());
 	        	break;
 	    	case ADD_EXPENSE:
     		case ADD_INCOME:

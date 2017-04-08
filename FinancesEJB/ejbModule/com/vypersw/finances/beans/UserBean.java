@@ -32,6 +32,7 @@ public class UserBean extends AbstractBean implements UserService {
 		UserDTO userDTO = new UserDTO();
 		userDTO.setId(user.getUserId());
 		userDTO.setUsername(user.getUsername());
+		userDTO.setEmail(user.getEmail());
 		userDTO.setPassword(user.getPassword());
 		CurrencyDTO currencyDTO = new CurrencyDTO();
 		currencyDTO.setCurrencyId(user.getCurrency().getCurrencyId());

@@ -16,9 +16,13 @@ import com.vypersw.finances.client.results.CreateUserActionResult;
 import com.vypersw.finances.client.results.GetCurrenciesActionResult;
 import com.vypersw.finances.dto.user.UserDTO;
 
-public class UserManagementFormPresenter extends AbstractContentPresenter<UserManagementFormPresenter.MyView> implements UserManagementFormUiHandlers {
+public class UserManagementFormPresenter extends AbstractContentPresenter<UserManagementFormPresenter.MyView, UserDTO> implements UserManagementFormUiHandlers {
     public interface MyView extends View, HasUiHandlers<UserManagementFormUiHandlers> {
     	void setCurrencyOptions(List<String> options);
+    	void setCurrentUserName(String name);
+    	void setCurrentPassword(String password);
+    	void setCurrentEmail(String email);
+    	void setCurrentCurrency(String currency);
     	String getUsername();
     	String getPassword();
     }
@@ -31,24 +35,6 @@ public class UserManagementFormPresenter extends AbstractContentPresenter<UserMa
 		this.dispatchAsync = dispatchAsync;
 		getView().setUiHandlers(this);
 	}
-	
-	@Override
-	protected void onReveal() {
-		dispatchAsync.execute(new GetCurrenciesAction(), currenciesCallBack);
-	}
-	
-	private AsyncCallback<GetCurrenciesActionResult> currenciesCallBack = new AsyncCallback<GetCurrenciesActionResult>() {
-		
-		@Override
-		public void onSuccess(GetCurrenciesActionResult result) {
-			getView().setCurrencyOptions(result.getCurrencies());
-		}
-		
-		@Override
-		public void onFailure(Throwable caught) {
-			Window.alert(caught.getMessage());
-		}
-	};
 
 	@Override
 	public void onSave() {
@@ -72,4 +58,35 @@ public class UserManagementFormPresenter extends AbstractContentPresenter<UserMa
 		});
 		
 	}
+	
+	@Override
+	public void initaliseForm() {
+		//Get all currencies from the database and
+		dispatchAsync.execute(new GetCurrenciesAction(), new AsyncCallback<GetCurrenciesActionResult>() {
+			
+			@Override
+			public void onSuccess(GetCurrenciesActionResult result) {
+				getView().setCurrencyOptions(result.getCurrencies());
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getMessage());
+			}
+		});
+	}
+
+	@Override
+	public void setFormData(UserDTO data) {
+		if (data != null) {
+			super.setData(data);
+			getView().setCurrentUserName(data.getUsername());
+			getView().setCurrentEmail(data.getEmail());
+			getView().setCurrentPassword(data.getPassword());
+			getView().setCurrentCurrency(data.getCurrencyDTO().getCurrencyCode());
+		}
+		
+	}
+
+	
 }

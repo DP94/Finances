@@ -2,9 +2,10 @@ package com.vypersw.finances.dto.user;
 
 import java.io.Serializable;
 
+import com.vypersw.finances.dto.VyperDTO;
 import com.vypersw.finances.dto.currency.CurrencyDTO;
 
-public class UserDTO implements Serializable {
+public class UserDTO extends VyperDTO implements Serializable {
 
 	/**
 	 * 

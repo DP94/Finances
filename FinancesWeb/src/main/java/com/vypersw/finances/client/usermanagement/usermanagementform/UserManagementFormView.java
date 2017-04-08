@@ -48,6 +48,18 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
     @UiField
     FormGroup passwordGroup;
     
+    @UiField
+    TextBox currentUsername;
+    
+    @UiField
+    TextBox currentEmailAddress;
+    
+    @UiField
+    Input currentPassword;
+    
+    @UiField
+    ListBox currentCurrency;
+    
     
 
     @Inject
@@ -107,6 +119,26 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
 			validate = false;
 		}
 		return validate;
+	}
+
+	@Override
+	public void setCurrentUserName(String name) {
+		currentUsername.setText(name);
+	}
+
+	@Override
+	public void setCurrentPassword(String password) {
+		currentPassword.setText(password);
+	}
+
+	@Override
+	public void setCurrentEmail(String email) {
+		currentEmailAddress.setText(email);
+	}
+
+	@Override
+	public void setCurrentCurrency(String currency) {
+		currentCurrency.addItem(currency);
 	}
     
 }
