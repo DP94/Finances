@@ -1,12 +1,9 @@
 package com.vypersw.finances.client.actions;
 
-import java.io.Serializable;
-
-import com.gwtplatform.dispatch.rpc.shared.ActionImpl;
-import com.vypersw.finances.client.results.CreateUserActionResult;
+import com.vypersw.finances.client.results.UserActionResult;
 import com.vypersw.finances.dto.user.UserDTO;
 
-public class CreateUserAction extends VyperAction<CreateUserActionResult> {
+public class UserAction extends VyperAction<UserActionResult> {
 	
 	/**
 	 * 
@@ -15,7 +12,7 @@ public class CreateUserAction extends VyperAction<CreateUserActionResult> {
 
 	private UserDTO dto;
 	
-	public CreateUserAction() {
+	public UserAction() {
 		
 	}
 	

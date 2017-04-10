@@ -66,10 +66,10 @@ public class ContentContainerView extends ViewWithUiHandlers<ContentContainerUiH
 
 	public void setCurrencyText(String code) {
 		switch (code) {
-			case "$":
+			case "USD":
 				currency.setStyleName("glyphicon glyphicon-usd");
 				break;
-			case "€":
+			case "EUR":
 				currency.setStyleName("glyphicon glyphicon-eur");
 				break;
 			default:

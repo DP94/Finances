@@ -41,7 +41,6 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
     	switch(type) {
 	    	case USER_SETTINGS:
 	        	setInSlot(SLOT_Perspective, presenter);
-	        	//presenter.setData(container.getUserDTO());
 	        	break;
 	    	case ADD_EXPENSE:
     		case ADD_INCOME:
@@ -50,7 +49,7 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 	    	default:
 	        	break;
     	}
-    	getView().setCurrencyText(container.getUserDTO().getCurrencyDTO().getSymbol());
+    	getView().setCurrencyText(container.getUserDTO().getCurrencyDTO().getCurrencyCode());
     }
     
     @Override

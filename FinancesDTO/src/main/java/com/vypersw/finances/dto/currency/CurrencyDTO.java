@@ -10,7 +10,6 @@ public class CurrencyDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String currencyCode;
 	private Long currencyId;
-	private String symbol;
 	
 	public CurrencyDTO() {
 		
@@ -30,13 +29,5 @@ public class CurrencyDTO implements Serializable {
 
 	public void setCurrencyId(Long currencyId) {
 		this.currencyId = currencyId;
-	}
-
-	public String getSymbol() {
-		return symbol;
-	}
-
-	public void setSymbol(String symbol) {
-		this.symbol = symbol;
 	}
 }

@@ -10,21 +10,20 @@ import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.View;
 import com.vypersw.finances.client.abstractpresenter.AbstractContentPresenter;
-import com.vypersw.finances.client.actions.CreateUserAction;
+import com.vypersw.finances.client.actions.UserAction;
 import com.vypersw.finances.client.actions.GetCurrenciesAction;
-import com.vypersw.finances.client.results.CreateUserActionResult;
+import com.vypersw.finances.client.results.UserActionResult;
 import com.vypersw.finances.client.results.GetCurrenciesActionResult;
+import com.vypersw.finances.dto.currency.CurrencyDTO;
 import com.vypersw.finances.dto.user.UserDTO;
 
 public class UserManagementFormPresenter extends AbstractContentPresenter<UserManagementFormPresenter.MyView, UserDTO> implements UserManagementFormUiHandlers {
     public interface MyView extends View, HasUiHandlers<UserManagementFormUiHandlers> {
-    	void setCurrencyOptions(List<String> options);
-    	void setCurrentUserName(String name);
-    	void setCurrentPassword(String password);
-    	void setCurrentEmail(String email);
-    	void setCurrentCurrency(String currency);
-    	String getUsername();
-    	String getPassword();
+    	void setCurrencyOptions(List<CurrencyDTO> options);
+    	void setUsername(String name);
+    	void setPassword(String password);
+    	void setEmail(String email);
+    	void setCurrency(Long currencyId);
     }
     
     private DispatchAsync dispatchAsync;
@@ -38,14 +37,10 @@ public class UserManagementFormPresenter extends AbstractContentPresenter<UserMa
 
 	@Override
 	public void onSave() {
-		UserDTO dto = new UserDTO();
-		dto.setUsername(getView().getUsername());
-		dto.setPassword(getView().getPassword());
+		UserAction action = new UserAction();
+		action.setDto(getData());
 		
-		CreateUserAction action = new CreateUserAction();
-		action.setDto(dto);
-		
-		dispatchAsync.execute(action, new AsyncCallback<CreateUserActionResult>() {
+		dispatchAsync.execute(action, new AsyncCallback<UserActionResult>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -53,10 +48,11 @@ public class UserManagementFormPresenter extends AbstractContentPresenter<UserMa
 			}
 
 			@Override
-			public void onSuccess(CreateUserActionResult result) {
+			public void onSuccess(UserActionResult result) {
+				Window.alert("Updated!");
+				setData(result.getDto());
 			}
 		});
-		
 	}
 	
 	@Override
@@ -67,6 +63,7 @@ public class UserManagementFormPresenter extends AbstractContentPresenter<UserMa
 			@Override
 			public void onSuccess(GetCurrenciesActionResult result) {
 				getView().setCurrencyOptions(result.getCurrencies());
+				getView().setCurrency(getData().getCurrencyDTO().getCurrencyId());
 			}
 			
 			@Override
@@ -80,12 +77,16 @@ public class UserManagementFormPresenter extends AbstractContentPresenter<UserMa
 	public void setFormData(UserDTO data) {
 		if (data != null) {
 			super.setData(data);
-			getView().setCurrentUserName(data.getUsername());
-			getView().setCurrentEmail(data.getEmail());
-			getView().setCurrentPassword(data.getPassword());
-			getView().setCurrentCurrency(data.getCurrencyDTO().getCurrencyCode());
+			getView().setUsername(data.getUsername());
+			getView().setEmail(data.getEmail());
+			getView().setPassword(data.getPassword());
 		}
 		
+	}
+	
+	@Override
+	public UserDTO getData() {
+		return super.getData();
 	}
 
 	

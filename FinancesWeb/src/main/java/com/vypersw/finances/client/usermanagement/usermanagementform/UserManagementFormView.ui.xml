@@ -9,20 +9,18 @@
     	<widget:Toolbar ui:field="toolbar"></widget:Toolbar>
     	<div class="nav-tabs-container-div">
 			<b:NavTabs>
-				<b:TabListItem active="true" dataTarget="#create" text="{constants.create}"></b:TabListItem>
-				<b:TabListItem dataTarget="#modify" text="{constants.modify}"></b:TabListItem>
-				<b:TabListItem dataTarget="#preferences" text="{constants.preferences}"></b:TabListItem>
+				<b:TabListItem active="true" dataTarget="#modify" text="{constants.modify}" ui:field="modifyTab"></b:TabListItem>
+				<b:TabListItem dataTarget="#preferences" text="{constants.preferences}" ui:field="preferencesTab"></b:TabListItem>
 			</b:NavTabs>
 			<b:TabContent>
-				<b:TabPane b:id="create" active="true">
+				<b:TabPane b:id="modify" active="true">
 					<g:HTMLPanel>
-							<b:Form styleName="finances-form">
+						<b:Form styleName="finances-form">
 	
 								<b:FormGroup ui:field="usernameGroup">
 									<b:FormLabel for="formUsername" text="{constants.username}"></b:FormLabel>
 									<b:TextBox ui:field="username" b:id="formUsername"></b:TextBox>
 								</b:FormGroup>
-						
 								<b:FormGroup>
 									<b:FormLabel for="formEmail" text="{constants.emailAddress}"></b:FormLabel>
 									<b:TextBox ui:field="emailAddress" b:id="formEmail"></b:TextBox>
@@ -36,32 +34,6 @@
 								<b:FormGroup>
 									<b:FormLabel for="formCurrency" text="{constants.currency}"></b:FormLabel>
 									<b:ListBox ui:field="currency" b:id="formCurrency"></b:ListBox>
-								</b:FormGroup>
-						
-						</b:Form>
-					</g:HTMLPanel>
-				</b:TabPane>
-				<b:TabPane b:id="modify">
-					<g:HTMLPanel>
-						<b:Form styleName="finances-form">
-	
-								<b:FormGroup ui:field="usernameGroupModify">
-									<b:FormLabel for="formUsernameModify" text="{constants.username}"></b:FormLabel>
-									<b:TextBox ui:field="currentUsername" b:id="formUsernameModify"></b:TextBox>
-								</b:FormGroup>
-								<b:FormGroup>
-									<b:FormLabel for="formEmailModify" text="{constants.emailAddress}"></b:FormLabel>
-									<b:TextBox ui:field="currentEmailAddress" b:id="formEmailModify"></b:TextBox>
-								</b:FormGroup>
-								
-								<b:FormGroup ui:field="passwordGroupModify">
-									<b:FormLabel for="formPassword" text="{constants.password}"></b:FormLabel>
-									<b:Input type="PASSWORD" ui:field="currentPassword" b:id="formPassword"></b:Input>
-								</b:FormGroup>
-								
-								<b:FormGroup>
-									<b:FormLabel for="formCurrencyModify" text="{constants.currency}"></b:FormLabel>
-									<b:ListBox ui:field="currentCurrency" b:id="formCurrencyModify"></b:ListBox>
 								</b:FormGroup>
 						
 						</b:Form>

@@ -2,9 +2,9 @@ package com.vypersw.finances.user;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -22,7 +22,6 @@ public class User implements Serializable {
 
 	@Id
 	@Column(name = "USER_ID")
-	@GeneratedValue
 	private Long userId;
 	
 	@Column(name = "USER_NAME")

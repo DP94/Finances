@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -26,10 +25,7 @@ public class Currency implements Serializable {
 	
 	@Column(name = "CURRENCY_CODE")
 	private String currencyCode;
-	
-	@Column(name = "SYMBOL")
-	private String symbol;
-	
+
 	public Long getCurrencyId() {
 		return currencyId;
 	}
@@ -44,13 +40,5 @@ public class Currency implements Serializable {
 
 	public void setCurrencyCode(String currencyCode) {
 		this.currencyCode = currencyCode;
-	}
-
-	public String getSymbol() {
-		return symbol;
-	}
-
-	public void setSymbol(String symbol) {
-		this.symbol = symbol;
 	}
 }
