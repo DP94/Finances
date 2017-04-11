@@ -9,28 +9,27 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.View;
-import com.vypersw.finances.client.abstractpresenter.AbstractContentPresenter;
+import com.vypersw.finances.client.abstractpresenter.VyperFormPresenter;
 import com.vypersw.finances.client.actions.UserAction;
+import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.client.actions.GetCurrenciesAction;
 import com.vypersw.finances.client.results.UserActionResult;
 import com.vypersw.finances.client.results.GetCurrenciesActionResult;
 import com.vypersw.finances.dto.currency.CurrencyDTO;
 import com.vypersw.finances.dto.user.UserDTO;
 
-public class UserManagementFormPresenter extends AbstractContentPresenter<UserManagementFormPresenter.MyView, UserDTO> implements UserManagementFormUiHandlers {
+public class UserManagementFormPresenter extends VyperFormPresenter<UserManagementFormPresenter.MyView, UserDTO> implements UserManagementFormUiHandlers {
     public interface MyView extends View, HasUiHandlers<UserManagementFormUiHandlers> {
     	void setCurrencyOptions(List<CurrencyDTO> options);
-    	void setUsername(String name);
-    	void setPassword(String password);
-    	void setEmail(String email);
     	void setCurrency(Long currencyId);
+    	void setViewData(UserDTO dto);
     }
     
     private DispatchAsync dispatchAsync;
 
 	@Inject
-	public UserManagementFormPresenter(EventBus eventBus, MyView view, DispatchAsync dispatchAsync) {
-		super(eventBus, view);
+	public UserManagementFormPresenter(EventBus eventBus, MyView view, DispatchAsync dispatchAsync, ApplicationPresenter container) {
+		super(eventBus, view, container);
 		this.dispatchAsync = dispatchAsync;
 		getView().setUiHandlers(this);
 	}
@@ -49,8 +48,8 @@ public class UserManagementFormPresenter extends AbstractContentPresenter<UserMa
 
 			@Override
 			public void onSuccess(UserActionResult result) {
-				Window.alert("Updated!");
 				setData(result.getDto());
+				setCurrencyIcon(getData().getCurrencyDTO().getCurrencyCode());
 			}
 		});
 	}
@@ -77,9 +76,7 @@ public class UserManagementFormPresenter extends AbstractContentPresenter<UserMa
 	public void setFormData(UserDTO data) {
 		if (data != null) {
 			super.setData(data);
-			getView().setUsername(data.getUsername());
-			getView().setEmail(data.getEmail());
-			getView().setPassword(data.getPassword());
+			getView().setViewData(data);
 		}
 		
 	}

@@ -6,7 +6,7 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
-import com.vypersw.finances.client.abstractpresenter.AbstractContentPresenter;
+import com.vypersw.finances.client.abstractpresenter.VyperFormPresenter;
 import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.client.usermanagement.usermanagementform.UserManagementFormPresenter;
 
@@ -17,7 +17,7 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
     	void setCurrencyText(String text);
     }
     
-    public static final Slot<AbstractContentPresenter<?,?>> SLOT_Perspective = new Slot<>();
+    public static final Slot<VyperFormPresenter<?,?>> SLOT_Perspective = new Slot<>();
     
     private ApplicationPresenter container;
     private ContentType type;
@@ -59,6 +59,10 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
     
     public void updateTitle(String text) {
     	getView().setTitle(text);
+    }
+    
+    public void setCurrencyIcon(String currencyCode) {
+    	getView().setCurrencyText(currencyCode);
     }
     
 	public ContentType getType() {

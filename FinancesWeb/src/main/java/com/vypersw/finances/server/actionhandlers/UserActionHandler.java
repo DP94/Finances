@@ -11,8 +11,8 @@ public class UserActionHandler extends VyperActionHandler<UserAction, UserAction
 	
 	@Override
 	protected UserActionResult executeAction(UserAction action) {
-		service.modify(action.getDto());
 		UserActionResult result = new UserActionResult();
+		result.setDto(service.modify(action.getDto()));
 		return result;
 	}
 

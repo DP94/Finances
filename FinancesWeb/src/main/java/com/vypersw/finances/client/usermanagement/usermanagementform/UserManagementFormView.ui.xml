@@ -41,7 +41,7 @@
 				</b:TabPane>
 				<b:TabPane b:id="preferences">
 					<g:HTMLPanel>
-						<div>hi 3</div>
+						<div>None yet! :)</div>
 					</g:HTMLPanel>
 				</b:TabPane>
 			</b:TabContent>

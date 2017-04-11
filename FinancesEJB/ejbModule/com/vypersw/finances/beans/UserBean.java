@@ -19,7 +19,7 @@ import com.vypersw.finances.user.User;
 public class UserBean extends AbstractBean implements UserService {
 
 	@Override
-	public void modify(UserDTO dto) {
+	public UserDTO modify(UserDTO dto) {
 		User user = new User();
 		user.setUserId(dto.getId());
 		user.setEmail(dto.getEmail());
@@ -30,6 +30,7 @@ public class UserBean extends AbstractBean implements UserService {
 		currency.setCurrencyId(dto.getCurrencyDTO().getCurrencyId());
 		user.setCurrency(currency);
 		entityManager.merge(user);
+		return dto;
 	}
 
 	@Override

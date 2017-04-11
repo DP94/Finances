@@ -3,15 +3,18 @@ package com.vypersw.finances.client.abstractpresenter;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
+import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.dto.VyperDTO;
 
-public abstract class AbstractContentPresenter<V extends View, D extends VyperDTO> extends PresenterWidget<V>  {
+public abstract class VyperFormPresenter<V extends View, D extends VyperDTO> extends PresenterWidget<V>  {
 
 	
 	private D data;
+	private ApplicationPresenter container;
 	
-	public AbstractContentPresenter(EventBus eventBus, V view) {
+	public VyperFormPresenter(EventBus eventBus, V view, ApplicationPresenter container) {
 		super(eventBus, view);
+		this.container = container;
 	}
 	
 	@Override
@@ -35,6 +38,10 @@ public abstract class AbstractContentPresenter<V extends View, D extends VyperDT
 
 	public void setData(D data) {
 		this.data = data;
+	}
+	
+	public void setCurrencyIcon(String currencyCode) {
+		container.updatePerspectiveCurrency(currencyCode);
 	}
 }
 

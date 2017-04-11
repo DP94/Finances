@@ -27,6 +27,7 @@ import com.vypersw.finances.client.widget.Toolbar;
 import com.vypersw.finances.client.widget.ToolbarButtonClickedEvent;
 import com.vypersw.finances.client.widget.ToolbarButtonClickedEvent.ToolbarButtonClickedHandler;
 import com.vypersw.finances.dto.currency.CurrencyDTO;
+import com.vypersw.finances.dto.user.UserDTO;
 
 public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFormUiHandlers> implements UserManagementFormPresenter.MyView, ToolbarButtonClickedHandler {
     interface Binder extends UiBinder<Widget, UserManagementFormView> {
@@ -94,6 +95,7 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
 			public void onChange(ChangeEvent event) {
 				Long index = Long.valueOf(currency.getSelectedIndex());
 				getUiHandlers().getData().getCurrencyDTO().setCurrencyId(index + 1);
+				getUiHandlers().getData().getCurrencyDTO().setCurrencyCode(currency.getSelectedItemText());
 			}
 		});
     }
@@ -113,7 +115,6 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
 
 	@Override
 	public void onToolbarButtonClicked(ToolbarButtonClickedEvent event) {
-		boolean create = false;
 		switch (event.getEventType()) {
 			case SAVE:
 				getUiHandlers().onSave();
@@ -138,20 +139,12 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
 		}
 		return validate;
 	}
-
+	
 	@Override
-	public void setUsername(String name) {
-		username.setText(name);
-	}
-
-	@Override
-	public void setPassword(String password) {
-		this.password.setText(password);
-	}
-
-	@Override
-	public void setEmail(String email) {
-		emailAddress.setText(email);
+	public void setViewData(UserDTO dto) {
+		username.setText(dto.getUsername());
+		password.setText(dto.getPassword());
+		emailAddress.setText(dto.getEmail());
 	}
 
 	@Override
