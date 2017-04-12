@@ -6,15 +6,13 @@ import com.gwtplatform.mvp.client.View;
 import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.dto.VyperDTO;
 
-public abstract class VyperFormPresenter<V extends View, D extends VyperDTO> extends PresenterWidget<V>  {
+public abstract class VyperFormPresenter<V extends View, D extends VyperDTO> extends VyperPresenterWidget<V>  {
 
 	
 	private D data;
-	private ApplicationPresenter container;
 	
 	public VyperFormPresenter(EventBus eventBus, V view, ApplicationPresenter container) {
-		super(eventBus, view);
-		this.container = container;
+		super(eventBus, view, container);
 	}
 	
 	@Override
@@ -40,8 +38,5 @@ public abstract class VyperFormPresenter<V extends View, D extends VyperDTO> ext
 		this.data = data;
 	}
 	
-	public void setCurrencyIcon(String currencyCode) {
-		container.updatePerspectiveCurrency(currencyCode);
-	}
 }
 

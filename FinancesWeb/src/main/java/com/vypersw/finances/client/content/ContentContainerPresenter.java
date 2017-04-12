@@ -7,6 +7,8 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.vypersw.finances.client.abstractpresenter.VyperFormPresenter;
+import com.vypersw.finances.client.abstractpresenter.VyperPresenterWidget;
+import com.vypersw.finances.client.accountmanagement.accountmanagementlist.AccountManagementListPresenter;
 import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.client.usermanagement.usermanagementform.UserManagementFormPresenter;
 
@@ -17,12 +19,14 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
     	void setCurrencyText(String text);
     }
     
-    public static final Slot<VyperFormPresenter<?,?>> SLOT_Perspective = new Slot<>();
+    public static final Slot<VyperPresenterWidget<?>> SLOT_Perspective = new Slot<>();
     
     private ApplicationPresenter container;
     private ContentType type;
     @Inject
-    private UserManagementFormPresenter presenter;
+    private UserManagementFormPresenter userPresenter;
+    @Inject
+    private AccountManagementListPresenter accountPresenter;
     
 	@Inject
 	public ContentContainerPresenter(EventBus eventBus, MyView view, ApplicationPresenter container) {
@@ -33,18 +37,21 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 
     protected void onBind() {
         super.onBind();
-		presenter.setData(container.getUserDTO());
+		userPresenter.setData(container.getUserDTO());
     }
     
     @Override
     protected void onReveal() {
     	switch(type) {
 	    	case USER_SETTINGS:
-	        	setInSlot(SLOT_Perspective, presenter);
+	        	setInSlot(SLOT_Perspective, userPresenter);
 	        	break;
 	    	case ADD_EXPENSE:
     		case ADD_INCOME:
+    			break;
     		case ACCOUNT_MANAGEMENT:
+    			setInSlot(SLOT_Perspective, accountPresenter);
+    			break;
     		case REPORTS:
 	    	default:
 	        	break;
