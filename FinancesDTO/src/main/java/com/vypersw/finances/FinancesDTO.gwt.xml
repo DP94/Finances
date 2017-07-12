@@ -1,3 +1,4 @@
 <module rename-to='FinancesDTO'>
 	<source path='dto'/>
+	<source path='enumeration'/>
 </module>

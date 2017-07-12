@@ -30,6 +30,7 @@
    		<gwt.version>2.8.0</gwt.version>
         <gwtp.version>1.6</gwtp.version>
         <gin.version>2.1.2</gin.version>
+        <gwt.svg.version>0.5.13</gwt.svg.version>
         <!-- server -->
         <guice.version>4.1.0</guice.version>
         <objectify.version>5.1.4</objectify.version>
@@ -171,6 +172,11 @@
 			<groupId>FinancesDTO</groupId>
 			<artifactId>FinancesDTO</artifactId>
 			<version>${finances.dto.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.vectomatic</groupId>
+			<artifactId>lib-gwt-svg</artifactId>
+			<version>${gwt.svg.version}</version>
 		</dependency>
    	</dependencies>
    </dependencyManagement>

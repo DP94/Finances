@@ -1,6 +1,7 @@
 package com.vypersw.finances.user;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,8 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.vypersw.finances.account.Account;
 
 @Entity
 @Table(name = "TBL_USER")
@@ -36,6 +41,13 @@ public class User implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "CURRENCY_ID")
 	private Currency currency;
+	
+	@ManyToMany
+	@JoinTable(
+			name="TBL_USER_ACCOUNT",
+			joinColumns=@JoinColumn(name="USER_ID", referencedColumnName="USER_ID"),
+			inverseJoinColumns=@JoinColumn(name="ACCOUNT_ID", referencedColumnName="ACCOUNT_ID"))
+	private List<Account> accounts;
 	
 	public User() {
 		
@@ -79,5 +91,13 @@ public class User implements Serializable {
 
 	public void setCurrency(Currency currency) {
 		this.currency = currency;
+	}
+
+	public List<Account> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(List<Account> accounts) {
+		this.accounts = accounts;
 	}
 }

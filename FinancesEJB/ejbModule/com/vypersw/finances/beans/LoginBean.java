@@ -9,33 +9,24 @@ import com.vypersw.finances.dto.user.UserDTO;
 import com.vypersw.finances.services.LoginService;
 import com.vypersw.finances.user.User;
 
-/**
- * Session Bean implementation class LoginBean
- */
 @Stateless
 @Local(LoginService.class)
 public class LoginBean extends AbstractBean implements LoginService {
 
-	
-
-	
-    /**
-     * Default constructor. 
-     */
-    public LoginBean() {
-    }
+	public LoginBean() {
+	}
 
 	@Override
 	public UserDTO login(String username, String password) {
 		if (username != null && !username.equals("") && password != null && !password.equals("")) {
 			User user = new User();
 			Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.username = :name")
-									   .setParameter("name", username);
+					.setParameter("name", username);
 			user = (User) query.getSingleResult();
 			if (user == null) {
 				return null;
 			}
-			
+
 			if (user.getPassword().equals(password)) {
 				UserDTO userDTO = new UserDTO();
 				userDTO.setId(user.getUserId());

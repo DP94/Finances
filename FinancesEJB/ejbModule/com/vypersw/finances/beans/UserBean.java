@@ -7,8 +7,11 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.Query;
 
 import com.vypersw.finances.abstractbean.AbstractBean;
+import com.vypersw.finances.account.Account;
 import com.vypersw.finances.dto.currency.CurrencyDTO;
+import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.dto.user.UserDTO;
+import com.vypersw.finances.enumeration.AccountType;
 import com.vypersw.finances.services.UserService;
 import com.vypersw.finances.user.Currency;
 import com.vypersw.finances.user.User;
@@ -52,6 +55,19 @@ public class UserBean extends AbstractBean implements UserService {
 		currencyDTO.setCurrencyId(user.getCurrency().getCurrencyId());
 		currencyDTO.setCurrencyCode(user.getCurrency().getCurrencyCode());
 		userDTO.setCurrencyDTO(currencyDTO);
+		
+		if (user.getAccounts() != null && !user.getAccounts().isEmpty()) {
+			for (Account account : user.getAccounts()) {
+				AccountDTO dto = new AccountDTO();
+				dto.setAccountId(account.getAccountId());
+				dto.setName(account.getName());
+				dto.setDescription(account.getDescription());
+				dto.setBalance(account.getBalance());
+				dto.setAccountType(AccountType.forValue(account.getAccountType()));
+				userDTO.getAccounts().add(dto);
+			}
+		}
+		
 		return userDTO;
 		
 	}

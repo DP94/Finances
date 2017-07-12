@@ -1,6 +1,8 @@
 package com.vypersw.finances.dto.user;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.vypersw.finances.dto.VyperDTO;
 import com.vypersw.finances.dto.currency.CurrencyDTO;
@@ -14,9 +16,10 @@ public class UserDTO extends VyperDTO implements Serializable {
 	private Long id;
 	private String username, password, email;
 	private CurrencyDTO currencyDTO;
+	private List<AccountDTO> accounts;
 	
 	public UserDTO() {
-		
+		accounts = new ArrayList<>();
 	}
 
 	public Long getId() {
@@ -57,5 +60,13 @@ public class UserDTO extends VyperDTO implements Serializable {
 
 	public void setCurrencyDTO(CurrencyDTO currencyDTO) {
 		this.currencyDTO = currencyDTO;
+	}
+
+	public List<AccountDTO> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(List<AccountDTO> accounts) {
+		this.accounts = accounts;
 	}
 }

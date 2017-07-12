@@ -1,0 +1,28 @@
+.main {
+	text-align: center;
+}
+
+svg {
+	height: 500px;
+	width: 500px;
+    overflow: hidden;
+    stroke-dashoffset: 0;
+    stroke: #666;
+    stroke-width: 1em;
+    text-align: center;
+}
+
+svg circle {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s cubic-bezier(.91,.8,.54,1.39);
+  stroke: #666;
+  stroke-width: 2em;
+}
+
+svg .bar {
+  stroke: #27e827;
+}
+
+.circle-transition {
+	transition: stroke-dashoffset 3s linear;
+}
