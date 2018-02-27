@@ -14,6 +14,7 @@ public class AccountDTO extends VyperDTO implements Serializable {
 	private Long accountId;
 	private BigDecimal balance;
 	private AccountType accountType;
+	private BigDecimal accountBalanceTarget;
 	
 	public AccountDTO() {
 	}
@@ -56,5 +57,13 @@ public class AccountDTO extends VyperDTO implements Serializable {
 
 	public void setAccountType(AccountType accountType) {
 		this.accountType = accountType;
+	}
+
+	public BigDecimal getAccountBalanceTarget() {
+		return accountBalanceTarget;
+	}
+
+	public void setAccountBalanceTarget(BigDecimal accountBalanceTarget) {
+		this.accountBalanceTarget = accountBalanceTarget;
 	}
 }

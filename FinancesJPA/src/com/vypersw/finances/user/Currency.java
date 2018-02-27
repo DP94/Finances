@@ -1,5 +1,7 @@
 package com.vypersw.finances.user;
 
+import com.vypersw.finances.VyperJPA;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -9,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TBL_CURRENCY")
-public class Currency implements Serializable {
+public class Currency implements VyperJPA {
 
 	/**
 	 * 

@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import com.vypersw.finances.abstractbean.AbstractBean;
 import com.vypersw.finances.dto.currency.CurrencyDTO;
+import com.vypersw.finances.jpahelpers.CurrencyJPAHelper;
 import com.vypersw.finances.services.CurrencyService;
 import com.vypersw.finances.user.Currency;
 
@@ -20,8 +21,9 @@ public class CurrencyBean extends AbstractBean implements CurrencyService {
 	@Override
 	public ArrayList<CurrencyDTO> getAllCurrencies() {
 		ArrayList<CurrencyDTO> currencies = new ArrayList<>();
-		Query query = entityManager.createQuery("SELECT c FROM Currency c");
-		for (Currency c : (List<Currency>) query.getResultList()) {
+		CurrencyJPAHelper currencyJPAHelper = new CurrencyJPAHelper(entityManager);
+		List<Currency> jpas = currencyJPAHelper.getAll(Currency.class);
+		for (Currency c : jpas) {
 			CurrencyDTO dto = new CurrencyDTO();
 			dto.setCurrencyId(c.getCurrencyId());
 			dto.setCurrencyCode(c.getCurrencyCode());

@@ -1,16 +1,16 @@
 package com.vypersw.finances.account;
 
+import com.vypersw.finances.VyperJPA;
+import com.vypersw.finances.user.User;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "TBL_ACCOUNT")
-public class Account implements Serializable {
+public class Account implements VyperJPA {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -29,7 +29,14 @@ public class Account implements Serializable {
 	
 	@Column(name = "ACCOUNT_TYPE")
 	private Integer accountType;
-	
+
+	@Column(name = "ACCOUNT_BALANCE_TARGET")
+	private BigDecimal accountBalanceTarget;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="USER_ID")
+	private User user;
+
 	public Account() {
 		
 	}
@@ -72,5 +79,21 @@ public class Account implements Serializable {
 
 	public void setAccountType(Integer accountType) {
 		this.accountType = accountType;
-	}	
+	}
+
+	public BigDecimal getAccountBalanceTarget() {
+		return accountBalanceTarget;
+	}
+
+	public void setAccountBalanceTarget(BigDecimal accountBalanceTarget) {
+		this.accountBalanceTarget = accountBalanceTarget;
+	}
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

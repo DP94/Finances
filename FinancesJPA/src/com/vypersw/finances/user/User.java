@@ -3,22 +3,14 @@ package com.vypersw.finances.user;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.vypersw.finances.VyperJPA;
 import com.vypersw.finances.account.Account;
 
 @Entity
 @Table(name = "TBL_USER")
-public class User implements Serializable {
+public class User implements VyperJPA {
 	
 	/**
 	 * 
@@ -42,11 +34,7 @@ public class User implements Serializable {
 	@JoinColumn(name = "CURRENCY_ID")
 	private Currency currency;
 	
-	@ManyToMany
-	@JoinTable(
-			name="TBL_USER_ACCOUNT",
-			joinColumns=@JoinColumn(name="USER_ID", referencedColumnName="USER_ID"),
-			inverseJoinColumns=@JoinColumn(name="ACCOUNT_ID", referencedColumnName="ACCOUNT_ID"))
+	@OneToMany(mappedBy = "user")
 	private List<Account> accounts;
 	
 	public User() {

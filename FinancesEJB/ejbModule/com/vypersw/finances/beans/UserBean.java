@@ -12,6 +12,7 @@ import com.vypersw.finances.dto.currency.CurrencyDTO;
 import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.dto.user.UserDTO;
 import com.vypersw.finances.enumeration.AccountType;
+import com.vypersw.finances.jpahelpers.UserJPAHelper;
 import com.vypersw.finances.services.UserService;
 import com.vypersw.finances.user.Currency;
 import com.vypersw.finances.user.User;
@@ -38,10 +39,8 @@ public class UserBean extends AbstractBean implements UserService {
 
 	@Override
 	public UserDTO getById(Long userId) {
-		User user = new User();
-		Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.userId = :userid")
-								   .setParameter("userid", userId);
-		user = (User) query.getSingleResult();
+		UserJPAHelper userJPAHelper = new UserJPAHelper(entityManager);
+		User user = userJPAHelper.findById(User.class, userId);
 		if (user == null) {
 			return null;
 		}
@@ -64,6 +63,7 @@ public class UserBean extends AbstractBean implements UserService {
 				dto.setDescription(account.getDescription());
 				dto.setBalance(account.getBalance());
 				dto.setAccountType(AccountType.forValue(account.getAccountType()));
+				dto.setAccountBalanceTarget(account.getAccountBalanceTarget());
 				userDTO.getAccounts().add(dto);
 			}
 		}
