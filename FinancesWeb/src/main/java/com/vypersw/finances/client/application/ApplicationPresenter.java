@@ -1,11 +1,5 @@
 package com.vypersw.finances.client.application;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-
-import javax.inject.Inject;
-
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Provider;
@@ -30,6 +24,11 @@ import com.vypersw.finances.client.place.NameTokens;
 import com.vypersw.finances.client.results.InitSessionActionResult;
 import com.vypersw.finances.client.results.LogoutActionResult;
 import com.vypersw.finances.dto.user.UserDTO;
+
+import javax.inject.Inject;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> implements ApplicationUiHandlers {
     interface MyView extends View, HasUiHandlers<ApplicationUiHandlers> {
@@ -81,7 +80,21 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 			@Override
 			public void onSuccess(InitSessionActionResult result) {
 				userDTO = result.getDto();
-				getView().updateUserLabel(constants.welcomeX() + " " + userDTO.getUsername());
+				if (userDTO == null) {
+					getView().closeMenu();
+					//Is this needed? Shouldn't we just leave it and let it clear from memory?
+					for (ContentContainerPresenter presenter : perspectives.values()) {
+						removeFromSlot(SLOT_content, presenter);
+					}
+					PlaceRequest request = new PlaceRequest.Builder()
+							.nameToken(NameTokens.login)
+							.with("feedbackText", constants.successfullyLoggedOut())
+							.with("feedbackType", "success")
+							.build();
+					placeManager.revealPlace(request);
+				} else {
+					getView().updateUserLabel(constants.welcomeX() + " " + userDTO.getUsername());
+				}
 			}
 		});
 	}

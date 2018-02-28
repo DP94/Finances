@@ -1,14 +1,14 @@
 package com.vypersw.finances.client.accountmanagement.accountmanagementlist;
 
-import java.util.List;
-
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.View;
 import com.vypersw.finances.client.abstractpresenter.VyperListPresenter;
 import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.dto.user.AccountDTO;
-import com.gwtplatform.mvp.client.HasUiHandlers;
+
+import java.util.List;
 
 public class AccountManagementListPresenter extends VyperListPresenter<AccountManagementListPresenter.MyView> implements AccountManagementListUiHandlers {
     public interface MyView extends View , HasUiHandlers<AccountManagementListUiHandlers> {
@@ -20,5 +20,10 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountMa
 		super(eventBus, view, container);
 		getView().setUiHandlers(this);
 		getView().setAccountData(getContainer().getUserDTO().getAccounts());
+	}
+
+	@Override
+	public String getCurrencySymbol() {
+		return getContainer().getUserDTO().getCurrencyDTO().getCurrencyCode();
 	}
 }
