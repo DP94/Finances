@@ -27,9 +27,9 @@ public class SavingsAccountWidget extends AccountWidget {
     OMSVGSVGElement svg;
     OMSVGCircleElement c2;
 	
-	public SavingsAccountWidget() {
+	public SavingsAccountWidget(double percentage) {
 		initWidget(binder.createAndBindUi(this));
-		setUpAccountSVG(0);
+		setUpAccountSVG(percentage);
 	}
 
 	private void setUpAccountSVG(double value) {
@@ -45,13 +45,9 @@ public class SavingsAccountWidget extends AccountWidget {
 		svg.appendChild(c2);
 		main.getElement().appendChild(svg.getElement());
 		c2.getStyle().setSVGProperty(SVGConstants.CSS_STROKE_DASHOFFSET_PROPERTY,
-				getOffSetValue(0, c2.getAttribute(SVGConstants.SVG_R_ATTRIBUTE)) + "px");
+				getOffSetValue(value, c2.getAttribute(SVGConstants.SVG_R_ATTRIBUTE)) + "px");
 		circle.getStyle().setSVGProperty(SVGConstants.SVG_FILL_ATTRIBUTE, "transparent");
 		c2.getStyle().setSVGProperty(SVGConstants.SVG_FILL_ATTRIBUTE, "transparent");
-		svg.addClickHandler(handler -> {
-			c2.getStyle().setSVGProperty(SVGConstants.CSS_STROKE_DASHOFFSET_PROPERTY,
-					getOffSetValue(50, c2.getAttribute(SVGConstants.SVG_R_ATTRIBUTE)) + "px");
-		});
 	}
 
 	private String getOffSetValue(double value, String r) {

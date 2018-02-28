@@ -50,7 +50,8 @@ public class AccountManagementListView extends ViewWithUiHandlers<AccountManagem
 		for (AccountDTO dto : accountList) {
 			AccountWidget widget;
 			if (dto.getAccountType() == AccountType.SAVINGS) {
-				widget = new SavingsAccountWidget();
+				double percentage = dto.getBalance().doubleValue() / dto.getAccountBalanceTarget().doubleValue() * 100;
+				widget = new SavingsAccountWidget(percentage);
 			} else {
 				widget = new ISAAccountWidget();
 			}
