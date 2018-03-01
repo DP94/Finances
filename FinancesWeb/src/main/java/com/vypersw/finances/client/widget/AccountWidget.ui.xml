@@ -1,13 +1,19 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
-             xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html">
+             xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
+             xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
     <ui:with field="constants" type="com.vypersw.finances.client.i18n.FinancesConstants"/>
     <g:HTMLPanel ui:field="main">
-        <b.html:Div ui:field="div" addStyleNames="accounts-info-div">
+        <b.html:Div ui:field="div" addStyleNames="accounts-info-div row">
             <g:Label ui:field="icon" addStyleNames="accounts-info-icon"/>
             <g:Label ui:field="accountName" addStyleNames="accounts-info-name"/>
             <g:Label ui:field="accountBalance" addStyleNames="accounts-info-balance"/>
+        </b.html:Div>
+        <b.html:Div addStyleNames="row">
+            <b:Progress>
+                <b:ProgressBar ui:field="progress" type="SUCCESS" percent="0"/>
+            </b:Progress>
         </b.html:Div>
     </g:HTMLPanel>
 </ui:UiBinder>

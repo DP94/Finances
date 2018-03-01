@@ -5,7 +5,6 @@
     <!-- Inherit the core Web Toolkit stuff. -->
     <inherits name='com.google.gwt.user.User' />
     <inherits name='com.google.gwt.inject.Inject' />
-    <inherits name="org.vectomatic.libgwtsvg" />
 
     <!-- Default css -->
     <inherits name='com.google.gwt.user.theme.standard.Standard' />

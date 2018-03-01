@@ -88,7 +88,7 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 					}
 					PlaceRequest request = new PlaceRequest.Builder()
 							.nameToken(NameTokens.login)
-							.with("feedbackText", constants.successfullyLoggedOut())
+                            .with("feedbackText", constants.sessionTimeout())
 							.with("feedbackType", "success")
 							.build();
 					placeManager.revealPlace(request);

@@ -3,14 +3,14 @@
 }
 
 svg {
-    position: relative;
     height: 400px;
-    left: -132px;
     width: 400px;
     stroke-dashoffset: 0;
     stroke: #666;
     stroke-width: 1em;
     text-align: center;
+    position: relative;
+    top: -262px;
 }
 
 svg circle {
@@ -29,22 +29,17 @@ svg .bar {
 }
 
 .arrow-left {
-    left: -400px;
-    top: 248px !important;
+    float: left;
     font-size: 50px;
 }
 
 .arrow-right {
-    left: 350px;
-    top: 248px !important;;
+    float: left;
     font-size: 50px;
 }
 
-.accounts-info-div {
-    display: inline-block;
-    position: relative;
-    left: 217px;
-    top: -110px;
+.account-container {
+    float: left;
 }
 
 .accounts-info-name {

@@ -6,13 +6,13 @@
 >
     <ui:with field="constants" type="com.vypersw.finances.client.i18n.FinancesConstants"/>
     <g:HTMLPanel ui:field="main">
-        <widget:Toolbar ui:field="toolbar"></widget:Toolbar>
+        <widget:Toolbar ui:field="toolbar"/>
         <div class="nav-tabs-container-div">
             <b:NavTabs>
                 <b:TabListItem active="true" dataTarget="#modify" text="{constants.modify}"
-                               ui:field="modifyTab"></b:TabListItem>
+                               ui:field="modifyTab"/>
                 <b:TabListItem dataTarget="#preferences" text="{constants.preferences}"
-                               ui:field="preferencesTab"></b:TabListItem>
+                               ui:field="preferencesTab"/>
             </b:NavTabs>
             <b:TabContent>
                 <b:TabPane b:id="modify" active="true" addStyleNames="finances-form">

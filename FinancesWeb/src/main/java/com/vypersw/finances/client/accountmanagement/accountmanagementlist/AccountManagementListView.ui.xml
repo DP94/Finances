@@ -4,11 +4,17 @@
              xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
 >
     <g:HTMLPanel styleName="main">
-        <g:Label ui:field="left" styleName="glyphicon glyphicon-arrow-left arrow-left"/>
-        <g:Label ui:field="right" styleName="glyphicon glyphicon-arrow-right arrow-right"/>
-        <b.html:Div ui:field="main">
+        <b.html:Div addStyleNames="row">
+            <b.html:Div addStyleNames="col-md-2"/>
+            <g:Label ui:field="left" styleName="glyphicon glyphicon-arrow-left arrow-left col-md-2"/>
+            <b.html:Div ui:field="main" addStyleNames="col-md-4 account-container">
 
+            </b.html:Div>
+            <g:Label ui:field="right" styleName="glyphicon glyphicon-arrow-right arrow-right col-md-2"/>
+            <b.html:Div addStyleNames="col-md-2"/>
         </b.html:Div>
-        <g:Label ui:field="edit" styleName="account-edit-button"/>
+        <b.html:Div addStyleNames="row">
+            <g:Label ui:field="edit" styleName="account-edit-button"/>
+        </b.html:Div>
     </g:HTMLPanel>
 </ui:UiBinder>
