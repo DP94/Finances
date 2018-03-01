@@ -48,6 +48,9 @@ public interface FinancesConstants extends ConstantsWithLookup {
 	
 	@DefaultStringValue("Successfully logged out")
 	public String successfullyLoggedOut();
+
+	@DefaultStringValue("Session timed out")
+	public String sessionTimeout();
 	
 	@DefaultStringValue("User management")
 	public String userManagement();

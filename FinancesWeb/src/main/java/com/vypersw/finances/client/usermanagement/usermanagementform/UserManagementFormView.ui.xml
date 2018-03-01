@@ -3,48 +3,57 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:widget="urn:import:com.vypersw.finances.client.widget"
              xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
-             xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html">
+>
     <ui:with field="constants" type="com.vypersw.finances.client.i18n.FinancesConstants"/>
     <g:HTMLPanel ui:field="main">
-    	<widget:Toolbar ui:field="toolbar"></widget:Toolbar>
-    	<div class="nav-tabs-container-div">
-			<b:NavTabs>
-				<b:TabListItem active="true" dataTarget="#modify" text="{constants.modify}" ui:field="modifyTab"></b:TabListItem>
-				<b:TabListItem dataTarget="#preferences" text="{constants.preferences}" ui:field="preferencesTab"></b:TabListItem>
-			</b:NavTabs>
-			<b:TabContent>
-				<b:TabPane b:id="modify" active="true">
-					<g:HTMLPanel>
-						<b:Form styleName="finances-form">
-	
-								<b:FormGroup ui:field="usernameGroup">
-									<b:FormLabel for="formUsername" text="{constants.username}"></b:FormLabel>
-									<b:TextBox ui:field="username" b:id="formUsername"></b:TextBox>
-								</b:FormGroup>
-								<b:FormGroup>
-									<b:FormLabel for="formEmail" text="{constants.emailAddress}"></b:FormLabel>
-									<b:TextBox ui:field="emailAddress" b:id="formEmail"></b:TextBox>
-								</b:FormGroup>
-								
-								<b:FormGroup ui:field="passwordGroup">
-									<b:FormLabel for="formPassword" text="{constants.password}"></b:FormLabel>
-									<b:Input type="PASSWORD" ui:field="password" b:id="formPassword"></b:Input>
-								</b:FormGroup>
-								
-								<b:FormGroup>
-									<b:FormLabel for="formCurrency" text="{constants.currency}"></b:FormLabel>
-									<b:ListBox ui:field="currency" b:id="formCurrency"></b:ListBox>
-								</b:FormGroup>
-						
-						</b:Form>
-					</g:HTMLPanel>
-				</b:TabPane>
-				<b:TabPane b:id="preferences">
-					<g:HTMLPanel>
-						<div>None yet! :)</div>
-					</g:HTMLPanel>
-				</b:TabPane>
-			</b:TabContent>
-		</div>
+        <widget:Toolbar ui:field="toolbar"></widget:Toolbar>
+        <div class="nav-tabs-container-div">
+            <b:NavTabs>
+                <b:TabListItem active="true" dataTarget="#modify" text="{constants.modify}"
+                               ui:field="modifyTab"></b:TabListItem>
+                <b:TabListItem dataTarget="#preferences" text="{constants.preferences}"
+                               ui:field="preferencesTab"></b:TabListItem>
+            </b:NavTabs>
+            <b:TabContent>
+                <b:TabPane b:id="modify" active="true" addStyleNames="finances-form">
+                    <b:Form type="HORIZONTAL">
+                        <b:FieldSet>
+                            <b:FormGroup ui:field="usernameGroup">
+                                <b:FormLabel for="formUsername" text="{constants.username}" addStyleNames="col-md-4"/>
+                                <g:FlowPanel addStyleNames="col-md-8">
+                                    <b:TextBox ui:field="username" b:id="formUsername"/>
+                                </g:FlowPanel>
+                            </b:FormGroup>
+                            <b:FormGroup>
+                                <b:FormLabel for="formEmail" text="{constants.emailAddress}" addStyleNames="col-md-4"/>
+                                <g:FlowPanel addStyleNames="col-md-8">
+                                    <b:TextBox ui:field="emailAddress" b:id="formEmail" addStyleNames="col-md-8"/>
+                                </g:FlowPanel>
+                            </b:FormGroup>
+
+                            <b:FormGroup ui:field="passwordGroup">
+                                <b:FormLabel for="formPassword" text="{constants.password}" addStyleNames="col-md-4"/>
+                                <g:FlowPanel addStyleNames="col-md-8">
+                                    <b:Input type="PASSWORD" ui:field="password" b:id="formPassword"
+                                             addStyleNames="col-md-8"/>
+                                </g:FlowPanel>
+                            </b:FormGroup>
+
+                            <b:FormGroup>
+                                <b:FormLabel for="formCurrency" text="{constants.currency}" addStyleNames="col-md-4"/>
+                                <g:FlowPanel addStyleNames="col-md-8">
+                                    <b:ListBox ui:field="currency" b:id="formCurrency" addStyleNames="col-md-8"/>
+                                </g:FlowPanel>
+                            </b:FormGroup>
+                        </b:FieldSet>
+                    </b:Form>
+                </b:TabPane>
+                <b:TabPane b:id="preferences">
+                    <g:HTMLPanel>
+                        <div>None yet! :)</div>
+                    </g:HTMLPanel>
+                </b:TabPane>
+            </b:TabContent>
+        </div>
     </g:HTMLPanel>
 </ui:UiBinder>

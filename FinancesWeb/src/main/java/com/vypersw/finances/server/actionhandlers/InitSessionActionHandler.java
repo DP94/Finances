@@ -29,7 +29,7 @@ public class InitSessionActionHandler extends VyperActionHandler<InitSessionActi
 		Long userId = new Long(0);
         HttpSession httpSession = req.get().getSession(false);
         InitSessionActionResult result = new InitSessionActionResult();
-        if (httpSession == null) {
+		if (httpSession.getAttribute("userId") == null) {
             result.setDto(null);
             return result;
         }
