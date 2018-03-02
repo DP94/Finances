@@ -11,7 +11,7 @@
             <g:Label ui:field="accountBalance" addStyleNames="accounts-info-balance"/>
         </b.html:Div>
         <b.html:Div addStyleNames="row">
-            <b:Progress>
+            <b:Progress addStyleNames="account-progress">
                 <b:ProgressBar ui:field="progress" type="SUCCESS" percent="0"/>
             </b:Progress>
         </b.html:Div>

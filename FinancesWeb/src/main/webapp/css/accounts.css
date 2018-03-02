@@ -2,40 +2,14 @@
 	text-align: center;
 }
 
-svg {
-    height: 400px;
-    width: 400px;
-    stroke-dashoffset: 0;
-    stroke: #666;
-    stroke-width: 1em;
-    text-align: center;
-    position: relative;
-    top: -262px;
-}
-
-svg circle {
-  stroke-dashoffset: 0;
-  transition: stroke-dashoffset 1s cubic-bezier(.91,.8,.54,1.39);
-  stroke: #666;
-  stroke-width: 2em;
-}
-
-svg .bar {
-  stroke: #27e827;
-}
-
-.circle-transition {
-	transition: stroke-dashoffset 3s linear;
-}
-
-.arrow-left {
+.arrow {
+    padding-top: 5%;
     float: left;
     font-size: 50px;
 }
 
-.arrow-right {
-    float: left;
-    font-size: 50px;
+.main {
+    padding-top: 5%;
 }
 
 .account-container {
@@ -59,4 +33,13 @@ svg .bar {
 
 .account-edit {
     font-size: 32px;
+}
+
+.account-progress {
+    border: 1px solid rgba(114, 114, 114, 0.5);
+}
+
+.progress-bar {
+    -webkit-transition: none !important;
+    transition: none !important;
 }
