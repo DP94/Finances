@@ -6,6 +6,7 @@
 		<groupId>Finances</groupId>
 		<artifactId>Finances</artifactId>
 		<version>1</version>
+		<relativePath>../Finances</relativePath>
 	</parent>
 	<groupId>FinancesEJB</groupId>
 	<artifactId>FinancesEJB</artifactId>
