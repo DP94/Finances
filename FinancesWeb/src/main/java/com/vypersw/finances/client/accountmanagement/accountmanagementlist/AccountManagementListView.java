@@ -21,6 +21,7 @@ public class AccountManagementListView extends ViewWithUiHandlers<AccountManagem
     
     private List<AccountWidget> widgets;
     private int currentIndex;
+    private AccountWidget currentAccount;
 
     @UiField
 	Div main;
@@ -50,8 +51,9 @@ public class AccountManagementListView extends ViewWithUiHandlers<AccountManagem
 			if (dto.getAccountBalanceTarget() != null) {
 				percentage = dto.getBalance().doubleValue() / dto.getAccountBalanceTarget().doubleValue() * 100;
 			}
-			AccountWidget widget = new AccountWidget(percentage);
+            AccountWidget widget = new AccountWidget();
 			widget.setAccountBalance("£" + dto.getBalance().toString());
+            widget.setPercentage(percentage);
 			widget.setAccountName(dto.getName());
 			widget.setID(dto.getAccountId().toString());
 			widget.setIconType("glyphicon glyphicon-piggy-bank");
@@ -63,16 +65,28 @@ public class AccountManagementListView extends ViewWithUiHandlers<AccountManagem
 			i++;
 		}
 	}
-	
-	@UiHandler("left")
+
+    @Override
+    public List<AccountWidget> getAllAccounts() {
+        return widgets;
+    }
+
+    @Override
+    public AccountWidget getSelectedAccount() {
+        return currentAccount;
+    }
+
+    @UiHandler("left")
 	public void onLeftPress(ClickEvent e) {
 		if (currentIndex == 0) {
 			widgets.get(0).setVisible(false);
+            currentAccount = widgets.get(widgets.size() - 1);
 			widgets.get(widgets.size() - 1).setVisible(true);
 			currentIndex = widgets.size() - 1;
 		} else {
 			widgets.get(currentIndex).setVisible(false);
 			widgets.get(currentIndex - 1).setVisible(true);
+            currentAccount = widgets.get(currentIndex - 1);
 			currentIndex--;
 		}
 	}
@@ -82,11 +96,18 @@ public class AccountManagementListView extends ViewWithUiHandlers<AccountManagem
 		if (currentIndex == widgets.size() - 1) {
 			widgets.get(widgets.size() - 1).setVisible(false);
 			widgets.get(0).setVisible(true);
+            currentAccount = widgets.get(0);
 			currentIndex = 0;
 		} else {
 			widgets.get(currentIndex).setVisible(false);
 			widgets.get(currentIndex + 1).setVisible(true);
+            currentAccount = widgets.get(currentIndex + 1);
 			currentIndex++;
 		}
 	}
+
+    @UiHandler("edit")
+    public void onEditPress(ClickEvent e) {
+
+    }
 }
