@@ -6,8 +6,8 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
-import com.vypersw.finances.client.abstractpresenter.VyperFormPresenter;
 import com.vypersw.finances.client.abstractpresenter.VyperPresenterWidget;
+import com.vypersw.finances.client.accountmanagement.accountmanagementlist.AccountEditorPresenter;
 import com.vypersw.finances.client.accountmanagement.accountmanagementlist.AccountManagementListPresenter;
 import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.client.usermanagement.usermanagementform.UserManagementFormPresenter;
@@ -27,6 +27,8 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
     private UserManagementFormPresenter userPresenter;
     @Inject
     private AccountManagementListPresenter accountPresenter;
+	@Inject
+	private AccountEditorPresenter accountEditorPresenter;
     
 	@Inject
 	public ContentContainerPresenter(EventBus eventBus, MyView view, ApplicationPresenter container) {
@@ -49,6 +51,9 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 	    	case ADD_EXPENSE:
     		case ADD_INCOME:
     			break;
+			case ACCOUNT_EDITING:
+				setInSlot(SLOT_Perspective, accountEditorPresenter);
+				break;
     		case ACCOUNT_MANAGEMENT:
     			setInSlot(SLOT_Perspective, accountPresenter);
     			break;

@@ -6,6 +6,7 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.View;
 import com.vypersw.finances.client.abstractpresenter.VyperListPresenter;
 import com.vypersw.finances.client.application.ApplicationPresenter;
+import com.vypersw.finances.client.content.ContentType;
 import com.vypersw.finances.client.widget.AccountWidget;
 import com.vypersw.finances.dto.user.AccountDTO;
 
@@ -32,7 +33,13 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountMa
 		return getContainer().getUserDTO().getCurrencyDTO().getCurrencyCode();
 	}
 
-    @Override
+	@Override
+	public void onEditPressed() {
+		long accountId = getView().getSelectedAccount().getAccountDTO().getAccountId();
+		getContainer().openPerspective(ContentType.ACCOUNT_EDITING);
+	}
+
+	@Override
     protected void onReveal() {
         for (AccountWidget accountWidget : getView().getAllAccounts()) {
             accountWidget.animate("progress" + accountWidget.getId(), accountWidget.getPercentage());

@@ -1,16 +1,8 @@
 package com.vypersw.finances.server.guice;
 
 import com.gwtplatform.dispatch.rpc.server.guice.HandlerModule;
-import com.vypersw.finances.client.actions.UserAction;
-import com.vypersw.finances.client.actions.GetCurrenciesAction;
-import com.vypersw.finances.client.actions.InitSessionAction;
-import com.vypersw.finances.client.actions.LoginAction;
-import com.vypersw.finances.client.actions.LogoutAction;
-import com.vypersw.finances.server.actionhandlers.UserActionHandler;
-import com.vypersw.finances.server.actionhandlers.GetCurrenciesActionHandler;
-import com.vypersw.finances.server.actionhandlers.InitSessionActionHandler;
-import com.vypersw.finances.server.actionhandlers.LoginActionHandler;
-import com.vypersw.finances.server.actionhandlers.LogoutActionHandler;
+import com.vypersw.finances.client.actions.*;
+import com.vypersw.finances.server.actionhandlers.*;
 
 public class ServerModule extends HandlerModule {
     @Override
@@ -20,5 +12,6 @@ public class ServerModule extends HandlerModule {
     	bindHandler(LogoutAction.class, LogoutActionHandler.class);
     	bindHandler(UserAction.class, UserActionHandler.class);
     	bindHandler(InitSessionAction.class, InitSessionActionHandler.class);
+		bindHandler(GetAccountAction.class, GetAccountActionHandler.class);
     }
 }

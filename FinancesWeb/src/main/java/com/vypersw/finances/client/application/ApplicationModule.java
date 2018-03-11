@@ -1,6 +1,8 @@
 package com.vypersw.finances.client.application;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
+import com.vypersw.finances.client.accountmanagement.accountmanagementlist.AccountEditorPresenter;
+import com.vypersw.finances.client.accountmanagement.accountmanagementlist.AccountEditorView;
 import com.vypersw.finances.client.accountmanagement.accountmanagementlist.AccountManagementListPresenter;
 import com.vypersw.finances.client.accountmanagement.accountmanagementlist.AccountManagementListView;
 import com.vypersw.finances.client.content.ContentContainerPresenter;
@@ -15,5 +17,6 @@ public class ApplicationModule extends AbstractPresenterModule {
         bindPresenterWidget(ContentContainerPresenter.class, ContentContainerPresenter.MyView.class, ContentContainerView.class);
         bindPresenterWidget(UserManagementFormPresenter.class, UserManagementFormPresenter.MyView.class, UserManagementFormView.class);
         bindPresenterWidget(AccountManagementListPresenter.class, AccountManagementListPresenter.MyView.class, AccountManagementListView.class);
+        bindPresenterWidget(AccountEditorPresenter.class, AccountEditorPresenter.MyView.class, AccountEditorView.class);
     }
 }

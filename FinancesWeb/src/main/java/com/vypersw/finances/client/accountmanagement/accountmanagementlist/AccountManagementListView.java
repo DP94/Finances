@@ -47,19 +47,14 @@ public class AccountManagementListView extends ViewWithUiHandlers<AccountManagem
 	public void setAccountData(List<AccountDTO> accountList) {
 		int i = 0;
 		for (AccountDTO dto : accountList) {
-			double percentage = 0;
-			if (dto.getAccountBalanceTarget() != null) {
-				percentage = dto.getBalance().doubleValue() / dto.getAccountBalanceTarget().doubleValue() * 100;
-			}
-            AccountWidget widget = new AccountWidget();
-			widget.setAccountBalance("£" + dto.getBalance().toString());
-            widget.setPercentage(percentage);
-			widget.setAccountName(dto.getName());
+            AccountWidget widget = new AccountWidget(dto);
 			widget.setID(dto.getAccountId().toString());
 			widget.setIconType("glyphicon glyphicon-piggy-bank");
-			if (i != 0) {
-				widget.setVisible(false);
-			}
+            if (i != 0) {
+                widget.setVisible(false);
+            } else {
+                currentAccount = widget;
+            }
 			main.add(widget);
 			widgets.add(widget);
 			i++;
@@ -108,6 +103,6 @@ public class AccountManagementListView extends ViewWithUiHandlers<AccountManagem
 
     @UiHandler("edit")
     public void onEditPress(ClickEvent e) {
-
+        getUiHandlers().onEditPressed();
     }
 }

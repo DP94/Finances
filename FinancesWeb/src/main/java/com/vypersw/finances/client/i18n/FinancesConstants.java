@@ -6,7 +6,7 @@ import com.google.gwt.i18n.client.ConstantsWithLookup;
 public interface FinancesConstants extends ConstantsWithLookup {
 	
 	FinancesConstants INSTANCE = GWT.create(FinancesConstants.class);
-	
+
 	@DefaultStringValue("Account management")
 	public String accountManagement();
 	
@@ -30,6 +30,9 @@ public interface FinancesConstants extends ConstantsWithLookup {
 	
 	@DefaultStringValue("Modify")
 	public String modify();
+
+    @DefaultStringValue("Name")
+    public String name();
 	
 	@DefaultStringValue("Password")
 	public String password();
