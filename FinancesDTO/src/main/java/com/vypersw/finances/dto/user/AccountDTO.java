@@ -1,10 +1,10 @@
 package com.vypersw.finances.dto.user;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-
 import com.vypersw.finances.dto.VyperDTO;
 import com.vypersw.finances.enumeration.AccountType;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class AccountDTO extends VyperDTO implements Serializable {
 	
@@ -15,6 +15,7 @@ public class AccountDTO extends VyperDTO implements Serializable {
 	private BigDecimal balance;
 	private AccountType accountType;
 	private BigDecimal accountBalanceTarget;
+    private long userId;
 	
 	public AccountDTO() {
 	}
@@ -66,4 +67,12 @@ public class AccountDTO extends VyperDTO implements Serializable {
 	public void setAccountBalanceTarget(BigDecimal accountBalanceTarget) {
 		this.accountBalanceTarget = accountBalanceTarget;
 	}
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 }

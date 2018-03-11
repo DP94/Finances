@@ -54,6 +54,8 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     private LinkedList<ContentContainerPresenter> openSlots = new LinkedList<>();
 
     private UserDTO userDTO;
+
+    private long currentAccountId;
     
     @ProxyCodeSplit
     @NameToken(NameTokens.home)
@@ -174,4 +176,12 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 			openSlots.getLast().setCurrencyIcon(currencyCode);
 		}
 	}
+
+    public long getCurrentAccountId() {
+        return currentAccountId;
+    }
+
+    public void setCurrentAccountId(long currentAccountId) {
+        this.currentAccountId = currentAccountId;
+    }
 }

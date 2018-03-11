@@ -22,6 +22,34 @@
                                     <b:TextBox ui:field="accountName" b:id="formAccountName"/>
                                 </g:FlowPanel>
                             </b:FormGroup>
+                            <b:FormGroup ui:field="accountDescriptionGroup">
+                                <b:FormLabel for="formAccountDescription" text="{constants.description}"
+                                             addStyleNames="col-md-4"/>
+                                <g:FlowPanel addStyleNames="col-md-8">
+                                    <b:TextBox ui:field="accountDescription" b:id="formAccountDescription"/>
+                                </g:FlowPanel>
+                            </b:FormGroup>
+                            <b:FormGroup ui:field="accountBalanceGroup">
+                                <b:FormLabel for="formAccountBalance" text="{constants.balance}"
+                                             addStyleNames="col-md-4"/>
+                                <g:FlowPanel addStyleNames="col-md-8">
+                                    <b:TextBox ui:field="accountBalance" b:id="formAccountBalance"/>
+                                </g:FlowPanel>
+                            </b:FormGroup>
+                            <b:FormGroup ui:field="accountBalanceTargetGroup">
+                                <b:FormLabel for="formAccountBalanceTarget" text="{constants.target}"
+                                             addStyleNames="col-md-4"/>
+                                <g:FlowPanel addStyleNames="col-md-8">
+                                    <b:TextBox ui:field="accountBalanceTarget" b:id="formAccountBalanceTarget"/>
+                                </g:FlowPanel>
+                            </b:FormGroup>
+                            <b:FormGroup>
+                                <b:FormLabel for="formAccountType" text="{constants.accountType}"
+                                             addStyleNames="col-md-4"/>
+                                <g:FlowPanel addStyleNames="col-md-8">
+                                    <b:ListBox ui:field="accountType" b:id="formAccountType" addStyleNames="col-md-8"/>
+                                </g:FlowPanel>
+                            </b:FormGroup>
                         </b:FieldSet>
                     </b:Form>
                 </b:TabPane>

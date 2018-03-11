@@ -9,18 +9,27 @@ public interface FinancesConstants extends ConstantsWithLookup {
 
 	@DefaultStringValue("Account management")
 	public String accountManagement();
+
+    @DefaultStringValue("Account type")
+    public String accountType();
 	
 	@DefaultStringValue("Add expense")
 	public String addExpense();
 	
 	@DefaultStringValue("Add income")
 	public String addIncome();
-	
+
+    @DefaultStringValue("Balance")
+    public String balance();
+
 	@DefaultStringValue("Create")
 	public String create();
 	
 	@DefaultStringValue("Currency")
 	public String currency();
+
+    @DefaultStringValue("Description")
+    public String description();
 	
 	@DefaultStringValue("Email address")
 	public String emailAddress();
@@ -54,6 +63,9 @@ public interface FinancesConstants extends ConstantsWithLookup {
 
 	@DefaultStringValue("Session timed out")
 	public String sessionTimeout();
+
+    @DefaultStringValue("Target")
+    public String target();
 	
 	@DefaultStringValue("User management")
 	public String userManagement();

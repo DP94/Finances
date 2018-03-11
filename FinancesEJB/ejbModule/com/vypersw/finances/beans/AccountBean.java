@@ -6,6 +6,7 @@ import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.enumeration.AccountType;
 import com.vypersw.finances.jpahelpers.AccountJPAHelper;
 import com.vypersw.finances.services.AccountService;
+import com.vypersw.finances.user.User;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
@@ -25,6 +26,25 @@ public class AccountBean extends AbstractBean implements AccountService {
         dto.setBalance(account.getBalance());
         dto.setAccountType(AccountType.forValue(account.getAccountType()));
         dto.setAccountBalanceTarget(account.getAccountBalanceTarget());
+        dto.setUserId(account.getUser().getUserId());
         return dto;
+    }
+
+    @Override
+    public long updateAccount(AccountDTO accountDTO) {
+        AccountJPAHelper accountJPAHelper = new AccountJPAHelper(entityManager);
+
+        Account account = new Account();
+        account.setAccountId(accountDTO.getAccountId());
+        account.setName(accountDTO.getName());
+        account.setAccountBalanceTarget(accountDTO.getAccountBalanceTarget());
+        account.setAccountType(accountDTO.getAccountType().getValue());
+        account.setBalance(accountDTO.getBalance());
+        account.setDescription(accountDTO.getDescription());
+        User user = new User();
+        user.setUserId(accountDTO.getUserId());
+        account.setUser(user);
+        entityManager.merge(account);
+        return account.getAccountId();
     }
 }

@@ -2,6 +2,7 @@ package com.vypersw.finances.client.accountmanagement.accountmanagementlist;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.View;
 import com.vypersw.finances.client.abstractpresenter.VyperListPresenter;
@@ -21,9 +22,12 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountMa
         AccountWidget getSelectedAccount();
     }
 
+	private DispatchAsync dispatchAsync;
+
 	@Inject
-	public AccountManagementListPresenter(EventBus eventBus, MyView view, ApplicationPresenter container) {
+	public AccountManagementListPresenter(EventBus eventBus, MyView view, DispatchAsync dispatchAsync, ApplicationPresenter container) {
 		super(eventBus, view, container);
+		this.dispatchAsync = dispatchAsync;
 		getView().setUiHandlers(this);
 		getView().setAccountData(getContainer().getUserDTO().getAccounts());
 	}
@@ -36,6 +40,7 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountMa
 	@Override
 	public void onEditPressed() {
 		long accountId = getView().getSelectedAccount().getAccountDTO().getAccountId();
+		getContainer().setCurrentAccountId(accountId);
 		getContainer().openPerspective(ContentType.ACCOUNT_EDITING);
 	}
 
