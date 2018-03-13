@@ -50,6 +50,7 @@ public class UserManagementFormPresenter extends VyperFormPresenter<UserManageme
 			public void onSuccess(UserActionResult result) {
 				setData(result.getDto());
 				setCurrencyIcon(getData().getCurrencyDTO().getCurrencyCode());
+				initaliseForm();
 			}
 		});
 	}

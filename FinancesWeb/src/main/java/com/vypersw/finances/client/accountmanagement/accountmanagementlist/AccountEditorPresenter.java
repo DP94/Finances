@@ -83,6 +83,7 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
             @Override
             public void onSuccess(AccountActionResult result) {
                 setData(result.getAccountDTO());
+                initaliseForm();
             }
         });
     }
