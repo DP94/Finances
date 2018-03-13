@@ -14,7 +14,6 @@ public class VyperPresenterWidget<V extends View> extends PresenterWidget<V> {
 		this.container = container;
 	}
 
-	
 	public void setCurrencyIcon(String currencyCode) {
 		container.updatePerspectiveCurrency(currencyCode);
 	}

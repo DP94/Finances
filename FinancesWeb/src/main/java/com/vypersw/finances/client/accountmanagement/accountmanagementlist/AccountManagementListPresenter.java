@@ -11,6 +11,8 @@ import com.vypersw.finances.client.content.ContentType;
 import com.vypersw.finances.client.widget.AccountWidget;
 import com.vypersw.finances.dto.user.AccountDTO;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class AccountManagementListPresenter extends VyperListPresenter<AccountManagementListPresenter.MyView> implements AccountManagementListUiHandlers {
@@ -40,8 +42,7 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountMa
 	@Override
 	public void onEditPressed() {
 		long accountId = getView().getSelectedAccount().getAccountDTO().getAccountId();
-		getContainer().setCurrentAccountId(accountId);
-		getContainer().openPerspective(ContentType.ACCOUNT_EDITING);
+		getContainer().move(ContentType.ACCOUNT_EDITING, new HashMap<>(Collections.singletonMap("id", String.valueOf(accountId))));
 	}
 
 	@Override

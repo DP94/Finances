@@ -1,25 +1,17 @@
 package com.vypersw.finances.client.application;
 
-import javax.inject.Inject;
-
-import org.gwtbootstrap3.client.ui.html.Div;
-
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.vypersw.finances.client.content.ContentType;
 import com.vypersw.finances.client.widget.MenuButton;
+
+import javax.inject.Inject;
 
 public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> implements ApplicationPresenter.MyView {
     interface Binder extends UiBinder<Widget, ApplicationView> {
@@ -97,7 +89,7 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				getUiHandlers().openPerspective(ContentType.ADD_EXPENSE);
+				getUiHandlers().move(ContentType.ADD_EXPENSE, null);
 			}
 		});
     	
@@ -105,7 +97,7 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				getUiHandlers().openPerspective(ContentType.ADD_INCOME);
+				getUiHandlers().move(ContentType.ADD_INCOME, null);
 			}
 		});
     	
@@ -113,7 +105,7 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				getUiHandlers().openPerspective(ContentType.ACCOUNT_MANAGEMENT);
+				getUiHandlers().move(ContentType.ACCOUNT_MANAGEMENT, null);
 			}
 		});
     	
@@ -121,7 +113,7 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				getUiHandlers().openPerspective(ContentType.REPORTS);
+				getUiHandlers().move(ContentType.REPORTS, null);
 			}
 		});
     	
@@ -129,7 +121,7 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				getUiHandlers().openPerspective(ContentType.USER_SETTINGS);
+				getUiHandlers().move(ContentType.USER_SETTINGS, null);
 			}
 		});
     	
