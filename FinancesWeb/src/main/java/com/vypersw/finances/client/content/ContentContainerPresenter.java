@@ -19,15 +19,15 @@ import com.vypersw.finances.client.widget.MoveEvent;
 public class ContentContainerPresenter extends PresenterWidget<ContentContainerPresenter.MyView> implements ContentContainerUiHandlers, MoveEvent.MoveEventHandlers {
 
 	private EventBus eventBus = new SimpleEventBus();
+	private VyperPresenterWidget<?> currentWidget = null;
 
 	@Override
 	public HandlerRegistration addMoveEvent(MoveEvent.MoveEventHandler moveEventHandler) {
-		return eventBus.addHandler(MoveEvent.TYPE, moveEventHandler);
+		return currentWidget.getPresenterEventBus().addHandler(MoveEvent.TYPE, moveEventHandler);
 	}
 
 	public interface MyView extends View, HasUiHandlers<ContentContainerUiHandlers> {
 		void setTitle(String text);
-
 		void setCurrencyText(String text);
 	}
 
@@ -59,6 +59,7 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 		switch(type) {
 			case USER_SETTINGS:
 				setInSlot(SLOT_Perspective, userPresenter);
+				currentWidget = userPresenter;
 				userPresenter.setContentContainerPresenter(this);
 				break;
 			case ADD_EXPENSE:
@@ -66,11 +67,13 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 				break;
 			case ACCOUNT_EDITING:
 				setInSlot(SLOT_Perspective, accountEditorPresenter);
+				currentWidget = accountEditorPresenter;
 				accountEditorPresenter.setContentContainerPresenter(this);
 				break;
 			case ACCOUNT_MANAGEMENT:
 				setInSlot(SLOT_Perspective, accountPresenter);
-				accountEditorPresenter.setContentContainerPresenter(this);
+				currentWidget = accountPresenter;
+				accountPresenter.setContentContainerPresenter(this);
 				break;
 			case REPORTS:
 			default:
@@ -101,7 +104,7 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 	}
 
 	public void move(PlaceRequest placeRequest) {
-		eventBus.fireEvent(new MoveEvent(placeRequest));
+		currentWidget.getPresenterEventBus().fireEvent(new MoveEvent(placeRequest));
 	}
 
 	public native void success(String message) /*-{

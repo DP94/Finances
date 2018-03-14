@@ -26,6 +26,7 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
     public void onMove(MoveEvent event) {
         PlaceRequest placeRequest = event.getPlaceRequest();
         accountId = Long.valueOf(placeRequest.getParameter("id", "0"));
+        initaliseForm();
     }
 
     public interface MyView extends View, HasUiHandlers<AccountEditorUIHandlers> {
