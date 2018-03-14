@@ -17,6 +17,8 @@ import java.math.BigDecimal;
 
 public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandlers> implements AccountEditorPresenter.MyView, ToolbarButtonClickedEvent.ToolbarButtonClickedHandler {
 
+    public interface Binder extends UiBinder<Widget, AccountEditorView> {
+    }
 
     @UiField
     TextBox accountName;
@@ -36,6 +38,13 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
     @UiField
     Toolbar toolbar;
 
+    @Inject
+    public AccountEditorView(Binder uiBinder) {
+        initWidget(uiBinder.createAndBindUi(this));
+        toolbar.addToolbarButtonClickedHandler(this);
+        init();
+    }
+
     @Override
     public void setViewData(AccountDTO accountDTO) {
         accountName.setText(accountDTO.getName());
@@ -46,6 +55,7 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
         } else {
             accountBalanceTarget.setText("0");
         }
+        accountType.clear();
         for (int i = 0; i < AccountType.values().length; i++) {
             AccountType type = AccountType.values()[i];
             accountType.addItem(type.name());
@@ -53,8 +63,6 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
                 accountType.setSelectedIndex(i);
             }
         }
-        toolbar.addToolbarButtonClickedHandler(this);
-        init();
     }
 
     private void init() {
@@ -76,14 +84,4 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
                 break;
         }
     }
-
-    public interface Binder extends UiBinder<Widget, AccountEditorView> {
-
-    }
-
-    @Inject
-    public AccountEditorView(Binder uiBinder) {
-        initWidget(uiBinder.createAndBindUi(this));
-    }
-
 }

@@ -1,6 +1,7 @@
 package com.vypersw.finances.client.abstractpresenter;
 
 import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.gwtplatform.mvp.client.View;
 import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.client.content.ContentContainerPresenter;
@@ -12,6 +13,7 @@ public abstract class VyperFormPresenter<V extends View, D extends VyperDTO> ext
 	
 	private D data;
     private ContentContainerPresenter contentContainerPresenter;
+    private EventBus eventBus = new SimpleEventBus();
 
 	public VyperFormPresenter(EventBus eventBus, V view, ApplicationPresenter container) {
 		super(eventBus, view, container);
@@ -47,6 +49,19 @@ public abstract class VyperFormPresenter<V extends View, D extends VyperDTO> ext
     @Override
     public void onMove(MoveEvent event) {
 
+    }
+
+    public ContentContainerPresenter getContentContainerPresenter() {
+        return contentContainerPresenter;
+    }
+
+
+    public EventBus getPresenterBus() {
+        return eventBus;
+    }
+
+    public void setPresenterBus(EventBus eventBus) {
+        this.eventBus = eventBus;
     }
 }
 

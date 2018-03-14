@@ -50,7 +50,7 @@ public class UserManagementFormPresenter extends VyperFormPresenter<UserManageme
 			public void onSuccess(UserActionResult result) {
 				setData(result.getDto());
 				setCurrencyIcon(getData().getCurrencyDTO().getCurrencyCode());
-				initaliseForm();
+				getContentContainerPresenter().success("Save successful");
 			}
 		});
 	}
@@ -68,7 +68,7 @@ public class UserManagementFormPresenter extends VyperFormPresenter<UserManageme
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				Window.alert(caught.getMessage());
+				getContentContainerPresenter().warn(caught.getMessage());
 			}
 		});
 	}

@@ -109,6 +109,12 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 			ContentType contentType = ContentType.valueOf(action);
 			ContentContainerPresenter presenter = openPerspective(contentType);
 			presenter.move(request);
+		} else {
+			for (ContentContainerPresenter contentContainerPresenter : openSlots) {
+				contentContainerPresenter.closePerspective();
+			}
+			openSlots.clear();
+			perspectives.clear();
 		}
 	}
 

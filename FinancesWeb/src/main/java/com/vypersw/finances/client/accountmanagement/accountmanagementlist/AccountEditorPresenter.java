@@ -25,9 +25,7 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
     @Override
     public void onMove(MoveEvent event) {
         PlaceRequest placeRequest = event.getPlaceRequest();
-        accountId = Long.valueOf(placeRequest.getParameter("id", ""));
-        String x = "";
-        initaliseForm();
+        accountId = Long.valueOf(placeRequest.getParameter("id", "0"));
     }
 
     public interface MyView extends View, HasUiHandlers<AccountEditorUIHandlers> {
@@ -56,7 +54,7 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
         dispatchAsync.execute(new GetAccountAction(accountId), new AsyncCallback<GetAccountResult>() {
             @Override
             public void onFailure(Throwable caught) {
-                Window.alert(caught.getMessage());
+                getContentContainerPresenter().warn(caught.getMessage());
             }
 
             @Override
@@ -83,7 +81,8 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
             @Override
             public void onSuccess(AccountActionResult result) {
                 setData(result.getAccountDTO());
-                initaliseForm();
+                getView().setViewData(result.getAccountDTO());
+                getContentContainerPresenter().success("Save successful");
             }
         });
     }

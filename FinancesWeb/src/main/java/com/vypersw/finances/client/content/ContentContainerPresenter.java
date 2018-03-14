@@ -59,6 +59,7 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 		switch(type) {
 			case USER_SETTINGS:
 				setInSlot(SLOT_Perspective, userPresenter);
+				userPresenter.setContentContainerPresenter(this);
 				break;
 			case ADD_EXPENSE:
 			case ADD_INCOME:
@@ -69,6 +70,7 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 				break;
 			case ACCOUNT_MANAGEMENT:
 				setInSlot(SLOT_Perspective, accountPresenter);
+				accountEditorPresenter.setContentContainerPresenter(this);
 				break;
 			case REPORTS:
 			default:
@@ -100,6 +102,59 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 
 	public void move(PlaceRequest placeRequest) {
 		eventBus.fireEvent(new MoveEvent(placeRequest));
-		int x = 1;
 	}
+
+	public native void success(String message) /*-{
+        var notify = $wnd.$.notify({
+            message: message
+        }, {
+            // settings
+            element: 'body',
+            position: null,
+            type: "success",
+            allow_dismiss: true,
+            newest_on_top: false,
+            showProgressbar: false,
+            placement: {
+                from: "top",
+                align: "center"
+            },
+            offset: 20,
+            spacing: 10,
+            z_index: 1031,
+            delay: 3000,
+            url_target: '_blank',
+            mouse_over: null,
+            animate: {
+                enter: 'animated fadeInDown'
+            }
+        });
+    }-*/;
+
+	public native void warn(String message) /*-{
+        var notify = $wnd.$.notify({
+            message: message
+        }, {
+            // settings
+            element: 'body',
+            position: null,
+            type: "info",
+            allow_dismiss: true,
+            newest_on_top: false,
+            showProgressbar: false,
+            placement: {
+                from: "top",
+                align: "center"
+            },
+            offset: 20,
+            spacing: 10,
+            z_index: 1031,
+            delay: 3000,
+            url_target: '_blank',
+            mouse_over: null,
+            animate: {
+                enter: 'animated fadeInDown'
+            }
+        });
+    }-*/;
 }
