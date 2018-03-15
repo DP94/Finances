@@ -100,6 +100,7 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     
     @Override
     public void setInSlot(Object slot, IsWidget content) {
+        int x = 0;
     	if (slot == ApplicationPresenter.SLOT_content) {
     		contentPanel.clear();
     		if (content != null) {
