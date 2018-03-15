@@ -1,5 +1,12 @@
 .nav-header-app {
-	background: rgba(35, 35, 35, 0.63);
+    height: 100%;
+    width: 70px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: rgba(35, 35, 35, 0.63);
+    overflow-x: hidden;
     border-bottom: 1px solid gray;
     padding: 3px 1px;
 }
@@ -15,7 +22,7 @@
 }
 
 .nav-sidebar-visible {
-	left: 0px;	
+	left: 0px;
 }
 
 .nav-header-button {
@@ -61,6 +68,7 @@
 
 .content-panel {
 	padding: 5px;
+    margin-left: 70px;
 }
 
 .finances-menu-button {
