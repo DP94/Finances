@@ -6,21 +6,30 @@ import com.google.gwt.i18n.client.ConstantsWithLookup;
 public interface FinancesConstants extends ConstantsWithLookup {
 	
 	FinancesConstants INSTANCE = GWT.create(FinancesConstants.class);
-	
+
 	@DefaultStringValue("Account management")
 	public String accountManagement();
+
+    @DefaultStringValue("Account type")
+    public String accountType();
 	
 	@DefaultStringValue("Add expense")
 	public String addExpense();
 	
 	@DefaultStringValue("Add income")
 	public String addIncome();
-	
+
+    @DefaultStringValue("Balance")
+    public String balance();
+
 	@DefaultStringValue("Create")
 	public String create();
 	
 	@DefaultStringValue("Currency")
 	public String currency();
+
+    @DefaultStringValue("Description")
+    public String description();
 	
 	@DefaultStringValue("Email address")
 	public String emailAddress();
@@ -30,6 +39,9 @@ public interface FinancesConstants extends ConstantsWithLookup {
 	
 	@DefaultStringValue("Modify")
 	public String modify();
+
+    @DefaultStringValue("Name")
+    public String name();
 	
 	@DefaultStringValue("Password")
 	public String password();
@@ -51,6 +63,9 @@ public interface FinancesConstants extends ConstantsWithLookup {
 
 	@DefaultStringValue("Session timed out")
 	public String sessionTimeout();
+
+    @DefaultStringValue("Target")
+    public String target();
 	
 	@DefaultStringValue("User management")
 	public String userManagement();

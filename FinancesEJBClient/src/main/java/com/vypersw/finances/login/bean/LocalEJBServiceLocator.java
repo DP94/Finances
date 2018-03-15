@@ -1,16 +1,17 @@
 package com.vypersw.finances.login.bean;
 
-import java.util.Properties;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
+import com.vypersw.finances.beans.AccountBean;
 import com.vypersw.finances.beans.LoginBean;
 import com.vypersw.finances.beans.UserBean;
 import com.vypersw.finances.beans.currency.CurrencyBean;
+import com.vypersw.finances.services.AccountService;
 import com.vypersw.finances.services.CurrencyService;
 import com.vypersw.finances.services.LoginService;
 import com.vypersw.finances.services.UserService;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import java.util.Properties;
 
 public class LocalEJBServiceLocator {
 	private Properties prop;
@@ -61,5 +62,9 @@ public class LocalEJBServiceLocator {
 	public UserService getUserService() {
 		return (UserService) lookup(UserBean.class.getSimpleName(), UserService.class.getName());
 	}
+
+    public AccountService getAccountService() {
+        return (AccountService) lookup(AccountBean.class.getSimpleName(), AccountService.class.getName());
+    }
 
 }

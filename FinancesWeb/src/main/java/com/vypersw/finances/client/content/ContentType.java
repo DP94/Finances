@@ -4,6 +4,7 @@ public enum ContentType {
 	
 	ADD_EXPENSE("Add expense"),
 	ADD_INCOME("Add income"),
+    ACCOUNT_EDITING("Account editing"),
 	ACCOUNT_MANAGEMENT("Account management"),
 	REPORTS("Reports"),
 	USER_SETTINGS("User settings");

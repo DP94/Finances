@@ -54,6 +54,8 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
     private LinkedList<ContentContainerPresenter> openSlots = new LinkedList<>();
 
     private UserDTO userDTO;
+
+    private long currentAccountId;
     
     @ProxyCodeSplit
     @NameToken(NameTokens.home)
@@ -98,7 +100,24 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 			}
 		});
 	}
-	
+
+	@Override
+	public void prepareFromRequest(PlaceRequest request) {
+		super.prepareFromRequest(request);
+		String action = request.getParameter("action", "");
+		if (action != null && action.length() > 0) {
+			ContentType contentType = ContentType.valueOf(action);
+			ContentContainerPresenter presenter = openPerspective(contentType);
+			presenter.move(request);
+		} else {
+			for (ContentContainerPresenter contentContainerPresenter : openSlots) {
+				contentContainerPresenter.closePerspective();
+			}
+			openSlots.clear();
+			perspectives.clear();
+		}
+	}
+
 	@Override
 	protected void revealInParent() {
 		RevealRootContentEvent.fire(this, this);
@@ -132,7 +151,8 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 	}
 
 	@Override
-	public void openPerspective(ContentType type) {
+	public ContentContainerPresenter openPerspective(ContentType type) {
+		ContentContainerPresenter vyperPresenterWidget = null;
 		if (!perspectives.containsKey(type)) {
 			ContentContainerPresenter presenter = presenterProvider.get();
 			presenter.updateTitle(type.getName());
@@ -140,12 +160,24 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 			perspectives.put(type, presenter);
 			openSlots.add(presenter);
 			setInSlot(SLOT_content, presenter);
+			vyperPresenterWidget = presenter;
 		} else {
 			ContentContainerPresenter presenter = perspectives.get(type);
 			setInSlot(SLOT_content, presenter);
 			openSlots.add(presenter);
+			vyperPresenterWidget = presenter;
 		}
 		getView().closeMenu();
+		return vyperPresenterWidget;
+	}
+
+	public void move(ContentType contentType, Map<String, String> params) {
+		if (params == null) {
+			params = new HashMap<>();
+		}
+		params.put("action", contentType.toString());
+		PlaceRequest request = new PlaceRequest.Builder().nameToken(NameTokens.home).with(params).build();
+		placeManager.revealPlace(request);
 	}
 	
 	@Override
@@ -174,4 +206,12 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 			openSlots.getLast().setCurrencyIcon(currencyCode);
 		}
 	}
+
+    public long getCurrentAccountId() {
+        return currentAccountId;
+    }
+
+    public void setCurrentAccountId(long currentAccountId) {
+        this.currentAccountId = currentAccountId;
+    }
 }

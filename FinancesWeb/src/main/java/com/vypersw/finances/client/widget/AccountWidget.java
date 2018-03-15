@@ -7,6 +7,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
+import com.vypersw.finances.dto.user.AccountDTO;
 import org.gwtbootstrap3.client.ui.ProgressBar;
 
 public class AccountWidget extends Composite {
@@ -15,6 +16,8 @@ public class AccountWidget extends Composite {
 
 	interface Binder extends UiBinder<Widget, AccountWidget> {
 	}
+
+	private AccountDTO accountDTO;
 
 	private String id;
 
@@ -34,23 +37,23 @@ public class AccountWidget extends Composite {
 	ProgressBar progress;
 
 
-	public AccountWidget(double percentage) {
+	public AccountWidget(AccountDTO accountDTO) {
 		initWidget(binder.createAndBindUi(this));
-		progress.setPercent(percentage);
-		progress.setText(String.valueOf(percentage));
-		progress.setId("progress" + id);
-		if (percentage == 0) {
+		this.accountDTO = accountDTO;
+		progress.setText(String.valueOf(getPercentage()));
+		if (getPercentage() == 0) {
 			progress.setVisible(false);
 		}
-		animate("progress" + id, percentage);
+		accountName.setText(accountDTO.getName());
+		accountBalance.setText("£" + accountDTO.getBalance().toString());
 	}
 
-	public void setAccountBalance(String text) {
-		accountBalance.setText(text);
+	public AccountDTO getAccountDTO() {
+		return accountDTO;
 	}
 
-	public void setAccountName(String name) {
-		accountName.setText(name);
+	public void setAccountDTO(AccountDTO accountDTO) {
+		this.accountDTO = accountDTO;
 	}
 
 	public void setIconType(String glyph) {
@@ -59,11 +62,23 @@ public class AccountWidget extends Composite {
 
 	public void setID(String id) {
 		this.id = id;
+		progress.setId("progress" + id);
 	}
 
-	private native void animate(String progressId, double percentage) /*-{
+	public String getId() {
+		return id;
+	}
+
+	public double getPercentage() {
+		if (accountDTO.getAccountBalanceTarget() != null) {
+			return accountDTO.getBalance().doubleValue() / accountDTO.getAccountBalanceTarget().doubleValue() * 100;
+		}
+		return 0;
+	}
+
+	public native void animate(String progressId, double percentage) /*-{
         $wnd.$("#" + progressId).animate({
-            width: percentage
-        }, 2500);
+            width: percentage + '%'
+        }, 1250);
     }-*/;
 }
