@@ -65,79 +65,37 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     }
     
     public void init() {
-    	menuButton.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				if (show) {
-					sidebar.addStyleName("nav-sidebar-visible");
-					show = false;
-				} else {
-					sidebar.removeStyleName("nav-sidebar-visible");
-					show = true;
-				}
-			}
-		});
+    	menuButton.addClickHandler(event -> {
+            if (show) {
+                sidebar.addStyleName("nav-sidebar-visible");
+                show = false;
+            } else {
+                sidebar.removeStyleName("nav-sidebar-visible");
+                show = true;
+            }
+        });
     	
-    	logout.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				getUiHandlers().logout();
-			}
-		});
+    	logout.addClickHandler(event -> getUiHandlers().logout());
     	
-    	addExpense.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				getUiHandlers().move(ContentType.ADD_EXPENSE, null);
-			}
-		});
+    	addExpense.addClickHandler(event -> getUiHandlers().move(ContentType.ADD_EXPENSE, null));
     	
-    	addIncome.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				getUiHandlers().move(ContentType.ADD_INCOME, null);
-			}
-		});
+    	addIncome.addClickHandler(event -> getUiHandlers().move(ContentType.ADD_INCOME, null));
     	
-    	accountManagement.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				getUiHandlers().move(ContentType.ACCOUNT_MANAGEMENT, null);
-			}
-		});
+    	accountManagement.addClickHandler(event -> getUiHandlers().move(ContentType.ACCOUNT_MANAGEMENT, null));
     	
-    	reports.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				getUiHandlers().move(ContentType.REPORTS, null);
-			}
-		});
+    	reports.addClickHandler(event -> getUiHandlers().move(ContentType.REPORTS, null));
     	
-    	userManagement.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				getUiHandlers().move(ContentType.USER_SETTINGS, null);
-			}
-		});
+    	userManagement.addClickHandler(event -> getUiHandlers().move(ContentType.USER_SETTINGS, null));
     	
-    	RootPanel.get().addDomHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				if (!sidebarDiv.isOrHasChild(Element.as(event.getNativeEvent().getEventTarget())) && !menuButton.getElement().isOrHasChild(Element.as(event.getNativeEvent().getEventTarget())) && sidebar.isVisible()) {
-					if(!show) {
-						sidebar.removeStyleName("nav-sidebar-visible");
-						show = true;
-					}
-				}
-				
-			}
-		}, ClickEvent.getType());
+    	RootPanel.get().addDomHandler(event -> {
+            if (!sidebarDiv.isOrHasChild(Element.as(event.getNativeEvent().getEventTarget())) && !menuButton.getElement().isOrHasChild(Element.as(event.getNativeEvent().getEventTarget())) && sidebar.isVisible()) {
+                if(!show) {
+                    sidebar.removeStyleName("nav-sidebar-visible");
+                    show = true;
+                }
+            }
+
+        }, ClickEvent.getType());
     }
     
     @Override
