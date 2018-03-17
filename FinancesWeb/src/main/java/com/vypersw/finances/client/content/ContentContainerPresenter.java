@@ -28,7 +28,6 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 
 	public interface MyView extends View, HasUiHandlers<ContentContainerUiHandlers> {
 		void setTitle(String text);
-		void setCurrencyText(String text);
 	}
 
 	public static final Slot<VyperPresenterWidget<?>> SLOT_Perspective = new Slot<>();
@@ -79,7 +78,6 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 			default:
 				break;
 		}
-		getView().setCurrencyText(container.getUserDTO().getCurrencyDTO().getCurrencyCode());
 	}
 
 	@Override
@@ -89,10 +87,6 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 
 	public void updateTitle(String text) {
 		getView().setTitle(text);
-	}
-
-	public void setCurrencyIcon(String currencyCode) {
-		getView().setCurrencyText(currencyCode);
 	}
 
 	public ContentType getType() {

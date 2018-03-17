@@ -38,13 +38,6 @@
                                              addStyleNames="col-md-8"/>
                                 </g:FlowPanel>
                             </b:FormGroup>
-
-                            <b:FormGroup>
-                                <b:FormLabel for="formCurrency" text="{constants.currency}" addStyleNames="col-md-4"/>
-                                <g:FlowPanel addStyleNames="col-md-8">
-                                    <b:ListBox ui:field="currency" b:id="formCurrency" addStyleNames="col-md-8"/>
-                                </g:FlowPanel>
-                            </b:FormGroup>
                         </b:FieldSet>
                     </b:Form>
                 </b:TabPane>

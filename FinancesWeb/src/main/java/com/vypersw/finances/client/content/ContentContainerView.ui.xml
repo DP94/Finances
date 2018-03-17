@@ -5,8 +5,7 @@
     	<div class="perspective-content">
     		<div class="perspective-content-topbar">
     			<div class="perspective-content-bar-content">
-    				<span class="content content-currency"><g:Label ui:field="currency" styleName="glyphicon glyphicon-gbp"></g:Label></span>
-		   			<span class="content content-title"><g:Label ui:field="title"></g:Label></span>
+		   			<span class="content content-title"><g:Label ui:field="title"/></span>
 		    		<g:Button ui:field="close" styleName="perspective-content-close">
 		    			<span class="glyphicon glyphicon-remove"/>
 		    		</g:Button>

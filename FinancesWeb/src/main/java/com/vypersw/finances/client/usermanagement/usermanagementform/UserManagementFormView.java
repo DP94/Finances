@@ -9,13 +9,14 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.vypersw.finances.client.widget.Toolbar;
 import com.vypersw.finances.client.widget.ToolbarButtonClickedEvent;
 import com.vypersw.finances.client.widget.ToolbarButtonClickedEvent.ToolbarButtonClickedHandler;
-import com.vypersw.finances.dto.currency.CurrencyDTO;
 import com.vypersw.finances.dto.user.UserDTO;
-import org.gwtbootstrap3.client.ui.*;
+import org.gwtbootstrap3.client.ui.FormGroup;
+import org.gwtbootstrap3.client.ui.Input;
+import org.gwtbootstrap3.client.ui.TabListItem;
+import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.ValidationState;
 
 import javax.inject.Inject;
-import java.util.List;
 
 public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFormUiHandlers> implements UserManagementFormPresenter.MyView, ToolbarButtonClickedHandler {
     interface Binder extends UiBinder<Widget, UserManagementFormView> {
@@ -37,10 +38,7 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
     
     @UiField
     Input password;
-    
-    @UiField
-    ListBox currency;
-    
+
     @UiField
     Toolbar toolbar;
     
@@ -54,7 +52,6 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
     @Inject
     public UserManagementFormView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
-        setButtons();
         toolbar.addToolbarButtonClickedHandler(this);
         init();
     }
@@ -63,26 +60,7 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
 		username.addValueChangeHandler(event -> getUiHandlers().getData().setUsername(event.getValue()));
 		emailAddress.addValueChangeHandler(event -> getUiHandlers().getData().setEmail(event.getValue()));
 		password.addValueChangeHandler(event -> getUiHandlers().getData().setPassword(event.getValue()));
-		currency.addChangeHandler(event -> {
-			Long index = Long.valueOf(currency.getSelectedIndex());
-			getUiHandlers().getData().getCurrencyDTO().setCurrencyId(index + 1);
-			getUiHandlers().getData().getCurrencyDTO().setCurrencyCode(currency.getSelectedItemText());
-		});
     }
-    
-    public void setButtons() {
-    	toolbar.getRefresh().setVisible(true);
-    	toolbar.getSave().setVisible(true);
-    }
-
-	@Override
-	public void setCurrencyOptions(List<CurrencyDTO> options) {
-		currency.clear();
-		for(CurrencyDTO dtos : options) {
-			currency.addItem(dtos.getCurrencyCode(), dtos.getCurrencyId() + "");
-		}
-	}
-
 	@Override
 	public void onToolbarButtonClicked(ToolbarButtonClickedEvent event) {
 		switch (event.getEventType()) {
@@ -116,14 +94,4 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
 		password.setText(dto.getPassword());
 		emailAddress.setText(dto.getEmail());
 	}
-
-	@Override
-	public void setCurrency(Long currencyId) {
-		for (int i = 0; i < currency.getItemCount(); i++) {
-			if (currency.getValue(i).equalsIgnoreCase(currencyId + "")) {
-				currency.setSelectedIndex(i);
-			}
-		}
-	}
-    
 }

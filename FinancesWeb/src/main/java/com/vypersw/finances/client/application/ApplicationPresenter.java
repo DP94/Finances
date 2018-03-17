@@ -197,18 +197,4 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 	public void setUserDTO(UserDTO userDTO) {
 		this.userDTO = userDTO;
 	}
-	
-	public void updatePerspectiveCurrency(String currencyCode) {
-		if (openSlots.size() > 0) {
-			openSlots.getLast().setCurrencyIcon(currencyCode);
-		}
-	}
-
-    public long getCurrentAccountId() {
-        return currentAccountId;
-    }
-
-    public void setCurrentAccountId(long currentAccountId) {
-        this.currentAccountId = currentAccountId;
-    }
 }

@@ -3,9 +3,7 @@ package com.vypersw.finances.login.bean;
 import com.vypersw.finances.beans.AccountBean;
 import com.vypersw.finances.beans.LoginBean;
 import com.vypersw.finances.beans.UserBean;
-import com.vypersw.finances.beans.currency.CurrencyBean;
 import com.vypersw.finances.services.AccountService;
-import com.vypersw.finances.services.CurrencyService;
 import com.vypersw.finances.services.LoginService;
 import com.vypersw.finances.services.UserService;
 
@@ -53,10 +51,6 @@ public class LocalEJBServiceLocator {
 	
 	public LoginService getLoginService() {
 		return (LoginService) lookup(LoginBean.class.getSimpleName(), LoginService.class.getName());
-	}
-	
-	public CurrencyService getCurrencyService() {
-		return (CurrencyService) lookup(CurrencyBean.class.getSimpleName(), CurrencyService.class.getName());
 	}
 	
 	public UserService getUserService() {

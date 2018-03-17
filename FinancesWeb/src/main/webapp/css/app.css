@@ -30,7 +30,7 @@
     border: 3px solid rgba(114, 114, 114, 0.5);
 }
 
-.content-currency, .perspective-content-close {
+.perspective-content-close {
 	font-size: 32px;
 }
 
@@ -43,9 +43,6 @@
 	font-size: 24px;
 }
 
-.content-currency {
-	float: left;
-}
 
 .content-title {
 	position: relative;

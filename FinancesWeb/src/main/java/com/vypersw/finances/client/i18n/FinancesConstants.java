@@ -24,9 +24,6 @@ public interface FinancesConstants extends ConstantsWithLookup {
 
 	@DefaultStringValue("Create")
 	public String create();
-	
-	@DefaultStringValue("Currency")
-	public String currency();
 
     @DefaultStringValue("Description")
     public String description();

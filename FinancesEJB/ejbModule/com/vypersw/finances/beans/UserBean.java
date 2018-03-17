@@ -1,21 +1,18 @@
 package com.vypersw.finances.beans;
 
-import javax.ejb.Local;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.persistence.Query;
-
 import com.vypersw.finances.abstractbean.AbstractBean;
 import com.vypersw.finances.account.Account;
-import com.vypersw.finances.dto.currency.CurrencyDTO;
 import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.dto.user.UserDTO;
 import com.vypersw.finances.enumeration.AccountType;
 import com.vypersw.finances.jpahelpers.UserJPAHelper;
 import com.vypersw.finances.services.UserService;
-import com.vypersw.finances.user.Currency;
 import com.vypersw.finances.user.User;
+
+import javax.ejb.Local;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 
 @Stateless
 @Local(UserService.class)
@@ -29,10 +26,6 @@ public class UserBean extends AbstractBean implements UserService {
 		user.setEmail(dto.getEmail());
 		user.setPassword(dto.getPassword());
 		user.setUsername(dto.getUsername());
-		Currency currency = new Currency();
-		currency.setCurrencyCode(currencyCodeForId(dto.getCurrencyDTO().getCurrencyId()));
-		currency.setCurrencyId(dto.getCurrencyDTO().getCurrencyId());
-		user.setCurrency(currency);
 		entityManager.merge(user);
 		return dto;
 	}
@@ -50,10 +43,6 @@ public class UserBean extends AbstractBean implements UserService {
 		userDTO.setUsername(user.getUsername());
 		userDTO.setEmail(user.getEmail());
 		userDTO.setPassword(user.getPassword());
-		CurrencyDTO currencyDTO = new CurrencyDTO();
-		currencyDTO.setCurrencyId(user.getCurrency().getCurrencyId());
-		currencyDTO.setCurrencyCode(user.getCurrency().getCurrencyCode());
-		userDTO.setCurrencyDTO(currencyDTO);
 		
 		if (user.getAccounts() != null && !user.getAccounts().isEmpty()) {
 			for (Account account : user.getAccounts()) {
@@ -71,18 +60,4 @@ public class UserBean extends AbstractBean implements UserService {
 		return userDTO;
 		
 	}
-	
-	private String currencyCodeForId(Long id) {
-		switch (id.intValue()) {
-		case 1:
-			return "GBP";
-		case 2:
-			return "EUR";
-		case 3:
-			return "USD";
-		default:
-			return "GBP";
-		}
-	}
-
 }

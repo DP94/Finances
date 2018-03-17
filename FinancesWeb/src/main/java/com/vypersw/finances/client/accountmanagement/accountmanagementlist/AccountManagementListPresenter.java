@@ -33,11 +33,6 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountMa
 	}
 
 	@Override
-	public String getCurrencySymbol() {
-		return getContainer().getUserDTO().getCurrencyDTO().getCurrencyCode();
-	}
-
-	@Override
 	public void onEditPressed(Long accountId) {
 		getContainer().move(ContentType.ACCOUNT_EDITING, new HashMap<>(Collections.singletonMap("id", String.valueOf(accountId))));
 	}

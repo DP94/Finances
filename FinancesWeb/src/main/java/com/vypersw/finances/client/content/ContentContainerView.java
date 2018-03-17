@@ -28,9 +28,6 @@ public class ContentContainerView extends ViewWithUiHandlers<ContentContainerUiH
     
     @UiField
     Button close;
-    
-    @UiField
-    Label currency;
 
     @Inject
     ContentContainerView(Binder uiBinder) {
@@ -62,19 +59,5 @@ public class ContentContainerView extends ViewWithUiHandlers<ContentContainerUiH
 	@Override
 	public void setTitle(String text) {
 		title.setText(text);
-	}
-
-	public void setCurrencyText(String code) {
-		switch (code) {
-			case "USD":
-				currency.setStyleName("glyphicon glyphicon-usd");
-				break;
-			case "EUR":
-				currency.setStyleName("glyphicon glyphicon-eur");
-				break;
-			default:
-				currency.setStyleName("glyphicon glyphicon-gbp");
-				break;
-		}
 	}
 }

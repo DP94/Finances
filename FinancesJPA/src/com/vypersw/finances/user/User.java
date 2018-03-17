@@ -30,10 +30,6 @@ public class User implements VyperJPA {
 	@Column(name = "EMAIL")
 	private String email;
 	
-	@OneToOne
-	@JoinColumn(name = "CURRENCY_ID")
-	private Currency currency;
-	
 	@OneToMany(mappedBy = "user")
 	private List<Account> accounts;
 	
@@ -71,14 +67,6 @@ public class User implements VyperJPA {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Currency getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(Currency currency) {
-		this.currency = currency;
 	}
 
 	public List<Account> getAccounts() {

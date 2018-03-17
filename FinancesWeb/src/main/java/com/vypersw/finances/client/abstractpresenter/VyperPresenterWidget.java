@@ -18,10 +18,6 @@ public class VyperPresenterWidget<V extends View> extends PresenterWidget<V> imp
 		super(eventBus, view);
 		this.container = container;
 	}
-
-	public void setCurrencyIcon(String currencyCode) {
-		container.updatePerspectiveCurrency(currencyCode);
-	}
 	
 	public ApplicationPresenter getContainer() {
 		return container;

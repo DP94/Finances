@@ -7,7 +7,6 @@ import com.vypersw.finances.server.actionhandlers.*;
 public class ServerModule extends HandlerModule {
     @Override
     protected void configureHandlers() {
-    	bindHandler(GetCurrenciesAction.class, GetCurrenciesActionHandler.class);
     	bindHandler(LoginAction.class, LoginActionHandler.class);
     	bindHandler(LogoutAction.class, LogoutActionHandler.class);
     	bindHandler(UserAction.class, UserActionHandler.class);
