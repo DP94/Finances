@@ -5,5 +5,5 @@ import com.gwtplatform.mvp.client.UiHandlers;
 interface AccountManagementListUiHandlers extends UiHandlers {
     String getCurrencySymbol();
 
-    void onEditPressed();
+    void onEditPressed(Long accountId);
 }

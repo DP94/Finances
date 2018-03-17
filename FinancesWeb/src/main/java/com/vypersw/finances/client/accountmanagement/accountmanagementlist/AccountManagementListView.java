@@ -1,15 +1,30 @@
 package com.vypersw.finances.client.accountmanagement.accountmanagementlist;
 
-import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.cell.client.CheckboxCell;
+import com.google.gwt.cell.client.FieldUpdater;
+import com.google.gwt.dom.client.BrowserEvents;
+import com.google.gwt.dom.client.TableRowElement;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.cellview.client.AbstractCellTable;
+import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.cellview.client.SimplePager;
+import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.view.client.CellPreviewEvent;
+import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.RangeChangeEvent;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.vypersw.finances.client.widget.AccountWidget;
 import com.vypersw.finances.dto.user.AccountDTO;
-import org.gwtbootstrap3.client.ui.html.Div;
+import org.gwtbootstrap3.client.ui.Pagination;
+import org.gwtbootstrap3.client.ui.constants.ButtonType;
+import org.gwtbootstrap3.client.ui.constants.IconType;
+import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
+import org.gwtbootstrap3.client.ui.gwt.DataGrid;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -20,45 +35,79 @@ public class AccountManagementListView extends ViewWithUiHandlers<AccountManagem
     }
     
     private List<AccountWidget> widgets;
-    private int currentIndex;
-    private AccountWidget currentAccount;
 
     @UiField
-	Div main;
-    
+    DataGrid<AccountDTO> dataGrid = new DataGrid<>(10);
     @UiField
-    Label left;
-    
-    @UiField
-    Label right;
+    Pagination dataGridPagination;
 
-	@UiField
-	Label edit;
-    
+    private SimplePager dataGridPager = new SimplePager();
+    private ListDataProvider<AccountDTO> dataGridProvider = new ListDataProvider<AccountDTO>();
+
     @Inject
     public AccountManagementListView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
         widgets = new ArrayList<>();
-        currentIndex = 0;
-		edit.addStyleName("glyphicon glyphicon-pencil account-edit");
-    } 
+
+    }
+
+    private void initTable(final AbstractCellTable<AccountDTO> grid, final SimplePager pager, final Pagination pagination, final ListDataProvider<AccountDTO> dataProvider) {
+
+        final Column<AccountDTO, Boolean> checkbox = new Column<AccountDTO, Boolean>(new CheckboxCell()) {
+            @Override
+            public Boolean getValue(AccountDTO accountDTO) {
+                return null;
+            }
+        };
+        checkbox.setFieldUpdater((i, s, s2) -> Window.alert("Selected"));
+        checkbox.setCellStyleNames("grid-cell-checkbox");
+        grid.addColumn(checkbox, "");
+        grid.getHeader(0).setHeaderStyleNames("grid-header-checkbox");
+        final TextColumn<AccountDTO> accountName = new TextColumn<AccountDTO>() {
+            @Override
+            public String getValue(AccountDTO o) {
+                return o.getName();
+            }
+        };
+        grid.addColumn(accountName, "Account name");
+
+        final TextColumn<AccountDTO> accountDescription = new TextColumn<AccountDTO>() {
+            @Override
+            public String getValue(AccountDTO accountDTO) {
+                return accountDTO.getDescription();
+            }
+        };
+        grid.addColumn(accountDescription, "Account description");
+
+        final TextColumn<AccountDTO> accountType = new TextColumn<AccountDTO>() {
+
+            @Override
+            public String getValue(AccountDTO accountDTO) {
+                return accountDTO.getAccountType().name();
+            }
+        };
+        grid.addColumn(accountType, "Account type");
+
+        grid.addRangeChangeHandler(event -> pagination.rebuild(pager));
+
+        grid.addDomHandler(doubleClickEvent -> {
+            DataGrid<?> dataGrid = (DataGrid<?>) doubleClickEvent.getSource();
+            AccountDTO accountDTO = grid.getVisibleItem(dataGrid.getKeyboardSelectedRow());
+            getUiHandlers().onEditPressed(accountDTO.getAccountId());
+        }, DoubleClickEvent.getType());
+        pager.setDisplay(grid);
+        pagination.clear();
+        dataProvider.addDataDisplay(grid);
+    }
     
 	@Override
 	public void setAccountData(List<AccountDTO> accountList) {
-		int i = 0;
-		for (AccountDTO dto : accountList) {
-            AccountWidget widget = new AccountWidget(dto);
-			widget.setID(dto.getAccountId().toString());
-			widget.setIconType("glyphicon glyphicon-piggy-bank");
-            if (i != 0) {
-                widget.setVisible(false);
-            } else {
-                currentAccount = widget;
-            }
-			main.add(widget);
-			widgets.add(widget);
-			i++;
-		}
+        initTable(dataGrid, dataGridPager, dataGridPagination, dataGridProvider);
+        for (AccountDTO accountDTO : accountList) {
+            dataGridProvider.getList().add(accountDTO);
+        }
+        dataGridProvider.flush();
+        dataGridPagination.rebuild(dataGridPager);
 	}
 
     @Override
@@ -66,43 +115,4 @@ public class AccountManagementListView extends ViewWithUiHandlers<AccountManagem
         return widgets;
     }
 
-    @Override
-    public AccountWidget getSelectedAccount() {
-        return currentAccount;
-    }
-
-    @UiHandler("left")
-	public void onLeftPress(ClickEvent e) {
-		if (currentIndex == 0) {
-			widgets.get(0).setVisible(false);
-            currentAccount = widgets.get(widgets.size() - 1);
-			widgets.get(widgets.size() - 1).setVisible(true);
-			currentIndex = widgets.size() - 1;
-		} else {
-			widgets.get(currentIndex).setVisible(false);
-			widgets.get(currentIndex - 1).setVisible(true);
-            currentAccount = widgets.get(currentIndex - 1);
-			currentIndex--;
-		}
-	}
-	
-	@UiHandler("right")
-	public void onRightPress(ClickEvent e) {
-		if (currentIndex == widgets.size() - 1) {
-			widgets.get(widgets.size() - 1).setVisible(false);
-			widgets.get(0).setVisible(true);
-            currentAccount = widgets.get(0);
-			currentIndex = 0;
-		} else {
-			widgets.get(currentIndex).setVisible(false);
-			widgets.get(currentIndex + 1).setVisible(true);
-            currentAccount = widgets.get(currentIndex + 1);
-			currentIndex++;
-		}
-	}
-
-    @UiHandler("edit")
-    public void onEditPress(ClickEvent e) {
-        getUiHandlers().onEditPressed();
-    }
 }

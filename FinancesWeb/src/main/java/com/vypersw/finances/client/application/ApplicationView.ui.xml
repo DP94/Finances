@@ -8,29 +8,15 @@
 	    <g:HTMLPanel ui:field="navHeader">
 	    	<div class="nav-header-app">
 	    		<div class="nav-header-content">
-		    		<g:Button ui:field="menuButton" styleName="glyphicon glyphicon-menu-hamburger nav-header-button"></g:Button>
-		    		<g:Label ui:field="nameLabel" styleName="nav-header-user-label"></g:Label>
+					<widget:MenuButton ui:field="addExpense" iconStyle="glyphicon glyphicon-plus options-item"/>
+					<widget:MenuButton ui:field="addIncome" iconStyle="glyphicon glyphicon-piggy-bank"/>
+					<widget:MenuButton ui:field="accountManagement" iconStyle="glyphicon glyphicon-folder-open"/>
+					<widget:MenuButton ui:field="reports" iconStyle="glyphicon glyphicon-signal"/>
+					<widget:MenuButton ui:field="userManagement" iconStyle="glyphicon glyphicon-user"/>
+					<widget:MenuButton ui:field="logout" iconStyle="glyphicon glyphicon-off"/>
 		    	</div>
 	    	</div>
 	    </g:HTMLPanel>
-	    <div ui:field="sidebarDiv">
-		    <g:HTMLPanel ui:field="sidebar" styleName="nav-sidebar">
-		    	<div>
-		    		<div class="nav-sidebar-container">
-		    			<div class="nav-sidebar-options">
-	   						<div class="nav-sidebar-options-container">
-								<widget:MenuButton ui:field="addExpense" iconStyle="glyphicon glyphicon-plus options-item" text="{constants.addExpense}"></widget:MenuButton>
-								<widget:MenuButton ui:field="addIncome" iconStyle="glyphicon glyphicon-piggy-bank" text="{constants.addIncome}"></widget:MenuButton>
-								<widget:MenuButton ui:field="accountManagement" iconStyle="glyphicon glyphicon-folder-open" text="{constants.accountManagement}"></widget:MenuButton>
-								<widget:MenuButton ui:field="reports" iconStyle="glyphicon glyphicon-signal" text="{constants.reports}"></widget:MenuButton>
-								<widget:MenuButton ui:field="userManagement" iconStyle="glyphicon glyphicon-user" text="{constants.userManagement}"></widget:MenuButton>
-	   							<widget:MenuButton ui:field="logout" iconStyle="glyphicon glyphicon-off" text="{constants.logout}"></widget:MenuButton>
-	   						</div>
-		    			</div>
-		    		</div>
-		    	</div>
-		    </g:HTMLPanel>
-	    </div>
     	<g:HTMLPanel ui:field="contentPanel" styleName="content-panel">
     	</g:HTMLPanel>
     </g:HTMLPanel>

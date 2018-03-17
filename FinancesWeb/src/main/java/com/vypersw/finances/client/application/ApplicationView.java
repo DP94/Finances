@@ -27,12 +27,6 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     HTMLPanel contentPanel;
     
     @UiField
-    HTMLPanel sidebar;
-    
-    @UiField
-    Button menuButton;
-    
-    @UiField
     MenuButton logout;
     
     @UiField
@@ -50,12 +44,6 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     @UiField
     MenuButton userManagement;
     
-    @UiField
-    Label nameLabel;
-    
-    @UiField
-    DivElement sidebarDiv;
-    
     private boolean show = true;
 
     @Inject
@@ -65,15 +53,6 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     }
     
     public void init() {
-    	menuButton.addClickHandler(event -> {
-            if (show) {
-                sidebar.addStyleName("nav-sidebar-visible");
-                show = false;
-            } else {
-                sidebar.removeStyleName("nav-sidebar-visible");
-                show = true;
-            }
-        });
     	
     	logout.addClickHandler(event -> getUiHandlers().logout());
     	
@@ -87,15 +66,15 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     	
     	userManagement.addClickHandler(event -> getUiHandlers().move(ContentType.USER_SETTINGS, null));
     	
-    	RootPanel.get().addDomHandler(event -> {
-            if (!sidebarDiv.isOrHasChild(Element.as(event.getNativeEvent().getEventTarget())) && !menuButton.getElement().isOrHasChild(Element.as(event.getNativeEvent().getEventTarget())) && sidebar.isVisible()) {
-                if(!show) {
-                    sidebar.removeStyleName("nav-sidebar-visible");
-                    show = true;
-                }
-            }
-
-        }, ClickEvent.getType());
+//    	RootPanel.get().addDomHandler(event -> {
+//            if (!sidebarDiv.isOrHasChild(Element.as(event.getNativeEvent().getEventTarget())) && !menuButton.getElement().isOrHasChild(Element.as(event.getNativeEvent().getEventTarget())) && sidebar.isVisible()) {
+//                if(!show) {
+//                    sidebar.removeStyleName("nav-sidebar-visible");
+//                    show = true;
+//                }
+//            }
+//
+//        }, ClickEvent.getType());
     }
     
     @Override
@@ -121,12 +100,8 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
 
 	@Override
 	public void closeMenu() {
-		sidebar.removeStyleName("nav-sidebar-visible");
+		//sidebar.removeStyleName("nav-sidebar-visible");
 		show = true;
 	}
 
-	@Override
-	public void updateUserLabel(String text) {
-		nameLabel.setText(text);
-	}
 }

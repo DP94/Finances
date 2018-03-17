@@ -33,7 +33,6 @@ import java.util.Map;
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> implements ApplicationUiHandlers {
     interface MyView extends View, HasUiHandlers<ApplicationUiHandlers> {
     	void closeMenu();
-    	void updateUserLabel(String text);
     }
     
     @Inject
@@ -94,8 +93,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 							.with("feedbackType", "success")
 							.build();
 					placeManager.revealPlace(request);
-				} else {
-					getView().updateUserLabel(constants.welcomeX() + " " + userDTO.getUsername());
 				}
 			}
 		});

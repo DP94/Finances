@@ -20,8 +20,6 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountMa
     	void setAccountData(List<AccountDTO> dto);
 
         List<AccountWidget> getAllAccounts();
-
-        AccountWidget getSelectedAccount();
     }
 
 	private DispatchAsync dispatchAsync;
@@ -40,8 +38,7 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountMa
 	}
 
 	@Override
-	public void onEditPressed() {
-		long accountId = getView().getSelectedAccount().getAccountDTO().getAccountId();
+	public void onEditPressed(Long accountId) {
 		getContainer().move(ContentType.ACCOUNT_EDITING, new HashMap<>(Collections.singletonMap("id", String.valueOf(accountId))));
 	}
 

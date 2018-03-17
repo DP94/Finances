@@ -43,3 +43,11 @@
     -webkit-transition: none !important;
     transition: none !important;
 }
+
+.grid-cell-checkbox {
+    width: 5%;
+}
+
+.grid-header-checkbox {
+    width: 5%;
+}

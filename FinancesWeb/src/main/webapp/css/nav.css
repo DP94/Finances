@@ -73,13 +73,14 @@
 
 .finances-menu-button {
 	width: 100%;
-	text-align: left;
+	text-align: center;
 	font-size: 24px;
 	border: none;
 	outline: none;
-	color: black;
+	color: #dddddd;
 	padding: 5px;
 	border-bottom: 1px solid black;
+    background: none;
 }
 
 .finances-menu-button-icon {

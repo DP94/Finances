@@ -7,7 +7,6 @@ import com.google.gwt.user.client.ui.Button;
 public class MenuButton extends Button {
 	
 	private SpanElement icon;
-	private SpanElement textElement;
 	
 	public static final String CLASS_NAME = "finances-menu-button";
 	
@@ -23,28 +22,10 @@ public class MenuButton extends Button {
 		icon.setClassName("finances-menu-button-icon " + style);
 	}
 	
-	@Override
-	public void setText(String text) {
-		if (textElement == null) {
-			textElement = Document.get().createSpanElement();
-			getButtonElement().appendChild(textElement);
-			textElement.setClassName("finances-menu-button-label");
-		}
-		this.textElement.setInnerText(text);
-	}
-	
 	public SpanElement getIcon() {
 		return icon;
 	}
 	public void setIcon(SpanElement icon) {
 		this.icon = icon;
 	}
-	
-	public SpanElement getSpanText() {
-		return textElement;
-	}
-	public void setText(SpanElement text) {
-		this.textElement = text;
-	}
-	
 }
