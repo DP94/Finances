@@ -10,6 +10,8 @@ import com.vypersw.finances.user.User;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 @Local(AccountService.class)
@@ -28,6 +30,25 @@ public class AccountBean extends AbstractBean implements AccountService {
         dto.setAccountBalanceTarget(account.getAccountBalanceTarget());
         dto.setUserId(account.getUser().getUserId());
         return dto;
+    }
+
+    @Override
+    public List<AccountDTO> getAll() {
+        AccountJPAHelper accountJPAHelper = new AccountJPAHelper(entityManager);
+        List<Account> accounts = accountJPAHelper.getAll(Account.class);
+        List<AccountDTO> accountDTOS = new ArrayList<>();
+        for (Account account : accounts) {
+            AccountDTO dto = new AccountDTO();
+            dto.setAccountId(account.getAccountId());
+            dto.setName(account.getName());
+            dto.setDescription(account.getDescription());
+            dto.setBalance(account.getBalance());
+            dto.setAccountType(AccountType.forValue(account.getAccountType()));
+            dto.setAccountBalanceTarget(account.getAccountBalanceTarget());
+            dto.setUserId(account.getUser().getUserId());
+            accountDTOS.add(dto);
+        }
+        return accountDTOS;
     }
 
     @Override

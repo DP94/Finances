@@ -28,6 +28,7 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 
 	public interface MyView extends View, HasUiHandlers<ContentContainerUiHandlers> {
 		void setTitle(String text);
+		void setLoading(boolean loading);
 	}
 
 	public static final Slot<VyperPresenterWidget<?>> SLOT_Perspective = new Slot<>();
@@ -98,7 +99,9 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 	}
 
 	public void move(PlaceRequest placeRequest) {
-		currentWidget.getPresenterEventBus().fireEvent(new MoveEvent(placeRequest));
+		if (currentWidget != null) {
+			currentWidget.getPresenterEventBus().fireEvent(new MoveEvent(placeRequest));
+		}
 	}
 
 	public native void success(String message) /*-{

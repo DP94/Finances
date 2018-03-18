@@ -1,13 +1,16 @@
 package com.vypersw.finances.client.accountmanagement.accountmanagementlist;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.View;
-import com.vypersw.finances.client.abstractpresenter.VyperListPresenter;
+import com.vypersw.finances.client.abstractpresenter.lists.VyperListPresenter;
+import com.vypersw.finances.client.actions.AccountAction;
 import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.client.content.ContentType;
+import com.vypersw.finances.client.results.AccountActionResult;
 import com.vypersw.finances.client.widget.AccountWidget;
 import com.vypersw.finances.dto.user.AccountDTO;
 
@@ -18,8 +21,6 @@ import java.util.List;
 public class AccountManagementListPresenter extends VyperListPresenter<AccountManagementListPresenter.MyView> implements AccountManagementListUiHandlers {
     public interface MyView extends View , HasUiHandlers<AccountManagementListUiHandlers> {
     	void setAccountData(List<AccountDTO> dto);
-
-        List<AccountWidget> getAllAccounts();
     }
 
 	private DispatchAsync dispatchAsync;
@@ -29,7 +30,6 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountMa
 		super(eventBus, view, container);
 		this.dispatchAsync = dispatchAsync;
 		getView().setUiHandlers(this);
-		getView().setAccountData(getContainer().getUserDTO().getAccounts());
 	}
 
 	@Override
@@ -39,8 +39,21 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountMa
 
 	@Override
     protected void onReveal() {
-        for (AccountWidget accountWidget : getView().getAllAccounts()) {
-            accountWidget.animate("progress" + accountWidget.getId(), accountWidget.getPercentage());
-        }
+		setLoading(true);
+		AccountAction accountAction = new AccountAction();
+		accountAction.setGetAll(true);
+		dispatchAsync.execute(accountAction, new AsyncCallback<AccountActionResult>() {
+			@Override
+			public void onFailure(Throwable throwable) {
+				setLoading(false);
+				getContentContainerPresenter().warn(throwable.getMessage());
+			}
+
+			@Override
+			public void onSuccess(AccountActionResult accountActionResult) {
+				setLoading(false);
+				getView().setAccountData(accountActionResult.getAccounts());
+			}
+		});
     }
 }

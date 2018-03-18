@@ -4,11 +4,11 @@
              xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
              xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
              xmlns:b.gwt="urn:import:org.gwtbootstrap3.client.ui.gwt"
+             xmlns:widget="urn:import:com.vypersw.finances.client.widget"
 >
     <g:HTMLPanel styleName="main">
-        <b.html:Div addStyleNames="col-md-2"/>
-        <b.gwt:DataGrid bordered="true" condensed="true" striped="true" hover="true" addStyleNames="col-md-8" height="300px" width="100%" ui:field="dataGrid"/>
-        <b:Pagination ui:field="dataGridPagination"/>
-        <b.html:Div addStyleNames="col-md-2"/>
+        <b.html:Div addStyleNames="col-md-12">
+            <widget:VyperDataGrid ui:field="vyperDataGrid"/>
+        </b.html:Div>
     </g:HTMLPanel>
 </ui:UiBinder>

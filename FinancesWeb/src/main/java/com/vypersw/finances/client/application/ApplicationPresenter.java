@@ -32,7 +32,6 @@ import java.util.Map;
 
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> implements ApplicationUiHandlers {
     interface MyView extends View, HasUiHandlers<ApplicationUiHandlers> {
-    	void closeMenu();
     }
     
     @Inject
@@ -82,7 +81,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 			public void onSuccess(InitSessionActionResult result) {
 				userDTO = result.getDto();
 				if (userDTO == null) {
-					getView().closeMenu();
 					//Is this needed? Shouldn't we just leave it and let it clear from memory?
 					for (ContentContainerPresenter presenter : perspectives.values()) {
 						removeFromSlot(SLOT_content, presenter);
@@ -132,7 +130,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 
 			@Override
 			public void onSuccess(LogoutActionResult result) {
-				getView().closeMenu();
 				//Is this needed? Shouldn't we just leave it and let it clear from memory?
 				for(ContentContainerPresenter presenter : perspectives.values()) {
 					removeFromSlot(SLOT_content, presenter);
@@ -164,7 +161,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 			openSlots.add(presenter);
 			vyperPresenterWidget = presenter;
 		}
-		getView().closeMenu();
 		return vyperPresenterWidget;
 	}
 
@@ -192,9 +188,5 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 
 	public UserDTO getUserDTO() {
 		return userDTO;
-	}
-
-	public void setUserDTO(UserDTO userDTO) {
-		this.userDTO = userDTO;
 	}
 }

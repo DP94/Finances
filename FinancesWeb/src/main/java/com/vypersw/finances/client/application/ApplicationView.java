@@ -65,16 +65,6 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     	reports.addClickHandler(event -> getUiHandlers().move(ContentType.REPORTS, null));
     	
     	userManagement.addClickHandler(event -> getUiHandlers().move(ContentType.USER_SETTINGS, null));
-    	
-//    	RootPanel.get().addDomHandler(event -> {
-//            if (!sidebarDiv.isOrHasChild(Element.as(event.getNativeEvent().getEventTarget())) && !menuButton.getElement().isOrHasChild(Element.as(event.getNativeEvent().getEventTarget())) && sidebar.isVisible()) {
-//                if(!show) {
-//                    sidebar.removeStyleName("nav-sidebar-visible");
-//                    show = true;
-//                }
-//            }
-//
-//        }, ClickEvent.getType());
     }
     
     @Override
@@ -97,11 +87,4 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
         	super.removeFromSlot(slot, content);
     	}
     }
-
-	@Override
-	public void closeMenu() {
-		//sidebar.removeStyleName("nav-sidebar-visible");
-		show = true;
-	}
-
 }

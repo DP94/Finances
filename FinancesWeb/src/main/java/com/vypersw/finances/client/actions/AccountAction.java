@@ -5,7 +5,7 @@ import com.vypersw.finances.dto.user.AccountDTO;
 
 public class AccountAction extends VyperAction<AccountActionResult> {
     private AccountDTO accountDTO;
-
+    private boolean getAll;
     public AccountAction() {
     }
 
@@ -19,5 +19,13 @@ public class AccountAction extends VyperAction<AccountActionResult> {
 
     public void setAccountDTO(AccountDTO accountDTO) {
         this.accountDTO = accountDTO;
+    }
+
+    public boolean isGetAll() {
+        return getAll;
+    }
+
+    public void setGetAll(boolean getAll) {
+        this.getAll = getAll;
     }
 }

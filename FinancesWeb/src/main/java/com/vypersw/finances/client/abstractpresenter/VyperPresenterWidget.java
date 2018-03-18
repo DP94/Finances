@@ -40,4 +40,8 @@ public class VyperPresenterWidget<V extends View> extends PresenterWidget<V> imp
 	public ContentContainerPresenter getContentContainerPresenter() {
 		return contentContainerPresenter;
 	}
+
+	public void setLoading(boolean loading) {
+		contentContainerPresenter.getView().setLoading(loading);
+	}
 }

@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import org.gwtbootstrap3.client.ui.html.Div;
 
 public class ContentContainerView extends ViewWithUiHandlers<ContentContainerUiHandlers> implements ContentContainerPresenter.MyView {
     interface Binder extends UiBinder<Widget, ContentContainerView> {
@@ -28,6 +29,9 @@ public class ContentContainerView extends ViewWithUiHandlers<ContentContainerUiH
     
     @UiField
     Button close;
+
+    @UiField
+    Div loading;
 
     @Inject
     ContentContainerView(Binder uiBinder) {
@@ -60,4 +64,11 @@ public class ContentContainerView extends ViewWithUiHandlers<ContentContainerUiH
 	public void setTitle(String text) {
 		title.setText(text);
 	}
+
+    @Override
+    public void setLoading(boolean loading) {
+        this.loading.setVisible(loading);
+    }
+
+
 }

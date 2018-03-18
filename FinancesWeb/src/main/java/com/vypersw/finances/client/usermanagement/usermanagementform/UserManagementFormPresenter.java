@@ -29,6 +29,7 @@ public class UserManagementFormPresenter extends VyperFormPresenter<UserManageme
 
 	@Override
 	public void onSave() {
+		setLoading(true);
 		UserAction action = new UserAction();
 		action.setDto(getData());
 		
@@ -36,11 +37,13 @@ public class UserManagementFormPresenter extends VyperFormPresenter<UserManageme
 
 			@Override
 			public void onFailure(Throwable caught) {
+				setLoading(false);
 				Window.alert(caught.getMessage());
 			}
 
 			@Override
 			public void onSuccess(UserActionResult result) {
+				setLoading(false);
 				setData(result.getDto());
 				getContentContainerPresenter().success("Save successful");
 			}

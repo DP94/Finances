@@ -52,14 +52,17 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
 
     @Override
     public void initaliseForm() {
+        setLoading(true);
         dispatchAsync.execute(new GetAccountAction(accountId), new AsyncCallback<GetAccountResult>() {
             @Override
             public void onFailure(Throwable caught) {
+                setLoading(false);
                 getContentContainerPresenter().warn(caught.getMessage());
             }
 
             @Override
             public void onSuccess(GetAccountResult result) {
+                setLoading(false);
                 setData(result.getAccountDTO());
                 getView().setViewData(result.getAccountDTO());
             }
@@ -73,14 +76,17 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
 
     @Override
     public void onSave() {
+        setLoading(true);
         dispatchAsync.execute(new AccountAction(getData()), new AsyncCallback<AccountActionResult>() {
             @Override
             public void onFailure(Throwable caught) {
+                setLoading(false);
                 Window.alert(caught.getMessage());
             }
 
             @Override
             public void onSuccess(AccountActionResult result) {
+                setLoading(false);
                 setData(result.getAccountDTO());
                 getView().setViewData(result.getAccountDTO());
                 getContentContainerPresenter().success("Save successful");

@@ -1,6 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-             xmlns:g="urn:import:com.google.gwt.user.client.ui">
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+			 xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html">
     <g:HTMLPanel ui:field="main" styleName="perspective-content-main">
     	<div class="perspective-content">
     		<div class="perspective-content-topbar">
@@ -15,6 +16,9 @@
     			<g:HTMLPanel ui:field="contentContainer">
     			</g:HTMLPanel>
     		</div>
+			<b.html:Div ui:field="loading" addStyleNames="loading" visible="false">
+				<b.html:Div addStyleNames="loading-inner"/>
+			</b.html:Div>
     	</div>
     </g:HTMLPanel>
 </ui:UiBinder>
