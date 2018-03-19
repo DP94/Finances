@@ -5,11 +5,14 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.vypersw.finances.client.abstractpresenter.FormState;
+import com.vypersw.finances.client.i18n.FinancesConstants;
 import com.vypersw.finances.client.widget.Toolbar;
 import com.vypersw.finances.client.widget.ToolbarButtonClickedEvent;
 import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.enumeration.AccountType;
 import org.gwtbootstrap3.client.ui.ListBox;
+import org.gwtbootstrap3.client.ui.TabListItem;
 import org.gwtbootstrap3.client.ui.TextBox;
 
 import javax.inject.Inject;
@@ -38,11 +41,18 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
     @UiField
     Toolbar toolbar;
 
+    @UiField
+    TabListItem modifyTab;
+
     @Inject
     public AccountEditorView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
         toolbar.addToolbarButtonClickedHandler(this);
         init();
+        for (int i = 0; i < AccountType.values().length; i++) {
+            AccountType type = AccountType.values()[i];
+            accountType.addItem(type.name());
+        }
     }
 
     @Override
@@ -55,13 +65,20 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
         } else {
             accountBalanceTarget.setText("0");
         }
-        accountType.clear();
         for (int i = 0; i < AccountType.values().length; i++) {
             AccountType type = AccountType.values()[i];
-            accountType.addItem(type.name());
             if (type == accountDTO.getAccountType()) {
                 accountType.setSelectedIndex(i);
             }
+        }
+    }
+
+    @Override
+    public void setFormState(FormState formState) {
+        if (formState == FormState.CREATE) {
+            modifyTab.setText(FinancesConstants.INSTANCE.create());
+        } else {
+            modifyTab.setText(FinancesConstants.INSTANCE.modify());
         }
     }
 
@@ -84,4 +101,6 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
                 break;
         }
     }
+
+
 }

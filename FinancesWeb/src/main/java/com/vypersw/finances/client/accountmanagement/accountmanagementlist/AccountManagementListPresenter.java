@@ -38,7 +38,21 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountMa
 	}
 
 	@Override
+	public void refresh() {
+		initTable();
+	}
+
+	@Override
+	public void onCreate() {
+		getContainer().move(ContentType.ACCOUNT_EDITING, null);
+	}
+
+	@Override
     protected void onReveal() {
+		initTable();
+    }
+
+    private void initTable() {
 		setLoading(true);
 		AccountAction accountAction = new AccountAction();
 		accountAction.setGetAll(true);
@@ -55,5 +69,5 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountMa
 				getView().setAccountData(accountActionResult.getAccounts());
 			}
 		});
-    }
+	}
 }

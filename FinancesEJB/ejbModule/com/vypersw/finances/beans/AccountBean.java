@@ -5,6 +5,7 @@ import com.vypersw.finances.account.Account;
 import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.enumeration.AccountType;
 import com.vypersw.finances.jpahelpers.AccountJPAHelper;
+import com.vypersw.finances.jpahelpers.UserJPAHelper;
 import com.vypersw.finances.services.AccountService;
 import com.vypersw.finances.user.User;
 
@@ -62,10 +63,29 @@ public class AccountBean extends AbstractBean implements AccountService {
         account.setAccountType(accountDTO.getAccountType().getValue());
         account.setBalance(accountDTO.getBalance());
         account.setDescription(accountDTO.getDescription());
-        User user = new User();
-        user.setUserId(accountDTO.getUserId());
+        UserJPAHelper userJPAHelper = new UserJPAHelper(entityManager);
+        User user = userJPAHelper.findById(User.class, accountDTO.getUserId());
         account.setUser(user);
         entityManager.merge(account);
+        return account.getAccountId();
+    }
+
+    @Override
+    public long create(AccountDTO accountDTO) {
+        AccountJPAHelper accountJPAHelper = new AccountJPAHelper(entityManager);
+
+        Account account = new Account();
+        account.setAccountId(accountJPAHelper.getNextAccountId());
+        account.setName(accountDTO.getName());
+        account.setAccountBalanceTarget(accountDTO.getAccountBalanceTarget());
+        account.setAccountType(accountDTO.getAccountType().getValue());
+        account.setBalance(accountDTO.getBalance());
+        account.setDescription(accountDTO.getDescription());
+        UserJPAHelper userJPAHelper = new UserJPAHelper(entityManager);
+        User user = userJPAHelper.findById(User.class, accountDTO.getUserId());
+        account.setUser(user);
+
+        entityManager.persist(account);
         return account.getAccountId();
     }
 }

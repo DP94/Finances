@@ -5,18 +5,24 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.vypersw.finances.client.widget.GridDoubleClickEvent;
+import com.vypersw.finances.client.widget.Toolbar;
+import com.vypersw.finances.client.widget.ToolbarButtonClickedEvent;
 import com.vypersw.finances.client.widget.VyperDataGrid;
 import com.vypersw.finances.dto.user.AccountDTO;
 
 import javax.inject.Inject;
 import java.util.List;
 
-public class AccountManagementListView extends ViewWithUiHandlers<AccountManagementListUiHandlers> implements AccountManagementListPresenter.MyView, GridDoubleClickEvent.GridDoubleClickEventHandler {
+public class AccountManagementListView extends ViewWithUiHandlers<AccountManagementListUiHandlers> implements AccountManagementListPresenter.MyView, GridDoubleClickEvent.GridDoubleClickEventHandler, ToolbarButtonClickedEvent.ToolbarButtonClickedHandler {
+
 
     public interface Binder extends UiBinder<Widget, AccountManagementListView> {}
 
     @UiField
     public VyperDataGrid<AccountDTO> vyperDataGrid;
+
+    @UiField
+    public Toolbar toolbar;
 
     private AccountDataProvider dataGridProvider = new AccountDataProvider();
 
@@ -25,7 +31,9 @@ public class AccountManagementListView extends ViewWithUiHandlers<AccountManagem
         initWidget(uiBinder.createAndBindUi(this));
         vyperDataGrid.setAbstractDataProvider(dataGridProvider);
         vyperDataGrid.addGridDoubleClickEventHandlers(this);
+        toolbar.addToolbarButtonClickedHandler(this);
         vyperDataGrid.buildTable();
+        toolbar.getSave().setEnabled(false);
     }
     
 	@Override
@@ -41,5 +49,14 @@ public class AccountManagementListView extends ViewWithUiHandlers<AccountManagem
     public void onGridDoubleClick(GridDoubleClickEvent event) {
         AccountDTO accountDTO = (AccountDTO) event.getCurrentRow();
         getUiHandlers().onEditPressed(accountDTO.getAccountId());
+    }
+
+    @Override
+    public void onToolbarButtonClicked(ToolbarButtonClickedEvent event) {
+        if (event.getEventType() == ToolbarButtonClickedEvent.ToolbarEventType.REFRESH) {
+            getUiHandlers().refresh();
+        } else if (event.getEventType() == ToolbarButtonClickedEvent.ToolbarEventType.CREATE) {
+            getUiHandlers().onCreate();
+        }
     }
 }

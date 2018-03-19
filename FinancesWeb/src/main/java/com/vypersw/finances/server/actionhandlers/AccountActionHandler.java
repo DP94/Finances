@@ -16,6 +16,12 @@ public class AccountActionHandler extends VyperActionHandler<AccountAction, Acco
     @Override
     protected AccountActionResult executeAction(AccountAction action) {
         AccountActionResult accountActionResult = new AccountActionResult();
+        if (action.isCreate()) {
+            long id = accountService.create(action.getAccountDTO());
+            AccountDTO newAccountDTO = accountService.getById(id);
+            accountActionResult.setAccountDTO(newAccountDTO);
+            return accountActionResult;
+        }
         if (action.isGetAll()) {
             ArrayList<AccountDTO> accountDTOList = new ArrayList<>(accountService.getAll());
             accountActionResult.setAccounts(accountDTOList);

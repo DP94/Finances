@@ -8,4 +8,5 @@ public interface AccountService {
     AccountDTO getById(long id);
     List<AccountDTO> getAll();
     long updateAccount(AccountDTO accountDTO);
+    long create(AccountDTO accountDTO);
 }

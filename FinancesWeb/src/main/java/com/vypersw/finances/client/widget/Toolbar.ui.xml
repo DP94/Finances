@@ -9,8 +9,9 @@
     	<div class="toolbar-main">
     		<div class="toolbar-buttons">
 	    		<div class="toolbar-save">
-	    			<widget:ToolbarButton ui:field="save" iconStyle="glyphicon glyphicon-floppy-disk"></widget:ToolbarButton>
-	    			<widget:ToolbarButton ui:field="refresh" iconStyle="glyphicon glyphicon-refresh"></widget:ToolbarButton>
+					<widget:ToolbarButton ui:field="create" iconStyle="glyphicon glyphicon-plus"/>
+	    			<widget:ToolbarButton ui:field="save" iconStyle="glyphicon glyphicon-floppy-disk"/>
+	    			<widget:ToolbarButton ui:field="refresh" iconStyle="glyphicon glyphicon-refresh"/>
 	    		</div>
 	    	</div>
     	</div>

@@ -6,6 +6,7 @@ import com.vypersw.finances.dto.user.AccountDTO;
 public class AccountAction extends VyperAction<AccountActionResult> {
     private AccountDTO accountDTO;
     private boolean getAll;
+    private boolean isCreate;
     public AccountAction() {
     }
 
@@ -27,5 +28,13 @@ public class AccountAction extends VyperAction<AccountActionResult> {
 
     public void setGetAll(boolean getAll) {
         this.getAll = getAll;
+    }
+
+    public boolean isCreate() {
+        return isCreate;
+    }
+
+    public void setCreate(boolean create) {
+        isCreate = create;
     }
 }

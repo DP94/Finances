@@ -7,6 +7,7 @@
              xmlns:widget="urn:import:com.vypersw.finances.client.widget"
 >
     <g:HTMLPanel styleName="main">
+        <widget:Toolbar ui:field="toolbar"/>
         <b.html:Div addStyleNames="col-md-12">
             <widget:VyperDataGrid ui:field="vyperDataGrid"/>
         </b.html:Div>

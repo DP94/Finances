@@ -24,6 +24,9 @@ public class Toolbar extends Composite implements HasToolbarButtonClickedHandler
     
     @UiField
     ToolbarButton refresh;
+
+    @UiField
+	ToolbarButton create;
     
     public Toolbar() {
         initWidget(binder.createAndBindUi(this));
@@ -54,7 +57,12 @@ public class Toolbar extends Composite implements HasToolbarButtonClickedHandler
 	public void onRefresh(ClickEvent event) {
 		ToolbarButtonClickedEvent.fire(ToolbarEventType.REFRESH, this);
 	}
-	
+
+	@UiHandler("create")
+	public void onCreate(ClickEvent event) {
+		ToolbarButtonClickedEvent.fire(ToolbarEventType.CREATE, this);
+	}
+
     @Override
     public HandlerRegistration addToolbarButtonClickedHandler(ToolbarButtonClickedHandler handler) {
         return this.addHandler(handler, ToolbarButtonClickedEvent.TYPE);

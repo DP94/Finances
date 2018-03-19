@@ -7,6 +7,7 @@ import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+import com.vypersw.finances.client.abstractpresenter.FormState;
 import com.vypersw.finances.client.abstractpresenter.VyperFormPresenter;
 import com.vypersw.finances.client.actions.AccountAction;
 import com.vypersw.finances.client.actions.GetAccountAction;
@@ -21,6 +22,7 @@ import javax.inject.Inject;
 public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPresenter.MyView, AccountDTO> implements AccountEditorUIHandlers, MoveEvent.MoveEventHandler {
 
     private long accountId;
+    private FormState formState;
 
     @Override
     public void onMove(MoveEvent event) {
@@ -31,6 +33,7 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
 
     public interface MyView extends View, HasUiHandlers<AccountEditorUIHandlers> {
         void setViewData(AccountDTO accountDTO);
+        void setFormState(FormState formState);
     }
 
     private DispatchAsync dispatchAsync;
@@ -52,21 +55,28 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
 
     @Override
     public void initaliseForm() {
-        setLoading(true);
-        dispatchAsync.execute(new GetAccountAction(accountId), new AsyncCallback<GetAccountResult>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                setLoading(false);
-                getContentContainerPresenter().warn(caught.getMessage());
-            }
+        if (accountId != 0) {
+            setLoading(true);
+            formState = FormState.MODIFY;
+            dispatchAsync.execute(new GetAccountAction(accountId), new AsyncCallback<GetAccountResult>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    setLoading(false);
+                    getContentContainerPresenter().warn(caught.getMessage());
+                }
 
-            @Override
-            public void onSuccess(GetAccountResult result) {
-                setLoading(false);
-                setData(result.getAccountDTO());
-                getView().setViewData(result.getAccountDTO());
-            }
-        });
+                @Override
+                public void onSuccess(GetAccountResult result) {
+                    setLoading(false);
+                    setData(result.getAccountDTO());
+                    getView().setViewData(result.getAccountDTO());
+                }
+            });
+        } else {
+            formState = FormState.CREATE;
+            setData(new AccountDTO());
+        }
+        getView().setFormState(formState);
     }
 
     @Override
@@ -77,19 +87,29 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
     @Override
     public void onSave() {
         setLoading(true);
-        dispatchAsync.execute(new AccountAction(getData()), new AsyncCallback<AccountActionResult>() {
+        AccountAction accountAction = new AccountAction();
+        if (accountId == 0) {
+            accountAction.setCreate(true);
+        }
+        AccountDTO accountDTO = getData();
+        accountDTO.setUserId(getContainer().getUserDTO().getId());
+        accountAction.setAccountDTO(accountDTO);
+        dispatchAsync.execute(accountAction, new AsyncCallback<AccountActionResult>() {
             @Override
             public void onFailure(Throwable caught) {
                 setLoading(false);
-                Window.alert(caught.getMessage());
+                getContentContainerPresenter().warn(caught.getMessage());
             }
 
             @Override
             public void onSuccess(AccountActionResult result) {
                 setLoading(false);
+                formState = FormState.MODIFY;
                 setData(result.getAccountDTO());
                 getView().setViewData(result.getAccountDTO());
                 getContentContainerPresenter().success("Save successful");
+                getView().setFormState(formState);
+                accountId = result.getAccountDTO().getAccountId();
             }
         });
     }

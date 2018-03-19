@@ -33,7 +33,7 @@ public class Account implements VyperJPA {
 	@Column(name = "ACCOUNT_BALANCE_TARGET")
 	private BigDecimal accountBalanceTarget;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="USER_ID")
 	private User user;
 
