@@ -5,6 +5,6 @@ import com.vypersw.finances.dto.user.AccountDTO;
 
 interface AccountEditorUIHandlers extends UiHandlers {
     void onSave();
-
+    void onRefresh();
     AccountDTO getData();
 }

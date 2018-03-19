@@ -16,9 +16,6 @@
     			<g:HTMLPanel ui:field="contentContainer">
     			</g:HTMLPanel>
     		</div>
-			<b.html:Div ui:field="loading" addStyleNames="loading" visible="false">
-				<b.html:Div addStyleNames="loading-inner"/>
-			</b.html:Div>
     	</div>
     </g:HTMLPanel>
 </ui:UiBinder>

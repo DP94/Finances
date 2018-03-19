@@ -80,7 +80,7 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
                 getUiHandlers().onSave();
                 break;
             case REFRESH:
-                Window.alert("Refresh pressed");
+                getUiHandlers().onRefresh();
                 break;
         }
     }

@@ -49,11 +49,6 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 		getView().setUiHandlers(this);
 	}
 
-	protected void onBind() {
-		super.onBind();
-		userPresenter.setData(container.getUserDTO());
-	}
-
 	@Override
 	protected void onReveal() {
 		switch(type) {

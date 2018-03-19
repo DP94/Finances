@@ -68,7 +68,7 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
 				getUiHandlers().onSave();
 				break;
 			case REFRESH:
-				Window.alert("Refresh pressed");
+				getUiHandlers().onRefresh();
 				break;
 		}
 	}

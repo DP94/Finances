@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.vypersw.finances.client.widget.LoadingSpinner;
 import org.gwtbootstrap3.client.ui.html.Div;
 
 public class ContentContainerView extends ViewWithUiHandlers<ContentContainerUiHandlers> implements ContentContainerPresenter.MyView {
@@ -30,8 +31,7 @@ public class ContentContainerView extends ViewWithUiHandlers<ContentContainerUiH
     @UiField
     Button close;
 
-    @UiField
-    Div loading;
+    private LoadingSpinner loadingSpinner = new LoadingSpinner();
 
     @Inject
     ContentContainerView(Binder uiBinder) {
@@ -67,7 +67,13 @@ public class ContentContainerView extends ViewWithUiHandlers<ContentContainerUiH
 
     @Override
     public void setLoading(boolean loading) {
-        this.loading.setVisible(loading);
+        if (loading) {
+            this.loadingSpinner.setLoading();
+            contentContainer.add(loadingSpinner);
+        } else {
+            contentContainer.remove(loadingSpinner);
+        }
+
     }
 
 

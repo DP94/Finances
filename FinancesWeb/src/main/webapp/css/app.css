@@ -58,13 +58,15 @@
 	padding: 1%;
 }
 
-.loading {
+.loading-full {
+	height: calc(100%);
+	width: calc(100%);
 	position: absolute;
-	width: 95%;
-	height: inherit;
-	opacity: 0.5;
-	top: 7%;
-	background: #151515;
+	background: rgba(0, 0, 0, 0.56);
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+	display: flex;
 }
 
 .loading-inner {

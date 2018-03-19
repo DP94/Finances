@@ -93,4 +93,9 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
             }
         });
     }
+
+    @Override
+    public void onRefresh() {
+        initaliseForm();
+    }
 }

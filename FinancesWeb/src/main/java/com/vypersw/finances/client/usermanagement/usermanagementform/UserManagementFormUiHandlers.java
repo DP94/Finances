@@ -5,5 +5,6 @@ import com.vypersw.finances.dto.user.UserDTO;
 
 interface UserManagementFormUiHandlers extends UiHandlers {
 	void onSave();
+	void onRefresh();
 	UserDTO getData();
 }
