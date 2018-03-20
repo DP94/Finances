@@ -11,7 +11,7 @@ import com.vypersw.finances.client.actions.AccountAction;
 import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.client.content.ContentType;
 import com.vypersw.finances.client.results.AccountActionResult;
-import com.vypersw.finances.client.widget.AccountWidget;
+import com.vypersw.finances.client.widget.Toolbar;
 import com.vypersw.finances.dto.user.AccountDTO;
 
 import java.util.Collections;
@@ -21,6 +21,8 @@ import java.util.List;
 public class AccountManagementListPresenter extends VyperListPresenter<AccountManagementListPresenter.MyView> implements AccountManagementListUiHandlers {
     public interface MyView extends View , HasUiHandlers<AccountManagementListUiHandlers> {
     	void setAccountData(List<AccountDTO> dto);
+
+		Toolbar getToolbar();
     }
 
 	private DispatchAsync dispatchAsync;
@@ -30,6 +32,7 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountMa
 		super(eventBus, view, container);
 		this.dispatchAsync = dispatchAsync;
 		getView().setUiHandlers(this);
+		getView().getToolbar().getSave().setVisible(false);
 	}
 
 	@Override

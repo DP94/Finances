@@ -10,7 +10,7 @@ public abstract class VyperFormPresenter<V extends View, D extends VyperDTO> ext
 
 	
 	private D data;
-
+    private FormState formState;
 
 	public VyperFormPresenter(EventBus eventBus, V view, ApplicationPresenter container) {
 		super(eventBus, view, container);
@@ -41,6 +41,14 @@ public abstract class VyperFormPresenter<V extends View, D extends VyperDTO> ext
     @Override
     public void onMove(MoveEvent event) {
         super.onMove(event);
+    }
+
+    public FormState getFormState() {
+        return formState;
+    }
+
+    public void setFormState(FormState formState) {
+        this.formState = formState;
     }
 }
 

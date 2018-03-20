@@ -36,18 +36,14 @@ public class Toolbar extends Composite implements HasToolbarButtonClickedHandler
 		return save;
 	}
 
-	public void setSave(ToolbarButton save) {
-		this.save = save;
-	}
-
 	public ToolbarButton getRefresh() {
 		return refresh;
 	}
 
-	public void setRefresh(ToolbarButton refresh) {
-		this.refresh = refresh;
+	public ToolbarButton getCreate() {
+		return create;
 	}
-	
+
 	@UiHandler("save")
 	public void onSave(ClickEvent event) {
 		ToolbarButtonClickedEvent.fire(ToolbarEventType.SAVE, this);

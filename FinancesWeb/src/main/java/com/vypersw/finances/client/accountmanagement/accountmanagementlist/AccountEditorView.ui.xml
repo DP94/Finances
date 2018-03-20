@@ -11,6 +11,7 @@
             <b:NavTabs>
                 <b:TabListItem active="true" dataTarget="#modify" text="{constants.modify}"
                                ui:field="modifyTab"/>
+                <b:TabListItem dataTarget="#transactions" text="{constants.transactions}" ui:field="transactionsTab"/>
             </b:NavTabs>
             <b:TabContent>
                 <b:TabPane b:id="modify" active="true" addStyleNames="finances-form">
@@ -53,6 +54,7 @@
                         </b:FieldSet>
                     </b:Form>
                 </b:TabPane>
+                <b:TabPane b:id="transactions" addStyleNames="finances-form"/>
             </b:TabContent>
         </div>
     </g:HTMLPanel>

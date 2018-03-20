@@ -2,7 +2,6 @@ package com.vypersw.finances.client.accountmanagement.accountmanagementlist;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.vypersw.finances.client.abstractpresenter.FormState;
@@ -44,6 +43,9 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
     @UiField
     TabListItem modifyTab;
 
+    @UiField
+    TabListItem transactionsTab;
+
     @Inject
     public AccountEditorView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
@@ -75,10 +77,13 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
 
     @Override
     public void setFormState(FormState formState) {
+        toolbar.getCreate().setVisible(false);
         if (formState == FormState.CREATE) {
             modifyTab.setText(FinancesConstants.INSTANCE.create());
+            transactionsTab.setVisible(false);
         } else {
             modifyTab.setText(FinancesConstants.INSTANCE.modify());
+            transactionsTab.setVisible(true);
         }
     }
 

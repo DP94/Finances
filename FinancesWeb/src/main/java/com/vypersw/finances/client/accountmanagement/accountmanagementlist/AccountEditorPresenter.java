@@ -1,6 +1,5 @@
 package com.vypersw.finances.client.accountmanagement.accountmanagementlist;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
@@ -22,7 +21,6 @@ import javax.inject.Inject;
 public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPresenter.MyView, AccountDTO> implements AccountEditorUIHandlers, MoveEvent.MoveEventHandler {
 
     private long accountId;
-    private FormState formState;
 
     @Override
     public void onMove(MoveEvent event) {
@@ -57,7 +55,7 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
     public void initaliseForm() {
         if (accountId != 0) {
             setLoading(true);
-            formState = FormState.MODIFY;
+            setFormState(FormState.MODIFY);
             dispatchAsync.execute(new GetAccountAction(accountId), new AsyncCallback<GetAccountResult>() {
                 @Override
                 public void onFailure(Throwable caught) {
@@ -73,10 +71,10 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
                 }
             });
         } else {
-            formState = FormState.CREATE;
+            setFormState(FormState.CREATE);
             setData(new AccountDTO());
         }
-        getView().setFormState(formState);
+        getView().setFormState(getFormState());
     }
 
     @Override
@@ -104,11 +102,11 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
             @Override
             public void onSuccess(AccountActionResult result) {
                 setLoading(false);
-                formState = FormState.MODIFY;
+                setFormState(FormState.MODIFY);
                 setData(result.getAccountDTO());
                 getView().setViewData(result.getAccountDTO());
                 getContentContainerPresenter().success("Save successful");
-                getView().setFormState(formState);
+                getView().setFormState(getFormState());
                 accountId = result.getAccountDTO().getAccountId();
             }
         });

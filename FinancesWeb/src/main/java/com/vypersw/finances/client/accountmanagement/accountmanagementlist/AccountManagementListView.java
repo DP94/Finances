@@ -59,4 +59,9 @@ public class AccountManagementListView extends ViewWithUiHandlers<AccountManagem
             getUiHandlers().onCreate();
         }
     }
+
+    @Override
+    public Toolbar getToolbar() {
+        return toolbar;
+    }
 }

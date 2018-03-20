@@ -109,5 +109,11 @@
 .finances-toolbar-button {
 	border: none;
 	outline: none;
-	
+    background: none;
+}
+
+.finances-toolbar-button-label {
+    padding: 2px;
+    font-size: 12px;
+    font-weight: bold;
 }
