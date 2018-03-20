@@ -43,6 +43,7 @@ public class AccountManagementListView extends ViewWithUiHandlers<AccountManagem
             dataGridProvider.getList().add(accountDTO);
         }
         dataGridProvider.flush();
+        vyperDataGrid.getPagination().rebuild(vyperDataGrid.getSimplePager());
 	}
 
     @Override

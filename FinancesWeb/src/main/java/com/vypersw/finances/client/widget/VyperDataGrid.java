@@ -75,4 +75,12 @@ public class VyperDataGrid<T extends VyperDTO> extends Composite implements Grid
     public HandlerRegistration addGridDoubleClickEventHandlers(GridDoubleClickEvent.GridDoubleClickEventHandler handler) {
         return this.addHandler(handler, GridDoubleClickEvent.TYPE);
     }
+
+    public SimplePager getSimplePager() {
+        return simplePager;
+    }
+
+    public Pagination getPagination() {
+        return pagination;
+    }
 }

@@ -1,9 +1,8 @@
 package com.vypersw.finances.client.content;
 
 public enum ContentType {
-	
-	ADD_EXPENSE("Add expense"),
-	ADD_INCOME("Add income"),
+
+    ADD("Add transaction"),
     ACCOUNT_EDITING("Account editing"),
 	ACCOUNT_MANAGEMENT("Account management"),
 	REPORTS("Reports"),

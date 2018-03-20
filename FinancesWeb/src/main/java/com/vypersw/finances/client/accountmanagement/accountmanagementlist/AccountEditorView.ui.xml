@@ -56,7 +56,7 @@
                     </b:Form>
                 </b:TabPane>
                 <b:TabPane b:id="transactions">
-                    <b.html:Div addStyleNames="col-md-12">
+                    <b.html:Div addStyleNames="col-md-12 transactions-grid-container">
                         <widget:VyperDataGrid ui:field="transactionsGrid"/>
                     </b.html:Div>
                 </b:TabPane>

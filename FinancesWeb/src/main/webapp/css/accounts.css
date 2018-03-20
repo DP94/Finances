@@ -51,3 +51,7 @@
 .grid-header-checkbox {
     width: 5%;
 }
+
+.transactions-grid-container {
+    padding: 5px;
+}

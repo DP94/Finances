@@ -57,8 +57,7 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 				currentWidget = userPresenter;
 				userPresenter.setContentContainerPresenter(this);
 				break;
-			case ADD_EXPENSE:
-			case ADD_INCOME:
+            case ADD:
 				break;
 			case ACCOUNT_EDITING:
 				setInSlot(SLOT_Perspective, accountEditorPresenter);

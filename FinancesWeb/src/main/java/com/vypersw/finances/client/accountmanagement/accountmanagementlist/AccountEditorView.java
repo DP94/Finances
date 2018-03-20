@@ -90,6 +90,7 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
                 transactionDataProvider.getList().add(transactionDTO);
             }
             transactionDataProvider.flush();
+            transactionsGrid.getPagination().rebuild(transactionsGrid.getSimplePager());
         });
     }
 
