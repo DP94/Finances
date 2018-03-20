@@ -6,8 +6,11 @@ import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.vypersw.finances.client.abstractpresenter.FormState;
 import com.vypersw.finances.client.i18n.FinancesConstants;
+import com.vypersw.finances.client.widget.GridDoubleClickEvent;
 import com.vypersw.finances.client.widget.Toolbar;
 import com.vypersw.finances.client.widget.ToolbarButtonClickedEvent;
+import com.vypersw.finances.client.widget.VyperDataGrid;
+import com.vypersw.finances.dto.TransactionDTO;
 import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.enumeration.AccountType;
 import org.gwtbootstrap3.client.ui.ListBox;
@@ -17,7 +20,7 @@ import org.gwtbootstrap3.client.ui.TextBox;
 import javax.inject.Inject;
 import java.math.BigDecimal;
 
-public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandlers> implements AccountEditorPresenter.MyView, ToolbarButtonClickedEvent.ToolbarButtonClickedHandler {
+public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandlers> implements AccountEditorPresenter.MyView, ToolbarButtonClickedEvent.ToolbarButtonClickedHandler, GridDoubleClickEvent.GridDoubleClickEventHandler {
 
     public interface Binder extends UiBinder<Widget, AccountEditorView> {
     }
@@ -46,6 +49,11 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
     @UiField
     TabListItem transactionsTab;
 
+    @UiField
+    VyperDataGrid<TransactionDTO> transactionsGrid;
+
+    private TransactionDataProvider transactionDataProvider = new TransactionDataProvider();
+
     @Inject
     public AccountEditorView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
@@ -55,6 +63,9 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
             AccountType type = AccountType.values()[i];
             accountType.addItem(type.name());
         }
+        transactionsGrid.setAbstractDataProvider(transactionDataProvider);
+        transactionsGrid.addGridDoubleClickEventHandlers(this);
+        transactionsGrid.buildTable();
     }
 
     @Override
@@ -73,6 +84,13 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
                 accountType.setSelectedIndex(i);
             }
         }
+        transactionsTab.addShowHandler(tabShowEvent -> {
+            transactionDataProvider.getList().clear();
+            for (TransactionDTO transactionDTO : accountDTO.getTransactions()) {
+                transactionDataProvider.getList().add(transactionDTO);
+            }
+            transactionDataProvider.flush();
+        });
     }
 
     @Override
@@ -105,6 +123,11 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
                 getUiHandlers().onRefresh();
                 break;
         }
+    }
+
+    @Override
+    public void onGridDoubleClick(GridDoubleClickEvent event) {
+
     }
 
 

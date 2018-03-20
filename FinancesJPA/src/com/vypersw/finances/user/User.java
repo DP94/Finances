@@ -1,12 +1,10 @@
 package com.vypersw.finances.user;
 
-import java.io.Serializable;
-import java.util.List;
-
-import javax.persistence.*;
-
 import com.vypersw.finances.VyperJPA;
 import com.vypersw.finances.account.Account;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "TBL_USER")
@@ -32,8 +30,8 @@ public class User implements VyperJPA {
 	
 	@OneToMany(mappedBy = "user")
 	private List<Account> accounts;
-	
-	public User() {
+
+    public User() {
 		
 	}
 

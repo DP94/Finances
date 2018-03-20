@@ -2,8 +2,11 @@ package com.vypersw.finances.beans;
 
 import com.vypersw.finances.abstractbean.AbstractBean;
 import com.vypersw.finances.account.Account;
+import com.vypersw.finances.account.Transaction;
+import com.vypersw.finances.dto.TransactionDTO;
 import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.enumeration.AccountType;
+import com.vypersw.finances.enumeration.TransactionType;
 import com.vypersw.finances.jpahelpers.AccountJPAHelper;
 import com.vypersw.finances.jpahelpers.UserJPAHelper;
 import com.vypersw.finances.services.AccountService;
@@ -30,6 +33,17 @@ public class AccountBean extends AbstractBean implements AccountService {
         dto.setAccountType(AccountType.forValue(account.getAccountType()));
         dto.setAccountBalanceTarget(account.getAccountBalanceTarget());
         dto.setUserId(account.getUser().getUserId());
+
+        for (Transaction transaction : account.getTransactions()) {
+            TransactionDTO transactionDTO = new TransactionDTO();
+            transactionDTO.setId(transaction.getId());
+            transactionDTO.setAmount(transaction.getAmount());
+            transactionDTO.setCategoryId(transaction.getCategoryId());
+            transactionDTO.setDescription(transaction.getDescription());
+            transactionDTO.setTransactionType(TransactionType.forValue(transaction.getTransactionType()));
+            transactionDTO.setAccountDTO(dto);
+            dto.getTransactions().add(transactionDTO);
+        }
         return dto;
     }
 
@@ -48,6 +62,17 @@ public class AccountBean extends AbstractBean implements AccountService {
             dto.setAccountBalanceTarget(account.getAccountBalanceTarget());
             dto.setUserId(account.getUser().getUserId());
             accountDTOS.add(dto);
+
+            for (Transaction transaction : account.getTransactions()) {
+                TransactionDTO transactionDTO = new TransactionDTO();
+                transactionDTO.setId(transaction.getId());
+                transactionDTO.setAmount(transactionDTO.getAmount());
+                transactionDTO.setCategoryId(transaction.getCategoryId());
+                transactionDTO.setDescription(transaction.getDescription());
+                transactionDTO.setTransactionType(TransactionType.forValue(transaction.getTransactionType()));
+                transactionDTO.setAccountDTO(dto);
+                dto.getTransactions().add(transactionDTO);
+            }
         }
         return accountDTOS;
     }

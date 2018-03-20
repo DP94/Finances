@@ -3,10 +3,9 @@ package com.vypersw.finances.account;
 import com.vypersw.finances.VyperJPA;
 import com.vypersw.finances.user.User;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Table(name = "TBL_ACCOUNT")
@@ -36,6 +35,9 @@ public class Account implements VyperJPA {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="USER_ID")
 	private User user;
+
+	@OneToMany(mappedBy = "account")
+	private Set<Transaction> transactions;
 
 	public Account() {
 		
@@ -96,4 +98,12 @@ public class Account implements VyperJPA {
     public void setUser(User user) {
         this.user = user;
     }
+
+	public Set<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(Set<Transaction> transactions) {
+		this.transactions = transactions;
+	}
 }

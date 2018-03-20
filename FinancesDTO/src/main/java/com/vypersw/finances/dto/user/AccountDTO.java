@@ -1,10 +1,13 @@
 package com.vypersw.finances.dto.user;
 
+import com.vypersw.finances.dto.TransactionDTO;
 import com.vypersw.finances.dto.VyperDTO;
 import com.vypersw.finances.enumeration.AccountType;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 public class AccountDTO extends VyperDTO implements Serializable {
 	
@@ -16,6 +19,7 @@ public class AccountDTO extends VyperDTO implements Serializable {
 	private AccountType accountType;
 	private BigDecimal accountBalanceTarget;
     private long userId;
+    private Set<TransactionDTO> transactions = new HashSet<>();
 	
 	public AccountDTO() {
 	}
@@ -74,5 +78,13 @@ public class AccountDTO extends VyperDTO implements Serializable {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public Set<TransactionDTO> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(Set<TransactionDTO> transactions) {
+        this.transactions = transactions;
     }
 }
