@@ -14,5 +14,6 @@ public class ServerModule extends HandlerModule {
 		bindHandler(GetAccountAction.class, GetAccountActionHandler.class);
         bindHandler(AccountAction.class, AccountActionHandler.class);
         bindHandler(GetUserAction.class, GetUserActionHandler.class);
+        bindHandler(TransactionAction.class, TransactionActionHandler.class);
     }
 }

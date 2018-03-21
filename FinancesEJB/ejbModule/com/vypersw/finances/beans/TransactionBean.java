@@ -1,0 +1,35 @@
+package com.vypersw.finances.beans;
+
+import com.vypersw.finances.abstractbean.AbstractBean;
+import com.vypersw.finances.account.Account;
+import com.vypersw.finances.account.Transaction;
+import com.vypersw.finances.dto.TransactionDTO;
+import com.vypersw.finances.jpahelpers.AccountJPAHelper;
+import com.vypersw.finances.jpahelpers.TransactionJPAHelper;
+import com.vypersw.finances.services.TransactionService;
+
+import javax.ejb.Local;
+import javax.ejb.Stateless;
+import java.util.Date;
+
+@Stateless
+@Local(TransactionService.class)
+public class TransactionBean extends AbstractBean implements TransactionService {
+
+    @Override
+    public long save(TransactionDTO transactionDTO) {
+        TransactionJPAHelper transactionJPAHelper = new TransactionJPAHelper(entityManager);
+        AccountJPAHelper accountJPAHelper = new AccountJPAHelper(entityManager);
+        Account account = accountJPAHelper.findById(Account.class, transactionDTO.getAccountDTO().getAccountId());
+        Transaction transaction = new Transaction();
+        transaction.setAccount(account);
+        transaction.setAmount(transactionDTO.getAmount());
+        transaction.setCategoryId(new Long(1));
+        transaction.setDate(new Date());
+        transaction.setDescription(transactionDTO.getDescription());
+        transaction.setTransactionType(transactionDTO.getTransactionType().getValue());
+        transaction.setId(transactionJPAHelper.getNextTransactionId());
+        entityManager.merge(transaction);
+        return transaction.getId();
+    }
+}

@@ -34,12 +34,9 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
         void setFormState(FormState formState);
     }
 
-    private DispatchAsync dispatchAsync;
-
     @Inject
     public AccountEditorPresenter(EventBus eventBus, MyView view, DispatchAsync dispatchAsync, ApplicationPresenter container) {
-        super(eventBus, view, container);
-        this.dispatchAsync = dispatchAsync;
+        super(eventBus, dispatchAsync, view, container);
         getView().setUiHandlers(this);
     }
 

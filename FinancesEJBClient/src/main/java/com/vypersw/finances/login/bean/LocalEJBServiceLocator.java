@@ -2,9 +2,11 @@ package com.vypersw.finances.login.bean;
 
 import com.vypersw.finances.beans.AccountBean;
 import com.vypersw.finances.beans.LoginBean;
+import com.vypersw.finances.beans.TransactionBean;
 import com.vypersw.finances.beans.UserBean;
 import com.vypersw.finances.services.AccountService;
 import com.vypersw.finances.services.LoginService;
+import com.vypersw.finances.services.TransactionService;
 import com.vypersw.finances.services.UserService;
 
 import javax.naming.InitialContext;
@@ -59,6 +61,10 @@ public class LocalEJBServiceLocator {
 
     public AccountService getAccountService() {
         return (AccountService) lookup(AccountBean.class.getSimpleName(), AccountService.class.getName());
+    }
+
+    public TransactionService getTransactionService() {
+        return (TransactionService) lookup(TransactionBean.class.getSimpleName(), TransactionService.class.getName());
     }
 
 }

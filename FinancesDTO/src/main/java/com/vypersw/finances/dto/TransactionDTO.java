@@ -5,6 +5,7 @@ import com.vypersw.finances.enumeration.TransactionType;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class TransactionDTO extends VyperDTO implements Serializable {
     private Long id;
@@ -13,6 +14,7 @@ public class TransactionDTO extends VyperDTO implements Serializable {
     private AccountDTO accountDTO;
     private Long categoryId;
     private TransactionType transactionType;
+    private Date date;
 
     public TransactionDTO() {
     }
@@ -63,5 +65,13 @@ public class TransactionDTO extends VyperDTO implements Serializable {
 
     public void setTransactionType(TransactionType transactionType) {
         this.transactionType = transactionType;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

@@ -7,6 +7,9 @@ public interface FinancesConstants extends ConstantsWithLookup {
 	
 	FinancesConstants INSTANCE = GWT.create(FinancesConstants.class);
 
+    @DefaultStringValue("Account")
+    public String account();
+
 	@DefaultStringValue("Account management")
 	public String accountManagement();
 
@@ -18,6 +21,9 @@ public interface FinancesConstants extends ConstantsWithLookup {
 	
 	@DefaultStringValue("Add income")
 	public String addIncome();
+
+    @DefaultStringValue("Amount")
+    public String amount();
 
     @DefaultStringValue("Balance")
     public String balance();
@@ -63,6 +69,9 @@ public interface FinancesConstants extends ConstantsWithLookup {
 
     @DefaultStringValue("Target")
     public String target();
+
+    @DefaultStringValue("Transaction")
+    public String transaction();
 
 	@DefaultStringValue("Transactions")
 	public String transactions();

@@ -4,6 +4,7 @@ import com.vypersw.finances.VyperJPA;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 @Table(name = "TBL_TRANSACTION")
@@ -28,6 +29,10 @@ public class Transaction implements VyperJPA {
 
     @Column(name = "TRANSACTION_TYPE")
     private Integer transactionType;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "DATE")
+    private Date date;
 
     public Transaction() {
 
@@ -79,5 +84,13 @@ public class Transaction implements VyperJPA {
 
     public void setTransactionType(Integer transactionType) {
         this.transactionType = transactionType;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

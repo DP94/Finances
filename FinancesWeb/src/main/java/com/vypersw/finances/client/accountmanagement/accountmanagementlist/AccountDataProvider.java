@@ -41,4 +41,15 @@ public class AccountDataProvider extends AbstractDataProvider<AccountDTO> {
                 return "";
         }
     }
+
+    @Override
+    public int getColumnType(int i) {
+        switch (i) {
+            case ACCOUNT_NAME:
+            case ACCOUNT_DESCRIPTION:
+            case ACCOUNT_TYPE:
+            default:
+                return STRING;
+        }
+    }
 }

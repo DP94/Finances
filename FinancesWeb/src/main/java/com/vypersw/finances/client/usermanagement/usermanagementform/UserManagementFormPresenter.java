@@ -19,13 +19,10 @@ public class UserManagementFormPresenter extends VyperFormPresenter<UserManageme
 	public interface MyView extends View, HasUiHandlers<UserManagementFormUiHandlers> {
     	void setViewData(UserDTO dto);
     }
-    
-    private DispatchAsync dispatchAsync;
 
 	@Inject
 	public UserManagementFormPresenter(EventBus eventBus, MyView view, DispatchAsync dispatchAsync, ApplicationPresenter container) {
-		super(eventBus, view, container);
-		this.dispatchAsync = dispatchAsync;
+		super(eventBus, dispatchAsync, view, container);
 		getView().setUiHandlers(this);
 	}
 

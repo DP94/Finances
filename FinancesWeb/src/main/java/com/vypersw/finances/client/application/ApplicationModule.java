@@ -7,6 +7,8 @@ import com.vypersw.finances.client.accountmanagement.accountmanagementlist.Accou
 import com.vypersw.finances.client.accountmanagement.accountmanagementlist.AccountManagementListView;
 import com.vypersw.finances.client.content.ContentContainerPresenter;
 import com.vypersw.finances.client.content.ContentContainerView;
+import com.vypersw.finances.client.transaction.TransactionFormPresenter;
+import com.vypersw.finances.client.transaction.TransactionFormView;
 import com.vypersw.finances.client.usermanagement.usermanagementform.UserManagementFormPresenter;
 import com.vypersw.finances.client.usermanagement.usermanagementform.UserManagementFormView;
 
@@ -18,5 +20,6 @@ public class ApplicationModule extends AbstractPresenterModule {
         bindPresenterWidget(UserManagementFormPresenter.class, UserManagementFormPresenter.MyView.class, UserManagementFormView.class);
         bindPresenterWidget(AccountManagementListPresenter.class, AccountManagementListPresenter.MyView.class, AccountManagementListView.class);
         bindPresenterWidget(AccountEditorPresenter.class, AccountEditorPresenter.MyView.class, AccountEditorView.class);
+        bindPresenterWidget(TransactionFormPresenter.class, TransactionFormPresenter.MyView.class, TransactionFormView.class);
     }
 }

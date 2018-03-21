@@ -42,6 +42,7 @@ public class AccountBean extends AbstractBean implements AccountService {
             transactionDTO.setDescription(transaction.getDescription());
             transactionDTO.setTransactionType(TransactionType.forValue(transaction.getTransactionType()));
             transactionDTO.setAccountDTO(dto);
+            transactionDTO.setDate(transaction.getDate());
             dto.getTransactions().add(transactionDTO);
         }
         return dto;
@@ -71,6 +72,7 @@ public class AccountBean extends AbstractBean implements AccountService {
                 transactionDTO.setDescription(transaction.getDescription());
                 transactionDTO.setTransactionType(TransactionType.forValue(transaction.getTransactionType()));
                 transactionDTO.setAccountDTO(dto);
+                transactionDTO.setDate(transaction.getDate());
                 dto.getTransactions().add(transactionDTO);
             }
         }

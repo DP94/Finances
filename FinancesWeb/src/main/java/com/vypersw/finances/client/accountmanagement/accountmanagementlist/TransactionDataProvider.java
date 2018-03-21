@@ -10,10 +10,11 @@ public class TransactionDataProvider extends AbstractDataProvider<TransactionDTO
     static final int TRANSACTION_DESCRIPTION = 2;
     static final int TRANSACTION_CATEGORY = 3;
     static final int TRANSACTION_TYPE = 4;
+    static final int DATE = 5;
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 6;
     }
 
     @Override
@@ -29,6 +30,8 @@ public class TransactionDataProvider extends AbstractDataProvider<TransactionDTO
                 return "Category";
             case TRANSACTION_TYPE:
                 return "Type";
+            case DATE:
+                return "Date";
             default:
                 return "";
         }
@@ -47,8 +50,25 @@ public class TransactionDataProvider extends AbstractDataProvider<TransactionDTO
                 return String.valueOf(transactionDTO.getCategoryId());
             case TRANSACTION_TYPE:
                 return transactionDTO.getTransactionType().name();
+            case DATE:
+                return transactionDTO.getDate().toString();
             default:
                 return "";
+        }
+    }
+
+    @Override
+    public int getColumnType(int i) {
+        switch (i) {
+            case DATE:
+                return DATE;
+            case TRANSACTION_AMOUNT:
+            case TRANSACTION_ACCOUNT:
+            case TRANSACTION_DESCRIPTION:
+            case TRANSACTION_CATEGORY:
+            case TRANSACTION_TYPE:
+            default:
+                return STRING;
         }
     }
 }

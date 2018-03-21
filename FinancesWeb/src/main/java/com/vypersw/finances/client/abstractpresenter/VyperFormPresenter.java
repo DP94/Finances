@@ -1,6 +1,7 @@
 package com.vypersw.finances.client.abstractpresenter;
 
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.View;
 import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.client.widget.MoveEvent;
@@ -11,9 +12,11 @@ public abstract class VyperFormPresenter<V extends View, D extends VyperDTO> ext
 	
 	private D data;
     private FormState formState;
+    protected DispatchAsync dispatchAsync;
 
-	public VyperFormPresenter(EventBus eventBus, V view, ApplicationPresenter container) {
+    public VyperFormPresenter(EventBus eventBus, DispatchAsync dispatchAsync, V view, ApplicationPresenter container) {
 		super(eventBus, view, container);
+        this.dispatchAsync = dispatchAsync;
 	}
 	
 	@Override

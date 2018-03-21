@@ -13,6 +13,7 @@ import com.vypersw.finances.client.abstractpresenter.VyperPresenterWidget;
 import com.vypersw.finances.client.accountmanagement.accountmanagementlist.AccountEditorPresenter;
 import com.vypersw.finances.client.accountmanagement.accountmanagementlist.AccountManagementListPresenter;
 import com.vypersw.finances.client.application.ApplicationPresenter;
+import com.vypersw.finances.client.transaction.TransactionFormPresenter;
 import com.vypersw.finances.client.usermanagement.usermanagementform.UserManagementFormPresenter;
 import com.vypersw.finances.client.widget.MoveEvent;
 
@@ -41,6 +42,8 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 	private AccountManagementListPresenter accountPresenter;
 	@Inject
 	private AccountEditorPresenter accountEditorPresenter;
+	@Inject
+	private TransactionFormPresenter transactionFormPresenter;
 
 	@Inject
 	public ContentContainerPresenter(EventBus eventBus, MyView view, ApplicationPresenter container) {
@@ -58,6 +61,9 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 				userPresenter.setContentContainerPresenter(this);
 				break;
             case ADD:
+				setInSlot(SLOT_Perspective, transactionFormPresenter);
+				currentWidget = transactionFormPresenter;
+				transactionFormPresenter.setContentContainerPresenter(this);
 				break;
 			case ACCOUNT_EDITING:
 				setInSlot(SLOT_Perspective, accountEditorPresenter);
