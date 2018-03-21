@@ -65,6 +65,8 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
     public void clearView() {
         amount.setText("");
         description.setText("");
+        account.setSelectedIndex(0);
+        transactionType.setSelectedIndex(0);
     }
 
     @Override
@@ -72,7 +74,7 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
         if (event.getEventType() == ToolbarButtonClickedEvent.ToolbarEventType.SAVE) {
             getUiHandlers().save();
         } else {
-
+            getUiHandlers().refresh();
         }
     }
 }

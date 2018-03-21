@@ -47,7 +47,7 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
 
     @Override
     public void refresh() {
-
+        getView().clearView();
     }
 
     public interface MyView extends View, HasUiHandlers<TransactionFormUiHandlers> {

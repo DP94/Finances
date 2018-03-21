@@ -4,6 +4,7 @@ import com.vypersw.finances.abstractbean.AbstractBean;
 import com.vypersw.finances.account.Account;
 import com.vypersw.finances.account.Transaction;
 import com.vypersw.finances.dto.TransactionDTO;
+import com.vypersw.finances.enumeration.TransactionType;
 import com.vypersw.finances.jpahelpers.AccountJPAHelper;
 import com.vypersw.finances.jpahelpers.TransactionJPAHelper;
 import com.vypersw.finances.services.TransactionService;
@@ -21,6 +22,13 @@ public class TransactionBean extends AbstractBean implements TransactionService 
         TransactionJPAHelper transactionJPAHelper = new TransactionJPAHelper(entityManager);
         AccountJPAHelper accountJPAHelper = new AccountJPAHelper(entityManager);
         Account account = accountJPAHelper.findById(Account.class, transactionDTO.getAccountDTO().getAccountId());
+
+        if (transactionDTO.getTransactionType() == TransactionType.EXPENSE) {
+            account.setBalance(account.getBalance().subtract(transactionDTO.getAmount()));
+        } else {
+            account.setBalance(account.getBalance().add(transactionDTO.getAmount()));
+        }
+
         Transaction transaction = new Transaction();
         transaction.setAccount(account);
         transaction.setAmount(transactionDTO.getAmount());
