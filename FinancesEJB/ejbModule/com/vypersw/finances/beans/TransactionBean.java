@@ -33,7 +33,11 @@ public class TransactionBean extends AbstractBean implements TransactionService 
         transaction.setAccount(account);
         transaction.setAmount(transactionDTO.getAmount());
         transaction.setCategoryId(new Long(1));
-        transaction.setDate(new Date());
+        if (transactionDTO.getDate() == null) {
+            transaction.setDate(new Date());
+        } else {
+            transaction.setDate(transactionDTO.getDate());
+        }
         transaction.setDescription(transactionDTO.getDescription());
         transaction.setTransactionType(transactionDTO.getTransactionType().getValue());
         transaction.setId(transactionJPAHelper.getNextTransactionId());

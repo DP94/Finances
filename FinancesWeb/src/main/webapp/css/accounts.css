@@ -55,3 +55,7 @@
 .transactions-grid-container {
     padding: 5px;
 }
+
+.datepicker > div {
+    display: block
+}

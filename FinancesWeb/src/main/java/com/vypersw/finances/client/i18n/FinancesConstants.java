@@ -22,6 +22,9 @@ public interface FinancesConstants extends ConstantsWithLookup {
 	@DefaultStringValue("Add income")
 	public String addIncome();
 
+    @DefaultStringValue("Advanced")
+    public String advanced();
+
     @DefaultStringValue("Amount")
     public String amount();
 
@@ -30,6 +33,9 @@ public interface FinancesConstants extends ConstantsWithLookup {
 
 	@DefaultStringValue("Create")
 	public String create();
+
+    @DefaultStringValue("Date")
+    public String date();
 
     @DefaultStringValue("Description")
     public String description();

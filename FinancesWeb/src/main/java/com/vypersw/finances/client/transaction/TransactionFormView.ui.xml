@@ -3,6 +3,7 @@
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
              xmlns:widget="urn:import:com.vypersw.finances.client.widget"
              xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
+             xmlns:datepicker="urn:import:org.gwtbootstrap3.extras.datepicker.client.ui"
 >
     <ui:with field="constants" type="com.vypersw.finances.client.i18n.FinancesConstants"/>
     <g:HTMLPanel ui:field="main" addStyleNames="finances-form">
@@ -31,6 +32,19 @@
                     <b:FormLabel for="formDescription" text="{constants.description}" addStyleNames="col-md-4"/>
                     <g:FlowPanel addStyleNames="col-md-8">
                         <b:TextBox ui:field="description" b:id="formDescription" addStyleNames="col-md-8"/>
+                    </g:FlowPanel>
+                </b:FormGroup>
+                <b:FormGroup>
+                    <b:FormLabel for="formAdvanced" text="{constants.advanced}" addStyleNames="col-md-4"/>
+                    <g:FlowPanel addStyleNames="col-md-8">
+                        <b:CheckBox ui:field="advanced" b:id="formAdvanced" addStyleNames="col-md-8"/>
+                    </g:FlowPanel>
+                </b:FormGroup>
+                <b:FormGroup ui:field="dateGroup" visible="false">
+                    <b:FormLabel for="formDate" text="{constants.date}" addStyleNames="col-md-4"/>
+                    <g:FlowPanel addStyleNames="col-md-8">
+                        <datepicker:DatePicker highlightToday="true" autoClose="true" allowBlank="false" ui:field="date"
+                                               b:id="formDate"/>
                     </g:FlowPanel>
                 </b:FormGroup>
             </b:FieldSet>

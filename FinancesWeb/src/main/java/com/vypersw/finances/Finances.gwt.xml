@@ -9,6 +9,7 @@
     <!-- Default css -->
     <inherits name='com.google.gwt.user.theme.standard.Standard' />
 	<inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
+    <inherits name="org.gwtbootstrap3.extras.datepicker.DatePicker"/>
 
     <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
     <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->

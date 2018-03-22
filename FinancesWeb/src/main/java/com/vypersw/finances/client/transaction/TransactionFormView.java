@@ -8,8 +8,11 @@ import com.vypersw.finances.client.widget.Toolbar;
 import com.vypersw.finances.client.widget.ToolbarButtonClickedEvent;
 import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.enumeration.TransactionType;
+import org.gwtbootstrap3.client.ui.CheckBox;
+import org.gwtbootstrap3.client.ui.FormGroup;
 import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
@@ -35,6 +38,15 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
     @UiField
     Toolbar toolbar;
 
+    @UiField
+    CheckBox advanced;
+
+    @UiField
+    DatePicker date;
+
+    @UiField
+    FormGroup dateGroup;
+
     @Inject
     public TransactionFormView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
@@ -47,6 +59,8 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
         amount.addValueChangeHandler(valueChangeHandler -> getUiHandlers().getData().setAmount(new BigDecimal(amount.getValue())));
         description.addValueChangeHandler(event -> getUiHandlers().getData().setDescription(description.getValue()));
         toolbar.addToolbarButtonClickedHandler(this);
+        date.addChangeDateHandler(changeDateEvent -> getUiHandlers().getData().setDate(date.getValue()));
+        advanced.addChangeHandler(changeEvent -> dateGroup.setVisible(advanced.getValue()));
     }
 
     @Override

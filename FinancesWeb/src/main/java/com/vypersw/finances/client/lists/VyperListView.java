@@ -37,5 +37,6 @@ public abstract class VyperListView<T extends VyperDTO, H extends UiHandlers, D 
             dataProvider.getList().add(t);
         }
         dataProvider.flush();
+        vyperDataGrid.getPagination().rebuild(vyperDataGrid.getSimplePager());
     }
 }

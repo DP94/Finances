@@ -66,6 +66,7 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
         transactionsGrid.setAbstractDataProvider(transactionDataProvider);
         transactionsGrid.addGridDoubleClickEventHandlers(this);
         transactionsGrid.buildTable();
+        transactionsGrid.getToolbar().removeFromParent();
     }
 
     @Override
