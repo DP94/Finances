@@ -7,6 +7,7 @@
              xmlns:b.gwt="urn:import:org.gwtbootstrap3.client.ui.gwt">
     <ui:with field="constants" type="com.vypersw.finances.client.i18n.FinancesConstants"/>
     <g:HTMLPanel ui:field="main">
+        <widget:Toolbar ui:field="toolbar"/>
         <b.html:Div>
             <b.gwt:DataGrid bordered="true" condensed="true" striped="true" hover="true" height="300px" width="100%" ui:field="dataGrid"/>
             <b:Pagination ui:field="pagination"/>

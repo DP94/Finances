@@ -1,6 +1,6 @@
 package com.vypersw.finances.client.accountmanagement.accountmanagementlist;
 
-import com.vypersw.finances.client.abstractpresenter.lists.AbstractDataProvider;
+import com.vypersw.finances.client.lists.AbstractDataProvider;
 import com.vypersw.finances.dto.TransactionDTO;
 
 public class TransactionDataProvider extends AbstractDataProvider<TransactionDTO> {

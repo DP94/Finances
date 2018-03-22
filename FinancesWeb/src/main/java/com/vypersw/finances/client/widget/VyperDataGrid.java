@@ -11,7 +11,7 @@ import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
-import com.vypersw.finances.client.abstractpresenter.lists.AbstractDataProvider;
+import com.vypersw.finances.client.lists.AbstractDataProvider;
 import com.vypersw.finances.dto.VyperDTO;
 import org.gwtbootstrap3.client.ui.Pagination;
 import org.gwtbootstrap3.client.ui.gwt.DataGrid;
@@ -24,6 +24,9 @@ public class VyperDataGrid<T extends VyperDTO> extends Composite implements Grid
 
     @UiField
     DataGrid<T> dataGrid = new DataGrid<>(10);
+
+    @UiField
+    Toolbar toolbar;
 
     @UiField
     Pagination pagination;
@@ -82,5 +85,9 @@ public class VyperDataGrid<T extends VyperDTO> extends Composite implements Grid
 
     public Pagination getPagination() {
         return pagination;
+    }
+
+    public Toolbar getToolbar() {
+        return toolbar;
     }
 }

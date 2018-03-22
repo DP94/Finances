@@ -1,4 +1,4 @@
-package com.vypersw.finances.client.abstractpresenter.lists;
+package com.vypersw.finances.client.lists;
 
 import com.google.gwt.view.client.ListDataProvider;
 import com.vypersw.finances.dto.VyperDTO;

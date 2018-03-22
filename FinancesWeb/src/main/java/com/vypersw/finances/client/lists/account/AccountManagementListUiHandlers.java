@@ -1,4 +1,4 @@
-package com.vypersw.finances.client.accountmanagement.accountmanagementlist;
+package com.vypersw.finances.client.lists.account;
 
 import com.gwtplatform.mvp.client.UiHandlers;
 
