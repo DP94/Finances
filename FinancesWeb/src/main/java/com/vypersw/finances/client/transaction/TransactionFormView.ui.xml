@@ -8,46 +8,51 @@
     <ui:with field="constants" type="com.vypersw.finances.client.i18n.FinancesConstants"/>
     <g:HTMLPanel ui:field="main" addStyleNames="finances-form">
         <widget:Toolbar ui:field="toolbar"/>
-        <b:Form type="HORIZONTAL">
-            <b:FieldSet>
-                <b:FormGroup ui:field="accountGroup">
-                    <b:FormLabel for="formAccount" text="{constants.account}" addStyleNames="col-md-4"/>
-                    <g:FlowPanel addStyleNames="col-md-8">
-                        <b:ListBox ui:field="account" b:id="formAccount"/>
-                    </g:FlowPanel>
-                </b:FormGroup>
-                <b:FormGroup>
-                    <b:FormLabel for="formTransactionType" text="{constants.transaction}" addStyleNames="col-md-4"/>
-                    <g:FlowPanel addStyleNames="col-md-8">
-                        <b:ListBox ui:field="transactionType" b:id="formTransactionType" addStyleNames="col-md-8"/>
-                    </g:FlowPanel>
-                </b:FormGroup>
-                <b:FormGroup>
-                    <b:FormLabel for="formAmount" text="{constants.amount}" addStyleNames="col-md-4"/>
-                    <g:FlowPanel addStyleNames="col-md-8">
-                        <b:TextBox ui:field="amount" b:id="formAmount" addStyleNames="col-md-8"/>
-                    </g:FlowPanel>
-                </b:FormGroup>
-                <b:FormGroup>
-                    <b:FormLabel for="formDescription" text="{constants.description}" addStyleNames="col-md-4"/>
-                    <g:FlowPanel addStyleNames="col-md-8">
-                        <b:TextBox ui:field="description" b:id="formDescription" addStyleNames="col-md-8"/>
-                    </g:FlowPanel>
-                </b:FormGroup>
-                <b:FormGroup>
-                    <b:FormLabel for="formAdvanced" text="{constants.advanced}" addStyleNames="col-md-4"/>
-                    <g:FlowPanel addStyleNames="col-md-8">
-                        <b:CheckBox ui:field="advanced" b:id="formAdvanced" addStyleNames="col-md-8"/>
-                    </g:FlowPanel>
-                </b:FormGroup>
-                <b:FormGroup ui:field="dateGroup" visible="false">
-                    <b:FormLabel for="formDate" text="{constants.date}" addStyleNames="col-md-4"/>
-                    <g:FlowPanel addStyleNames="col-md-8">
-                        <datepicker:DatePicker highlightToday="true" autoClose="true" allowBlank="false" ui:field="date"
-                                               b:id="formDate"/>
-                    </g:FlowPanel>
-                </b:FormGroup>
-            </b:FieldSet>
-        </b:Form>
+        <b:html.Div addStyleNames="transaction-container">
+            <b:Form type="HORIZONTAL">
+                <b:FieldSet>
+                    <b:FormGroup ui:field="accountGroup">
+                        <b:FormLabel for="formAccount" text="{constants.account}" addStyleNames="col-md-4"/>
+                        <g:FlowPanel addStyleNames="col-md-8">
+                            <b:ListBox ui:field="account" b:id="formAccount"/>
+                        </g:FlowPanel>
+                    </b:FormGroup>
+                    <b:FormGroup>
+                        <b:FormLabel for="formTransactionType" text="{constants.transaction}" addStyleNames="col-md-4"/>
+                        <g:FlowPanel addStyleNames="col-md-8">
+                            <b:ListBox ui:field="transactionType" b:id="formTransactionType" addStyleNames="col-md-8"/>
+                        </g:FlowPanel>
+                    </b:FormGroup>
+                    <b:FormGroup>
+                        <b:FormLabel for="formAmount" text="{constants.amount}" addStyleNames="col-md-4"/>
+                        <g:FlowPanel addStyleNames="col-md-8">
+                            <b:TextBox ui:field="amount" b:id="formAmount" addStyleNames="col-md-8"/>
+                        </g:FlowPanel>
+                    </b:FormGroup>
+                    <b:FormGroup>
+                        <b:FormLabel for="formDescription" text="{constants.description}" addStyleNames="col-md-4"/>
+                        <g:FlowPanel addStyleNames="col-md-8">
+                            <b:TextBox ui:field="description" b:id="formDescription" addStyleNames="col-md-8"/>
+                        </g:FlowPanel>
+                    </b:FormGroup>
+                    <b:FormGroup>
+                        <b:FormLabel for="formAdvanced" text="{constants.advanced}" addStyleNames="col-md-4"/>
+                        <g:FlowPanel addStyleNames="col-md-8">
+                            <b:CheckBox ui:field="advanced" b:id="formAdvanced" addStyleNames="col-md-8"/>
+                        </g:FlowPanel>
+                    </b:FormGroup>
+                    <b:FormGroup ui:field="dateGroup" visible="false">
+                        <b:FormLabel for="formDate" text="{constants.date}" addStyleNames="col-md-4"/>
+                        <g:FlowPanel addStyleNames="col-md-8">
+                            <datepicker:DatePicker highlightToday="true" autoClose="true" allowBlank="false"
+                                                   ui:field="date"
+                                                   b:id="formDate"/>
+                        </g:FlowPanel>
+                    </b:FormGroup>
+                </b:FieldSet>
+            </b:Form>
+            <g:Tree ui:field="categoryTree">
+            </g:Tree>
+        </b:html.Div>
     </g:HTMLPanel>
 </ui:UiBinder>

@@ -2,10 +2,13 @@ package com.vypersw.finances.client.transaction;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Tree;
+import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.vypersw.finances.client.widget.Toolbar;
 import com.vypersw.finances.client.widget.ToolbarButtonClickedEvent;
+import com.vypersw.finances.dto.CategoryDTO;
 import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.enumeration.TransactionType;
 import org.gwtbootstrap3.client.ui.CheckBox;
@@ -17,6 +20,7 @@ import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
 import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHandlers> implements TransactionFormPresenter.MyView, ToolbarButtonClickedEvent.ToolbarButtonClickedHandler {
 
@@ -46,6 +50,9 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
 
     @UiField
     FormGroup dateGroup;
+
+    @UiField
+    Tree categoryTree;
 
     @Inject
     public TransactionFormView(Binder uiBinder) {
@@ -81,6 +88,20 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
         description.setText("");
         account.setSelectedIndex(0);
         transactionType.setSelectedIndex(0);
+    }
+
+    @Override
+    public void buildCategoriesTree(Set<CategoryDTO> categoryDTOSet) {
+        for (CategoryDTO categoryDTO : categoryDTOSet) {
+            TreeItem treeItem = new TreeItem();
+            treeItem.setText(categoryDTO.getName());
+            for (CategoryDTO child : categoryDTO.getChildCategories()) {
+                TreeItem treeItem1 = new TreeItem();
+                treeItem1.setText(child.getName());
+                treeItem.addItem(treeItem1);
+            }
+            categoryTree.addItem(treeItem);
+        }
     }
 
     @Override

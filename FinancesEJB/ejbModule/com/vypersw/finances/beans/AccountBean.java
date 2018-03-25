@@ -2,7 +2,9 @@ package com.vypersw.finances.beans;
 
 import com.vypersw.finances.abstractbean.AbstractBean;
 import com.vypersw.finances.account.Account;
+import com.vypersw.finances.account.Category;
 import com.vypersw.finances.account.Transaction;
+import com.vypersw.finances.dto.CategoryDTO;
 import com.vypersw.finances.dto.TransactionDTO;
 import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.enumeration.AccountType;
@@ -38,12 +40,14 @@ public class AccountBean extends AbstractBean implements AccountService {
             TransactionDTO transactionDTO = new TransactionDTO();
             transactionDTO.setId(transaction.getId());
             transactionDTO.setAmount(transaction.getAmount());
-            transactionDTO.setCategoryId(transaction.getCategoryId());
+            transactionDTO.setCategoryId(transaction.getCategory().getId());
             transactionDTO.setDescription(transaction.getDescription());
             transactionDTO.setTransactionType(TransactionType.forValue(transaction.getTransactionType()));
             transactionDTO.setAccountDTO(dto);
             transactionDTO.setDate(transaction.getDate());
             dto.getTransactions().add(transactionDTO);
+            transactionDTO.setCategoryDTO(getCategoryDTO(transaction.getCategory()));
+
         }
         return dto;
     }
@@ -68,12 +72,13 @@ public class AccountBean extends AbstractBean implements AccountService {
                 TransactionDTO transactionDTO = new TransactionDTO();
                 transactionDTO.setId(transaction.getId());
                 transactionDTO.setAmount(transactionDTO.getAmount());
-                transactionDTO.setCategoryId(transaction.getCategoryId());
+                transactionDTO.setCategoryId(transaction.getCategory().getId());
                 transactionDTO.setDescription(transaction.getDescription());
                 transactionDTO.setTransactionType(TransactionType.forValue(transaction.getTransactionType()));
                 transactionDTO.setAccountDTO(dto);
                 transactionDTO.setDate(transaction.getDate());
                 dto.getTransactions().add(transactionDTO);
+                transactionDTO.setCategoryDTO(getCategoryDTO(transaction.getCategory()));
             }
         }
         return accountDTOS;
@@ -114,5 +119,19 @@ public class AccountBean extends AbstractBean implements AccountService {
 
         entityManager.persist(account);
         return account.getAccountId();
+    }
+
+    private CategoryDTO getCategoryDTO(Category category) {
+        CategoryDTO categoryDTO = new CategoryDTO();
+        categoryDTO.setId(category.getId());
+        categoryDTO.setName(category.getName());
+        if (category.getParentCategory() != null) {
+            categoryDTO.setParentCategory(category.getParentCategory().getId());
+        }
+
+        for (Category child : category.getChildCategories()) {
+            categoryDTO.getChildCategories().add(getCategoryDTO(child));
+        }
+        return categoryDTO;
     }
 }

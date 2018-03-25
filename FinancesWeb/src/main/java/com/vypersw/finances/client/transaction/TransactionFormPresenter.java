@@ -7,17 +7,29 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.View;
 import com.vypersw.finances.client.abstractpresenter.VyperFormPresenter;
 import com.vypersw.finances.client.actions.AccountAction;
+import com.vypersw.finances.client.actions.GetCategoriesAction;
 import com.vypersw.finances.client.actions.TransactionAction;
 import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.client.results.AccountActionResult;
+import com.vypersw.finances.client.results.GetCategoriesResult;
 import com.vypersw.finances.client.results.TransactionResult;
+import com.vypersw.finances.dto.CategoryDTO;
 import com.vypersw.finances.dto.TransactionDTO;
 import com.vypersw.finances.dto.user.AccountDTO;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Set;
 
 public class TransactionFormPresenter extends VyperFormPresenter<TransactionFormPresenter.MyView, TransactionDTO> implements TransactionFormUiHandlers {
+
+    public interface MyView extends View, HasUiHandlers<TransactionFormUiHandlers> {
+        void setViewData(List<AccountDTO> accountDTOList);
+
+        void clearView();
+
+        void buildCategoriesTree(Set<CategoryDTO> categoryDTOSet);
+    }
 
     @Inject
     public TransactionFormPresenter(EventBus eventBus, DispatchAsync dispatchAsync, MyView view, ApplicationPresenter container) {
@@ -50,12 +62,6 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
         getView().clearView();
     }
 
-    public interface MyView extends View, HasUiHandlers<TransactionFormUiHandlers> {
-        void setViewData(List<AccountDTO> accountDTOList);
-
-        void clearView();
-    }
-
     @Override
     public void setFormData(TransactionDTO data) {
 
@@ -81,6 +87,19 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
             @Override
             public void onSuccess(AccountActionResult result) {
                 getView().setViewData(result.getAccounts());
+            }
+        });
+        dispatchAsync.execute(new GetCategoriesAction(), new AsyncCallback<GetCategoriesResult>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                setLoading(false);
+                getContentContainerPresenter().warn(caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(GetCategoriesResult result) {
+                setLoading(false);
+                getView().buildCategoriesTree(result.getCategoryDTOS());
             }
         });
     }

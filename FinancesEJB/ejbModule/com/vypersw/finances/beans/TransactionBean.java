@@ -2,10 +2,12 @@ package com.vypersw.finances.beans;
 
 import com.vypersw.finances.abstractbean.AbstractBean;
 import com.vypersw.finances.account.Account;
+import com.vypersw.finances.account.Category;
 import com.vypersw.finances.account.Transaction;
 import com.vypersw.finances.dto.TransactionDTO;
 import com.vypersw.finances.enumeration.TransactionType;
 import com.vypersw.finances.jpahelpers.AccountJPAHelper;
+import com.vypersw.finances.jpahelpers.CategoryJPAHelper;
 import com.vypersw.finances.jpahelpers.TransactionJPAHelper;
 import com.vypersw.finances.services.TransactionService;
 
@@ -32,7 +34,9 @@ public class TransactionBean extends AbstractBean implements TransactionService 
         Transaction transaction = new Transaction();
         transaction.setAccount(account);
         transaction.setAmount(transactionDTO.getAmount());
-        transaction.setCategoryId(new Long(1));
+        CategoryJPAHelper categoryJPAHelper = new CategoryJPAHelper(entityManager);
+        Category category = categoryJPAHelper.findById(Category.class, 1L);
+        transaction.setCategory(category);
         if (transactionDTO.getDate() == null) {
             transaction.setDate(new Date());
         } else {

@@ -1,13 +1,7 @@
 package com.vypersw.finances.login.bean;
 
-import com.vypersw.finances.beans.AccountBean;
-import com.vypersw.finances.beans.LoginBean;
-import com.vypersw.finances.beans.TransactionBean;
-import com.vypersw.finances.beans.UserBean;
-import com.vypersw.finances.services.AccountService;
-import com.vypersw.finances.services.LoginService;
-import com.vypersw.finances.services.TransactionService;
-import com.vypersw.finances.services.UserService;
+import com.vypersw.finances.beans.*;
+import com.vypersw.finances.services.*;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -66,5 +60,9 @@ public class LocalEJBServiceLocator {
     public TransactionService getTransactionService() {
         return (TransactionService) lookup(TransactionBean.class.getSimpleName(), TransactionService.class.getName());
     }
+
+	public CategoryService getCategoryService() {
+		return (CategoryService) lookup(CategoryBean.class.getSimpleName(), CategoryService.class.getName());
+	}
 
 }

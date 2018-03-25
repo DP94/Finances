@@ -24,8 +24,9 @@ public class Transaction implements VyperJPA {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @Column(name = "CATEGORY_ID")
-    private Long categoryId;
+    @OneToOne
+    @JoinColumn(name = "CATEGORY_ID")
+    private Category category;
 
     @Column(name = "TRANSACTION_TYPE")
     private Integer transactionType;
@@ -70,12 +71,12 @@ public class Transaction implements VyperJPA {
         this.description = description;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Integer getTransactionType() {

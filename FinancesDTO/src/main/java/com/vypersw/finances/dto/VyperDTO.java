@@ -1,5 +1,7 @@
 package com.vypersw.finances.dto;
 
-public class VyperDTO {
+import java.io.Serializable;
+
+public class VyperDTO implements Serializable {
 
 }

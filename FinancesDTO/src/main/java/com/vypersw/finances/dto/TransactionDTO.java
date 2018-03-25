@@ -15,6 +15,7 @@ public class TransactionDTO extends VyperDTO implements Serializable {
     private Long categoryId;
     private TransactionType transactionType;
     private Date date;
+    private CategoryDTO categoryDTO;
 
     public TransactionDTO() {
     }
@@ -73,5 +74,13 @@ public class TransactionDTO extends VyperDTO implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public CategoryDTO getCategoryDTO() {
+        return categoryDTO;
+    }
+
+    public void setCategoryDTO(CategoryDTO categoryDTO) {
+        this.categoryDTO = categoryDTO;
     }
 }
