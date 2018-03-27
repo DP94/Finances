@@ -2,8 +2,8 @@ package com.vypersw.finances.services;
 
 import com.vypersw.finances.dto.CategoryDTO;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public interface CategoryService {
-    HashSet<CategoryDTO> getAllCategories();
+    ArrayList<CategoryDTO> getAllCategories();
 }

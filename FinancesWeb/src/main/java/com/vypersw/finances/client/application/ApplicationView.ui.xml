@@ -3,7 +3,7 @@
 			 xmlns:widget="urn:import:com.vypersw.finances.client.widget"
 >
               <ui:with field="constants" type="com.vypersw.finances.client.i18n.FinancesConstants"/>
-    <g:HTMLPanel ui:field="main">
+    <g:HTMLPanel ui:field="main" addStyleNames="max-height">
 	    <g:HTMLPanel ui:field="navHeader">
 	    	<div class="nav-header-app">
 	    		<div class="nav-header-content">
@@ -15,7 +15,7 @@
 		    	</div>
 	    	</div>
 	    </g:HTMLPanel>
-    	<g:HTMLPanel ui:field="contentPanel" styleName="content-panel">
+        <g:HTMLPanel ui:field="contentPanel" addStyleNames="max-height content-panel">
     	</g:HTMLPanel>
     </g:HTMLPanel>
 </ui:UiBinder>

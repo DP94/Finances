@@ -5,15 +5,27 @@
 	margin: 0px;
 }
 
+html, body {
+	height: 100%;
+	overflow: hidden;
+}
+
+body > div {
+	height: 100%;
+}
+
+.max-height {
+	height: 100%;
+}
+
 .perspective-content {
 	background: white;
-    height: 600px;
 }
 
 .perspective-content-topbar {
 	color: white;
 	background: #0060b1;
-    height: 10%;
+	max-height: 40px;
     border-bottom: 3px solid #727272;
 }
 
@@ -23,7 +35,7 @@
     color: white;
     outline: none;
     float: right;
-    padding: 10px;
+	padding: 5px;
 }
 
 .perspective-content-main {
@@ -31,7 +43,7 @@
 }
 
 .perspective-content-close {
-	font-size: 32px;
+	font-size: 24px;
 }
 
 .content {
@@ -41,12 +53,12 @@
 
 .perspective-content-bar-content {
 	font-size: 24px;
+	text-align: center;
 }
 
 
 .content-title {
-	position: relative;
-    left: 42%;
+	padding: 1px;
 }
 
 .nav-tabs-container-div {

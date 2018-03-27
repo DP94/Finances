@@ -10,6 +10,7 @@ import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.vypersw.finances.client.lists.AbstractDataProvider;
 import com.vypersw.finances.dto.VyperDTO;
@@ -30,6 +31,10 @@ public class VyperDataGrid<T extends VyperDTO> extends Composite implements Grid
 
     @UiField
     Pagination pagination;
+
+    @UiField
+    DockLayoutPanel outerDock;
+
 
     private SimplePager simplePager = new SimplePager();
     private AbstractDataProvider<T> abstractDataProvider;

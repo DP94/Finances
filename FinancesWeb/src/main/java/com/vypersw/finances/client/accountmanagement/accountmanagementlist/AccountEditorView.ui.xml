@@ -6,15 +6,15 @@
              xmlns:b.html="urn:import:org.gwtbootstrap3.client.ui.html"
 >
     <ui:with field="constants" type="com.vypersw.finances.client.i18n.FinancesConstants"/>
-    <g:HTMLPanel ui:field="main">
+    <g:HTMLPanel ui:field="main" addStyleNames="max-height">
         <widget:Toolbar ui:field="toolbar"/>
-        <div class="nav-tabs-container-div">
+        <div class="nav-tabs-container-div max-height">
             <b:NavTabs>
                 <b:TabListItem active="true" dataTarget="#modify" text="{constants.modify}"
                                ui:field="modifyTab"/>
                 <b:TabListItem dataTarget="#transactions" text="{constants.transactions}" ui:field="transactionsTab"/>
             </b:NavTabs>
-            <b:TabContent>
+            <b:TabContent addStyleNames="max-height">
                 <b:TabPane b:id="modify" active="true" addStyleNames="finances-form">
                     <b:Form type="HORIZONTAL">
                         <b:FieldSet>
@@ -55,8 +55,8 @@
                         </b:FieldSet>
                     </b:Form>
                 </b:TabPane>
-                <b:TabPane b:id="transactions">
-                    <b.html:Div addStyleNames="col-md-12 transactions-grid-container">
+                <b:TabPane b:id="transactions" addStyleNames="max-height">
+                    <b.html:Div addStyleNames="col-md-12 transactions-grid-container max-height">
                         <widget:VyperDataGrid ui:field="transactionsGrid"/>
                     </b.html:Div>
                 </b:TabPane>

@@ -19,7 +19,6 @@ import com.vypersw.finances.dto.user.AccountDTO;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.Set;
 
 public class TransactionFormPresenter extends VyperFormPresenter<TransactionFormPresenter.MyView, TransactionDTO> implements TransactionFormUiHandlers {
 
@@ -28,7 +27,7 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
 
         void clearView();
 
-        void buildCategoriesTree(Set<CategoryDTO> categoryDTOSet);
+        void buildCategoriesTree(List<CategoryDTO> categoryDTOSet);
     }
 
     @Inject

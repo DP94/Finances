@@ -6,11 +6,21 @@
              xmlns:widget="urn:import:com.vypersw.finances.client.widget"
              xmlns:b.gwt="urn:import:org.gwtbootstrap3.client.ui.gwt">
     <ui:with field="constants" type="com.vypersw.finances.client.i18n.FinancesConstants"/>
-    <g:HTMLPanel ui:field="main">
-        <widget:Toolbar ui:field="toolbar"/>
-        <b.html:Div>
-            <b.gwt:DataGrid bordered="true" condensed="true" striped="true" hover="true" height="300px" width="100%" ui:field="dataGrid"/>
-            <b:Pagination ui:field="pagination"/>
-        </b.html:Div>
-    </g:HTMLPanel>
+    <b.html:Div addStyleNames="max-height">
+        <g:DockLayoutPanel unit='PX' ui:field="outerDock" addStyleNames="max-height">
+            <g:north size="28">
+                <widget:Toolbar ui:field="toolbar"/>
+            </g:north>
+            <g:center>
+                <b.html:Div addStyleNames="max-height">
+                    <b.gwt:DataGrid bordered="true" condensed="true" striped="true" hover="true" ui:field="dataGrid"
+                                    addStyleNames="max-height"/>
+
+                </b.html:Div>
+            </g:center>
+            <g:south size="28">
+                <b:Pagination ui:field="pagination" addStyleNames="max-height"/>
+            </g:south>
+        </g:DockLayoutPanel>
+    </b.html:Div>
 </ui:UiBinder>

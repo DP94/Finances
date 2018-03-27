@@ -20,7 +20,6 @@ import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
 import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 
 public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHandlers> implements TransactionFormPresenter.MyView, ToolbarButtonClickedEvent.ToolbarButtonClickedHandler {
 
@@ -91,7 +90,7 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
     }
 
     @Override
-    public void buildCategoriesTree(Set<CategoryDTO> categoryDTOSet) {
+    public void buildCategoriesTree(List<CategoryDTO> categoryDTOSet) {
         for (CategoryDTO categoryDTO : categoryDTOSet) {
             TreeItem treeItem = new TreeItem();
             treeItem.setText(categoryDTO.getName());

@@ -2,19 +2,19 @@ package com.vypersw.finances.client.results;
 
 import com.vypersw.finances.dto.CategoryDTO;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class GetCategoriesResult extends VyperActionResult {
-    private HashSet<CategoryDTO> categoryDTOS;
+    private ArrayList<CategoryDTO> categoryDTOS;
 
     public GetCategoriesResult() {
     }
 
-    public HashSet<CategoryDTO> getCategoryDTOS() {
+    public ArrayList<CategoryDTO> getCategoryDTOS() {
         return categoryDTOS;
     }
 
-    public void setCategoryDTOS(HashSet<CategoryDTO> categoryDTOS) {
+    public void setCategoryDTOS(ArrayList<CategoryDTO> categoryDTOS) {
         this.categoryDTOS = categoryDTOS;
     }
 }

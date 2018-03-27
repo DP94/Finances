@@ -8,7 +8,7 @@ import com.vypersw.finances.services.CategoryService;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
@@ -16,11 +16,11 @@ import java.util.List;
 public class CategoryBean extends AbstractBean implements CategoryService {
 
     @Override
-    public HashSet<CategoryDTO> getAllCategories() {
+    public ArrayList<CategoryDTO> getAllCategories() {
         CategoryJPAHelper categoryJPAHelper = new CategoryJPAHelper(entityManager);
         List<Category> categoryList = categoryJPAHelper.getAll(Category.class);
         categoryList.removeIf(s -> s.getParentCategory() != null);
-        HashSet<CategoryDTO> categories = new HashSet<>();
+        ArrayList<CategoryDTO> categories = new ArrayList<>();
         for (Category category : categoryList) {
             categories.add(getCategoryDTO(category));
         }
