@@ -44,13 +44,13 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
             @Override
             public void onFailure(Throwable caught) {
                 setLoading(false);
-                getContentContainerPresenter().warn(caught.getMessage());
+                getContentContainerPresenter().getContainer().warn(caught.getMessage());
             }
 
             @Override
             public void onSuccess(TransactionResult result) {
                 setLoading(false);
-                getContentContainerPresenter().success("Transaction created successfully");
+                getContentContainerPresenter().getContainer().success("Transaction created successfully");
                 getView().clearView();
             }
         });
@@ -80,7 +80,7 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
         dispatchAsync.execute(accountAction, new AsyncCallback<AccountActionResult>() {
             @Override
             public void onFailure(Throwable caught) {
-                getContentContainerPresenter().warn(caught.getMessage());
+                getContentContainerPresenter().getContainer().warn(caught.getMessage());
             }
 
             @Override
@@ -92,7 +92,7 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
             @Override
             public void onFailure(Throwable caught) {
                 setLoading(false);
-                getContentContainerPresenter().warn(caught.getMessage());
+                getContentContainerPresenter().getContainer().warn(caught.getMessage());
             }
 
             @Override

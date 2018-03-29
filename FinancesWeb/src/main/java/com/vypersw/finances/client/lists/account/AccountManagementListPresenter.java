@@ -52,7 +52,7 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountDT
 			@Override
 			public void onFailure(Throwable throwable) {
 				setLoading(false);
-				getContentContainerPresenter().warn(throwable.getMessage());
+                getContentContainerPresenter().getContainer().warn(throwable.getMessage());
 			}
 
 			@Override

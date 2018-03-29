@@ -57,7 +57,7 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
                 @Override
                 public void onFailure(Throwable caught) {
                     setLoading(false);
-                    getContentContainerPresenter().warn(caught.getMessage());
+                    getContentContainerPresenter().getContainer().warn(caught.getMessage());
                 }
 
                 @Override
@@ -93,7 +93,7 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
             @Override
             public void onFailure(Throwable caught) {
                 setLoading(false);
-                getContentContainerPresenter().warn(caught.getMessage());
+                getContentContainerPresenter().getContainer().warn(caught.getMessage());
             }
 
             @Override
@@ -102,7 +102,7 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
                 setFormState(FormState.MODIFY);
                 setData(result.getAccountDTO());
                 getView().setViewData(result.getAccountDTO());
-                getContentContainerPresenter().success("Save successful");
+                getContentContainerPresenter().getContainer().success("Save successful");
                 getView().setFormState(getFormState());
                 accountId = result.getAccountDTO().getAccountId();
             }

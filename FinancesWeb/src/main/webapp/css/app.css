@@ -66,7 +66,6 @@ body > div {
 }
 
 .finances-form {
-	width: 40%;
 	padding: 1%;
 }
 
@@ -95,4 +94,8 @@ body > div {
 @keyframes spin {
 	0% { transform: rotate(0deg); }
 	100% { transform: rotate(360deg); }
+}
+
+.alert {
+	height: 50px !important;
 }

@@ -24,7 +24,7 @@ public class Transaction implements VyperJPA {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 

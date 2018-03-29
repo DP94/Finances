@@ -104,57 +104,11 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 		}
 	}
 
-	public native void success(String message) /*-{
-        var notify = $wnd.$.notify({
-            message: message
-        }, {
-            // settings
-            element: 'body',
-            position: null,
-            type: "success",
-            allow_dismiss: true,
-            newest_on_top: false,
-            showProgressbar: false,
-            placement: {
-                from: "top",
-                align: "center"
-            },
-            offset: 20,
-            spacing: 10,
-            z_index: 1031,
-            delay: 3000,
-            url_target: '_blank',
-            mouse_over: null,
-            animate: {
-                enter: 'animated fadeInDown'
-            }
-        });
-    }-*/;
+    public ApplicationPresenter getContainer() {
+        return container;
+    }
 
-	public native void warn(String message) /*-{
-        var notify = $wnd.$.notify({
-            message: message
-        }, {
-            // settings
-            element: 'body',
-            position: null,
-            type: "info",
-            allow_dismiss: true,
-            newest_on_top: false,
-            showProgressbar: false,
-            placement: {
-                from: "top",
-                align: "center"
-            },
-            offset: 20,
-            spacing: 10,
-            z_index: 1031,
-            delay: 3000,
-            url_target: '_blank',
-            mouse_over: null,
-            animate: {
-                enter: 'animated fadeInDown'
-            }
-        });
-    }-*/;
+    public void setContainer(ApplicationPresenter container) {
+        this.container = container;
+    }
 }

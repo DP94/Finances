@@ -44,7 +44,7 @@ public class UserManagementFormPresenter extends VyperFormPresenter<UserManageme
 			public void onSuccess(UserActionResult result) {
 				setLoading(false);
 				setData(result.getDto());
-				getContentContainerPresenter().success("Save successful");
+                getContentContainerPresenter().getContainer().success("Save successful");
 			}
 		});
 	}

@@ -11,8 +11,6 @@ import com.vypersw.finances.client.widget.ToolbarButtonClickedEvent;
 import com.vypersw.finances.dto.CategoryDTO;
 import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.enumeration.TransactionType;
-import org.gwtbootstrap3.client.ui.CheckBox;
-import org.gwtbootstrap3.client.ui.FormGroup;
 import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
@@ -42,13 +40,7 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
     Toolbar toolbar;
 
     @UiField
-    CheckBox advanced;
-
-    @UiField
     DatePicker date;
-
-    @UiField
-    FormGroup dateGroup;
 
     @UiField
     Tree categoryTree;
@@ -66,7 +58,6 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
         description.addValueChangeHandler(event -> getUiHandlers().getData().setDescription(description.getValue()));
         toolbar.addToolbarButtonClickedHandler(this);
         date.addChangeDateHandler(changeDateEvent -> getUiHandlers().getData().setDate(date.getValue()));
-        advanced.addChangeHandler(changeEvent -> dateGroup.setVisible(advanced.getValue()));
     }
 
     @Override
@@ -85,8 +76,6 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
     public void clearView() {
         amount.setText("");
         description.setText("");
-        account.setSelectedIndex(0);
-        transactionType.setSelectedIndex(0);
     }
 
     @Override
