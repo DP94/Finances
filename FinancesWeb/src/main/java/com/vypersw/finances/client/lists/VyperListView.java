@@ -28,6 +28,7 @@ public abstract class VyperListView<T extends VyperDTO, H extends UiHandlers, D 
         vyperDataGrid.addGridDoubleClickEventHandlers(this);
         vyperDataGrid.buildTable();
         vyperDataGrid.getToolbar().addToolbarButtonClickedHandler(this);
+
     }
 
     @Override

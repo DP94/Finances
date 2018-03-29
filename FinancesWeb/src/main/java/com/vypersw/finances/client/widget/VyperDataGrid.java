@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.vypersw.finances.client.lists.AbstractDataProvider;
 import com.vypersw.finances.dto.VyperDTO;
 import org.gwtbootstrap3.client.ui.Pagination;
+import org.gwtbootstrap3.client.ui.constants.PaginationSize;
 import org.gwtbootstrap3.client.ui.gwt.DataGrid;
 
 public class VyperDataGrid<T extends VyperDTO> extends Composite implements GridDoubleClickEvent.HasGridDoubleClickEventHandlers {
@@ -23,8 +24,8 @@ public class VyperDataGrid<T extends VyperDTO> extends Composite implements Grid
     interface Binder extends UiBinder<Widget, VyperDataGrid> {}
 
 
-    @UiField
-    DataGrid<T> dataGrid = new DataGrid<>(10);
+    @UiField(provided = true)
+    DataGrid<T> dataGrid = new DataGrid<>(20);
 
     @UiField
     Toolbar toolbar;
@@ -36,6 +37,8 @@ public class VyperDataGrid<T extends VyperDTO> extends Composite implements Grid
     DockLayoutPanel outerDock;
 
 
+
+
     private SimplePager simplePager = new SimplePager();
     private AbstractDataProvider<T> abstractDataProvider;
 
@@ -44,6 +47,7 @@ public class VyperDataGrid<T extends VyperDTO> extends Composite implements Grid
     }
 
     public void buildTable() {
+        pagination.setPaginationSize(PaginationSize.SMALL);
         int columnCount = abstractDataProvider.getColumnCount();
         final Column<T, Boolean> checkbox = new Column<T, Boolean>(new CheckboxCell()) {
             @Override

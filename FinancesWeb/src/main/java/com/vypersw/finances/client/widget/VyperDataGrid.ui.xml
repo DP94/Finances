@@ -8,19 +8,22 @@
     <ui:with field="constants" type="com.vypersw.finances.client.i18n.FinancesConstants"/>
     <b.html:Div addStyleNames="max-height">
         <g:DockLayoutPanel unit='PX' ui:field="outerDock" addStyleNames="max-height">
-            <g:north size="28">
-                <widget:Toolbar ui:field="toolbar"/>
-            </g:north>
             <g:center>
-                <b.html:Div addStyleNames="max-height">
-                    <b.gwt:DataGrid bordered="true" condensed="true" striped="true" hover="true" ui:field="dataGrid"
-                                    addStyleNames="max-height"/>
+                <g:DockLayoutPanel ui:field="innerDock" addStyleNames="max-height">
+                    <g:north size="28">
+                        <widget:Toolbar ui:field="toolbar"/>
+                    </g:north>
+                    <g:center>
+                        <b.html:Div addStyleNames="max-height">
+                            <b.gwt:DataGrid bordered="true" condensed="true" striped="true" hover="true" ui:field="dataGrid" addStyleNames="max-height"/>
 
-                </b.html:Div>
+                        </b.html:Div>
+                    </g:center>
+                    <g:south size="200">
+                        <b:Pagination ui:field="pagination" addStyleNames="max-height"/>
+                    </g:south>
+                </g:DockLayoutPanel>
             </g:center>
-            <g:south size="28">
-                <b:Pagination ui:field="pagination" addStyleNames="max-height"/>
-            </g:south>
         </g:DockLayoutPanel>
     </b.html:Div>
 </ui:UiBinder>
