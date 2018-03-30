@@ -35,6 +35,7 @@
                                 <b:FormLabel for="formAmount" text="{constants.amount}" addStyleNames="col-md-2"/>
                                 <g:FlowPanel addStyleNames="col-md-6">
                                     <b:TextBox ui:field="amount" b:id="formAmount" addStyleNames="col-md-6"/>
+                                    <b:Label ui:field="amountLabel"/>
                                 </g:FlowPanel>
                                 <b:html.Div addStyleNames="col-md-4"/>
                             </b:FormGroup>

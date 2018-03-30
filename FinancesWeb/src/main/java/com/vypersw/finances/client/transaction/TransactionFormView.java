@@ -12,13 +12,16 @@ import com.vypersw.finances.dto.CategoryDTO;
 import com.vypersw.finances.dto.TransactionDTO;
 import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.enumeration.TransactionType;
+import org.gwtbootstrap3.client.ui.Label;
 import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHandlers> implements TransactionFormPresenter.MyView, ToolbarButtonClickedEvent.ToolbarButtonClickedHandler {
 
@@ -46,6 +49,11 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
     @UiField
     Tree categoryTree;
 
+    @UiField
+    Label amountLabel;
+
+    private Map<Long, AccountDTO> accountDTOMap = new HashMap<>();
+
     @Inject
     public TransactionFormView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
@@ -55,7 +63,15 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
             getUiHandlers().getData().setAccountDTO(accountDTO);
         });
         transactionType.addChangeHandler(changeEvent -> getUiHandlers().getData().setTransactionType(TransactionType.valueOf(transactionType.getSelectedValue())));
-        amount.addValueChangeHandler(valueChangeHandler -> getUiHandlers().getData().setAmount(new BigDecimal(amount.getValue())));
+        amount.addValueChangeHandler(valueChangeHandler -> {
+            getUiHandlers().getData().setAmount(new BigDecimal(amount.getValue()));
+            Long accountId = Long.valueOf(account.getSelectedValue());
+            if (transactionType.getSelectedValue().equals(String.valueOf(TransactionType.EXPENSE.name()))) {
+                amountLabel.setText("The account's balance after this expense will be: " + (accountDTOMap.get(accountId).getBalance().doubleValue() - (new BigDecimal(amount.getText()).doubleValue())));
+            } else {
+                amountLabel.setText("The account's balance after this income will be: " + (accountDTOMap.get(accountId).getBalance().doubleValue() + (new BigDecimal(amount.getText()).doubleValue())));
+            }
+        });
         description.addValueChangeHandler(event -> getUiHandlers().getData().setDescription(description.getValue()));
         toolbar.addToolbarButtonClickedHandler(this);
         date.addChangeDateHandler(changeDateEvent -> getUiHandlers().getData().setDate(date.getValue()));
@@ -68,6 +84,7 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
         account.addItem("", "0");
         for (AccountDTO accountDTO : accountDTOList) {
             account.addItem(accountDTO.getName(), String.valueOf(accountDTO.getAccountId()));
+            accountDTOMap.put(accountDTO.getAccountId(), accountDTO);
         }
         for (TransactionType type : TransactionType.values()) {
             transactionType.addItem(type.name());
