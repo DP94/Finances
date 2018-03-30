@@ -6,7 +6,7 @@ import java.util.Map;
 
 public enum AccountType implements Serializable {
 
-	SAVINGS(1), ISA(2);
+    SAVINGS(1), ISA(2), CURRENT_ACCOUNT(3);
 
 	private static final Map<Integer, AccountType> values = new HashMap<>();
 

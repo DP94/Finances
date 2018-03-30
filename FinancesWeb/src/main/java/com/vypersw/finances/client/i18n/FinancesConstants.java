@@ -85,6 +85,9 @@ public interface FinancesConstants extends ConstantsWithLookup {
     @DefaultStringValue("Target")
     public String target();
 
+    @DefaultStringValue("Transfer")
+    public String transfer();
+
     @DefaultStringValue("Transaction")
     public String transaction();
 

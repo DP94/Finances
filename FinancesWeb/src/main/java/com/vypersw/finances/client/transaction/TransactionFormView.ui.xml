@@ -70,8 +70,11 @@
                 </b:html.Div>
             </g:center>
             <g:east size="600">
-                <b:html.Div addStyleNames="max-height" ui:field="chartContainer">
-
+                <b:html.Div addStyleNames="max-height chart-container" ui:field="chartContainer">
+                    <b:html.Div addStyleNames="chart-select-account" ui:field="noData">
+                        <g:Label text="Select an account from the drop down"
+                                 addStyleNames="chart-select-account-label"/>
+                    </b:html.Div>
                 </b:html.Div>
             </g:east>
         </g:DockLayoutPanel>

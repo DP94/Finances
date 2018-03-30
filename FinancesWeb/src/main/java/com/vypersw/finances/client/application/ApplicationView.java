@@ -35,6 +35,9 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     
     @UiField
     MenuButton reports;
+
+    @UiField
+    MenuButton transfer;
     
     @UiField
     MenuButton userManagement;

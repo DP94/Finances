@@ -13,14 +13,19 @@ import com.vypersw.finances.dto.TransactionDTO;
 import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.enumeration.AccountType;
 import com.vypersw.finances.enumeration.TransactionType;
+import org.gwtbootstrap3.client.ui.FormGroup;
 import org.gwtbootstrap3.client.ui.Label;
 import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.LabelType;
 import org.gwtbootstrap3.client.ui.html.Div;
 import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
+import org.moxieapps.gwt.highcharts.client.Axis;
 import org.moxieapps.gwt.highcharts.client.Chart;
+import org.moxieapps.gwt.highcharts.client.Point;
 import org.moxieapps.gwt.highcharts.client.Series;
+import org.moxieapps.gwt.highcharts.client.plotOptions.PlotOptions;
+import org.moxieapps.gwt.highcharts.client.plotOptions.SeriesPlotOptions;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
@@ -55,10 +60,16 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
     Tree categoryTree;
 
     @UiField
+    FormGroup treeGroup;
+
+    @UiField
     Label amountLabel;
 
     @UiField
     Div chartContainer;
+
+    @UiField
+    Div noData;
 
     private Map<Long, AccountDTO> accountDTOMap = new HashMap<>();
 
@@ -66,10 +77,21 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
     public TransactionFormView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
         account.addChangeHandler(changeEvent -> {
-            AccountDTO accountDTO = new AccountDTO();
-            accountDTO.setAccountId(Long.valueOf(account.getSelectedValue()));
-            getUiHandlers().getData().setAccountDTO(accountDTO);
-            buildAccountChart(accountDTOMap.get(accountDTO.getAccountId()));
+            Long id = Long.valueOf(account.getSelectedValue());
+            if (id > 0) {
+                AccountDTO accountDTO = new AccountDTO();
+                accountDTO.setAccountId(Long.valueOf(account.getSelectedValue()));
+                getUiHandlers().getData().setAccountDTO(accountDTO);
+                buildAccountChart(accountDTOMap.get(accountDTO.getAccountId()));
+                if (accountDTOMap.get(id).getAccountType() == AccountType.SAVINGS || accountDTOMap.get(id).getAccountType() == AccountType.ISA) {
+                    treeGroup.setVisible(false);
+                } else {
+                    treeGroup.setVisible(true);
+                }
+            } else {
+                chartContainer.clear();
+                chartContainer.add(noData);
+            }
         });
         transactionType.addChangeHandler(changeEvent -> getUiHandlers().getData().setTransactionType(TransactionType.valueOf(transactionType.getSelectedValue())));
         amount.addValueChangeHandler(valueChangeHandler -> {
@@ -159,22 +181,23 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
         if (accountDTO.getAccountType() == AccountType.SAVINGS || accountDTO.getAccountType() == AccountType.ISA) {
             chartContainer.clear();
             Chart chart = new Chart()
-                    .setType(Series.Type.SPLINE)
+                    .setType(Series.Type.LINE)
                     .setChartTitleText(accountDTO.getName())
-                    .setMarginRight(10);
-            Series series = chart.createSeries()
-                    .setName("Account transactions")
-                    .setPoints(buildPoints(accountDTO));
+                    .setMarginRight(10)
+                    .setSeriesPlotOptions(new SeriesPlotOptions().setCursor(PlotOptions.Cursor.POINTER));
+            chart.getXAxis().setType(Axis.Type.DATE_TIME);
+            Series series = chart.createSeries().setName("Account transactions in £s");
+            for (TransactionDTO transactionDTO : accountDTO.getTransactions()) {
+                Point point = new Point(transactionDTO.getDate().getTime(), transactionDTO.getAmount().doubleValue());
+                if (transactionDTO.getTransactionType() == TransactionType.EXPENSE) {
+                    point.setColor("red");
+                } else {
+                    point.setColor("green");
+                }
+                series.addPoint(point);
+            }
             chart.addSeries(series);
             chartContainer.add(chart);
         }
-    }
-
-    private Number[] buildPoints(AccountDTO accountDTO) {
-        Number[] numbers = new Number[accountDTO.getTransactions().size()];
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = accountDTO.getTransactions().get(i).getAmount().intValue();
-        }
-        return numbers;
     }
 }
