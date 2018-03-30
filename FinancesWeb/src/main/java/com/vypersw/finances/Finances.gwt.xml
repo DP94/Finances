@@ -18,7 +18,8 @@
     <inherits name='com.gwtplatform.dispatch.rpc.DispatchRpc' />
     <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint' />
 	<inherits name="com.vypersw.finances.FinancesDTO"/>
-	<extend-property name="locale" values="en_GB"/>
+    <inherits name="org.moxieapps.gwt.highcharts.Highcharts"/>
+    <extend-property name="locale" values="en_GB"/>
 
     <source path='client' />
     <source path='shared' />

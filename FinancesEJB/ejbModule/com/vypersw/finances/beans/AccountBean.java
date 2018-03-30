@@ -17,6 +17,7 @@ import com.vypersw.finances.user.User;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Stateless
@@ -71,7 +72,7 @@ public class AccountBean extends AbstractBean implements AccountService {
             for (Transaction transaction : account.getTransactions()) {
                 TransactionDTO transactionDTO = new TransactionDTO();
                 transactionDTO.setId(transaction.getId());
-                transactionDTO.setAmount(transactionDTO.getAmount());
+                transactionDTO.setAmount(transaction.getAmount());
                 transactionDTO.setCategoryId(transaction.getCategory().getId());
                 transactionDTO.setDescription(transaction.getDescription());
                 transactionDTO.setTransactionType(TransactionType.forValue(transaction.getTransactionType()));
@@ -80,6 +81,7 @@ public class AccountBean extends AbstractBean implements AccountService {
                 dto.getTransactions().add(transactionDTO);
                 transactionDTO.setCategoryDTO(getCategoryDTO(transaction.getCategory()));
             }
+            dto.getTransactions().sort(Comparator.comparing(TransactionDTO::getDate));
         }
         return accountDTOS;
     }

@@ -5,7 +5,7 @@ import com.vypersw.finances.user.User;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "TBL_ACCOUNT")
@@ -37,7 +37,7 @@ public class Account implements VyperJPA {
 	private User user;
 
 	@OneToMany(mappedBy = "account", orphanRemoval = true)
-	private Set<Transaction> transactions;
+	private List<Transaction> transactions;
 
 	public Account() {
 		
@@ -99,11 +99,11 @@ public class Account implements VyperJPA {
         this.user = user;
     }
 
-	public Set<Transaction> getTransactions() {
+	public List<Transaction> getTransactions() {
 		return transactions;
 	}
 
-	public void setTransactions(Set<Transaction> transactions) {
+	public void setTransactions(List<Transaction> transactions) {
 		this.transactions = transactions;
 	}
 }

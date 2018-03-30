@@ -11,11 +11,16 @@ import com.vypersw.finances.client.widget.ToolbarButtonClickedEvent;
 import com.vypersw.finances.dto.CategoryDTO;
 import com.vypersw.finances.dto.TransactionDTO;
 import com.vypersw.finances.dto.user.AccountDTO;
+import com.vypersw.finances.enumeration.AccountType;
 import com.vypersw.finances.enumeration.TransactionType;
 import org.gwtbootstrap3.client.ui.Label;
 import org.gwtbootstrap3.client.ui.ListBox;
 import org.gwtbootstrap3.client.ui.TextBox;
+import org.gwtbootstrap3.client.ui.constants.LabelType;
+import org.gwtbootstrap3.client.ui.html.Div;
 import org.gwtbootstrap3.extras.datepicker.client.ui.DatePicker;
+import org.moxieapps.gwt.highcharts.client.Chart;
+import org.moxieapps.gwt.highcharts.client.Series;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
@@ -52,6 +57,9 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
     @UiField
     Label amountLabel;
 
+    @UiField
+    Div chartContainer;
+
     private Map<Long, AccountDTO> accountDTOMap = new HashMap<>();
 
     @Inject
@@ -61,14 +69,17 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
             AccountDTO accountDTO = new AccountDTO();
             accountDTO.setAccountId(Long.valueOf(account.getSelectedValue()));
             getUiHandlers().getData().setAccountDTO(accountDTO);
+            buildAccountChart(accountDTOMap.get(accountDTO.getAccountId()));
         });
         transactionType.addChangeHandler(changeEvent -> getUiHandlers().getData().setTransactionType(TransactionType.valueOf(transactionType.getSelectedValue())));
         amount.addValueChangeHandler(valueChangeHandler -> {
             getUiHandlers().getData().setAmount(new BigDecimal(amount.getValue()));
             Long accountId = Long.valueOf(account.getSelectedValue());
             if (transactionType.getSelectedValue().equals(String.valueOf(TransactionType.EXPENSE.name()))) {
+                amountLabel.setType(LabelType.DANGER);
                 amountLabel.setText("The account's balance after this expense will be: " + (accountDTOMap.get(accountId).getBalance().doubleValue() - (new BigDecimal(amount.getText()).doubleValue())));
             } else {
+                amountLabel.setType(LabelType.SUCCESS);
                 amountLabel.setText("The account's balance after this income will be: " + (accountDTOMap.get(accountId).getBalance().doubleValue() + (new BigDecimal(amount.getText()).doubleValue())));
             }
         });
@@ -142,5 +153,28 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
         } else {
             getUiHandlers().refresh();
         }
+    }
+
+    private void buildAccountChart(AccountDTO accountDTO) {
+        if (accountDTO.getAccountType() == AccountType.SAVINGS || accountDTO.getAccountType() == AccountType.ISA) {
+            chartContainer.clear();
+            Chart chart = new Chart()
+                    .setType(Series.Type.SPLINE)
+                    .setChartTitleText(accountDTO.getName())
+                    .setMarginRight(10);
+            Series series = chart.createSeries()
+                    .setName("Account transactions")
+                    .setPoints(buildPoints(accountDTO));
+            chart.addSeries(series);
+            chartContainer.add(chart);
+        }
+    }
+
+    private Number[] buildPoints(AccountDTO accountDTO) {
+        Number[] numbers = new Number[accountDTO.getTransactions().size()];
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = accountDTO.getTransactions().get(i).getAmount().intValue();
+        }
+        return numbers;
     }
 }

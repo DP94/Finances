@@ -15,6 +15,7 @@ public class AccountManagementListView extends VyperListView<AccountDTO, Account
     public void init(AccountDataProvider dataProvider) {
         super.init(dataProvider);
         vyperDataGrid.getToolbar().getSave().removeFromParent();
+        int x = 50;
     }
 
     @Override

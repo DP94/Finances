@@ -59,17 +59,21 @@
                         </b:FieldSet>
                         <b:FormGroup ui:field="treeGroup">
                             <b:FormLabel for="formTree" text="{constants.category}" addStyleNames="col-md-2"/>
-                            <g:FlowPanel addStyleNames="col-md-2">
+                            <g:FlowPanel addStyleNames="col-md-6">
                                 <b:html.Div addStyleNames="transaction-tree-container max-height" b:id="formTree">
                                     <g:Tree ui:field="categoryTree" addStyleNames="category-tree">
                                     </g:Tree>
                                 </b:html.Div>
                             </g:FlowPanel>
-                            <b:html.Div addStyleNames="col-md-8"/>
                         </b:FormGroup>
                     </b:Form>
                 </b:html.Div>
             </g:center>
+            <g:east size="600">
+                <b:html.Div addStyleNames="max-height" ui:field="chartContainer">
+
+                </b:html.Div>
+            </g:east>
         </g:DockLayoutPanel>
     </g:HTMLPanel>
 </ui:UiBinder>
