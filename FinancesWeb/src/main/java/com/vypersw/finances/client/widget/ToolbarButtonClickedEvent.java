@@ -8,7 +8,7 @@ import com.google.web.bindery.event.shared.HandlerRegistration;
 public class ToolbarButtonClickedEvent extends GwtEvent<ToolbarButtonClickedEvent.ToolbarButtonClickedHandler> {
         
 	public enum ToolbarEventType {
-		SAVE, REFRESH, CREATE
+		SAVE, REFRESH, CREATE, DELETE, EDIT
 	}
 	
 	

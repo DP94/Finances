@@ -27,6 +27,12 @@ public class Toolbar extends Composite implements HasToolbarButtonClickedHandler
 
     @UiField
 	ToolbarButton create;
+
+    @UiField
+	ToolbarButton delete;
+
+    @UiField
+	ToolbarButton edit;
     
     public Toolbar() {
         initWidget(binder.createAndBindUi(this));
@@ -44,6 +50,14 @@ public class Toolbar extends Composite implements HasToolbarButtonClickedHandler
 		return create;
 	}
 
+	public ToolbarButton getDelete() {
+		return delete;
+	}
+
+	public ToolbarButton getEdit() {
+		return edit;
+	}
+
 	@UiHandler("save")
 	public void onSave(ClickEvent event) {
 		ToolbarButtonClickedEvent.fire(ToolbarEventType.SAVE, this);
@@ -59,7 +73,18 @@ public class Toolbar extends Composite implements HasToolbarButtonClickedHandler
 		ToolbarButtonClickedEvent.fire(ToolbarEventType.CREATE, this);
 	}
 
-    @Override
+	@UiHandler("delete")
+	public void onDelete(ClickEvent event) {
+		ToolbarButtonClickedEvent.fire(ToolbarEventType.DELETE, this);
+	}
+
+	@UiHandler("edit")
+	public void onEdit(ClickEvent event) {
+		ToolbarButtonClickedEvent.fire(ToolbarEventType.EDIT, this);
+	}
+
+
+	@Override
     public HandlerRegistration addToolbarButtonClickedHandler(ToolbarButtonClickedHandler handler) {
         return this.addHandler(handler, ToolbarButtonClickedEvent.TYPE);
     }

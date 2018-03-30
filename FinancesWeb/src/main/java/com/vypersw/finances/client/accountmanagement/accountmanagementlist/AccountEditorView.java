@@ -101,6 +101,8 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
         if (formState == FormState.CREATE) {
             modifyTab.setText(FinancesConstants.INSTANCE.create());
             transactionsTab.setVisible(false);
+            toolbar.getDelete().removeFromParent();
+            toolbar.getEdit().removeFromParent();
         } else {
             modifyTab.setText(FinancesConstants.INSTANCE.modify());
             transactionsTab.setVisible(true);

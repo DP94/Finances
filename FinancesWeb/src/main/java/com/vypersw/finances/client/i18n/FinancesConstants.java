@@ -40,8 +40,14 @@ public interface FinancesConstants extends ConstantsWithLookup {
     @DefaultStringValue("Date")
     public String date();
 
+    @DefaultStringValue("Delete")
+	public String delete();
+
     @DefaultStringValue("Description")
     public String description();
+
+    @DefaultStringValue("Edit")
+	public String edit();
 	
 	@DefaultStringValue("Email address")
 	public String emailAddress();

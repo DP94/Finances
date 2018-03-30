@@ -58,6 +58,8 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
         description.addValueChangeHandler(event -> getUiHandlers().getData().setDescription(description.getValue()));
         toolbar.addToolbarButtonClickedHandler(this);
         date.addChangeDateHandler(changeDateEvent -> getUiHandlers().getData().setDate(date.getValue()));
+        toolbar.getDelete().removeFromParent();
+        toolbar.getEdit().removeFromParent();
     }
 
     @Override

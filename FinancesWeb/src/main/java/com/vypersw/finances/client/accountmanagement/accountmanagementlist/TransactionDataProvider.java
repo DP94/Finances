@@ -47,7 +47,7 @@ public class TransactionDataProvider extends AbstractDataProvider<TransactionDTO
             case TRANSACTION_DESCRIPTION:
                 return transactionDTO.getDescription();
             case TRANSACTION_CATEGORY:
-                return String.valueOf(transactionDTO.getCategoryId());
+                return transactionDTO.getCategoryDTO().getName();
             case TRANSACTION_TYPE:
                 return transactionDTO.getTransactionType().name();
             case DATE:

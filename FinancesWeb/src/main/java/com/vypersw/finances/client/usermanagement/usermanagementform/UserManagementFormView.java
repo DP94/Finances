@@ -53,6 +53,8 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
     public UserManagementFormView(Binder uiBinder) {
         initWidget(uiBinder.createAndBindUi(this));
         toolbar.addToolbarButtonClickedHandler(this);
+        toolbar.getEdit().removeFromParent();
+        toolbar.getCreate().removeFromParent();
         init();
     }
     

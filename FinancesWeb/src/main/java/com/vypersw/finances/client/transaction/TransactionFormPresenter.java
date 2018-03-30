@@ -58,7 +58,9 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
 
     @Override
     public void refresh() {
+        setLoading(true);
         getView().clearView();
+        setLoading(false);
     }
 
     @Override

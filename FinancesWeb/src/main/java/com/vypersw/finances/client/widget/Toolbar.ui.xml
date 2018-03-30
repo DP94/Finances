@@ -14,6 +14,8 @@
                                           iconStyle="glyphicon glyphicon-floppy-disk"/>
                     <widget:ToolbarButton ui:field="refresh" text="{constants.refresh}"
                                           iconStyle="glyphicon glyphicon-refresh"/>
+                    <widget:ToolbarButton ui:field="delete" text="{constants.delete}" iconStyle="glyphicon glyphicon-trash"/>
+                    <widget:ToolbarButton ui:field="edit" text="{constants.edit}" iconStyle="glyphicon glyphicon-pencil"/>
 	    		</div>
 	    	</div>
     	</div>
