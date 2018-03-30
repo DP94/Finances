@@ -22,4 +22,8 @@ public abstract class JPAHelper<T extends VyperJPA> {
     public T findById(Class<T> t, Long id) {
         return entityManager.find(t, id);
     }
+
+    public void delete(VyperJPA vyperJPA) {
+        entityManager.remove(vyperJPA);
+    }
 }

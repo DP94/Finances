@@ -5,6 +5,8 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.View;
+import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+import com.vypersw.finances.client.abstractpresenter.FormState;
 import com.vypersw.finances.client.abstractpresenter.VyperFormPresenter;
 import com.vypersw.finances.client.actions.AccountAction;
 import com.vypersw.finances.client.actions.GetCategoriesAction;
@@ -13,6 +15,7 @@ import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.client.results.AccountActionResult;
 import com.vypersw.finances.client.results.GetCategoriesResult;
 import com.vypersw.finances.client.results.TransactionResult;
+import com.vypersw.finances.client.widget.MoveEvent;
 import com.vypersw.finances.dto.CategoryDTO;
 import com.vypersw.finances.dto.TransactionDTO;
 import com.vypersw.finances.dto.user.AccountDTO;
@@ -20,7 +23,7 @@ import com.vypersw.finances.dto.user.AccountDTO;
 import javax.inject.Inject;
 import java.util.List;
 
-public class TransactionFormPresenter extends VyperFormPresenter<TransactionFormPresenter.MyView, TransactionDTO> implements TransactionFormUiHandlers {
+public class TransactionFormPresenter extends VyperFormPresenter<TransactionFormPresenter.MyView, TransactionDTO> implements TransactionFormUiHandlers, MoveEvent.MoveEventHandler {
 
     public interface MyView extends View, HasUiHandlers<TransactionFormUiHandlers> {
         void setViewData(List<AccountDTO> accountDTOList);
@@ -28,7 +31,11 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
         void clearView();
 
         void buildCategoriesTree(List<CategoryDTO> categoryDTOSet);
+
+        void buildTransactionData(TransactionDTO transactionDTO);
     }
+
+    private long transactionId;
 
     @Inject
     public TransactionFormPresenter(EventBus eventBus, DispatchAsync dispatchAsync, MyView view, ApplicationPresenter container) {
@@ -40,6 +47,7 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
     public void save() {
         setLoading(true);
         TransactionAction accountAction = new TransactionAction(getData());
+        accountAction.setSave(true);
         dispatchAsync.execute(accountAction, new AsyncCallback<TransactionResult>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -51,7 +59,11 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
             public void onSuccess(TransactionResult result) {
                 setLoading(false);
                 getContentContainerPresenter().getContainer().success("Transaction created successfully");
-                getView().clearView();
+                if (getFormState() == FormState.CREATE) {
+                    getView().clearView();
+                } else {
+                    getView().buildTransactionData(result.getTransactionDTO());
+                }
             }
         });
     }
@@ -70,13 +82,7 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
 
     @Override
     public void initaliseForm() {
-
-    }
-
-    @Override
-    protected void onBind() {
-        super.onBind();
-        setData(new TransactionDTO());
+        setLoading(false);
         AccountAction accountAction = new AccountAction();
         accountAction.setGetAll(true);
         dispatchAsync.execute(accountAction, new AsyncCallback<AccountActionResult>() {
@@ -103,10 +109,39 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
                 getView().buildCategoriesTree(result.getCategoryDTOS());
             }
         });
+        if (transactionId != 0) {
+            TransactionAction transactionAction = new TransactionAction();
+            transactionAction.setGet(true);
+            transactionAction.setId(transactionId);
+            dispatchAsync.execute(transactionAction, new AsyncCallback<TransactionResult>() {
+                @Override
+                public void onFailure(Throwable throwable) {
+                    setLoading(false);
+                    getContentContainerPresenter().getContainer().warn(throwable.getMessage());
+                }
+
+                @Override
+                public void onSuccess(TransactionResult transactionResult) {
+                    setLoading(false);
+                    setData(transactionResult.getTransactionDTO());
+                    getView().buildTransactionData(transactionResult.getTransactionDTO());
+                }
+            });
+        } else {
+            setFormState(FormState.CREATE);
+            setData(new TransactionDTO());
+        }
     }
 
     @Override
     public TransactionDTO getData() {
         return super.getData();
+    }
+
+    @Override
+    public void onMove(MoveEvent event) {
+        PlaceRequest placeRequest = event.getPlaceRequest();
+        transactionId = Long.valueOf(placeRequest.getParameter("id", "0"));
+        initaliseForm();
     }
 }

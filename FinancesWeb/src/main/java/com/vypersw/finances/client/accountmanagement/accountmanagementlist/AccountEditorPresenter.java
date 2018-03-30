@@ -9,14 +9,20 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.vypersw.finances.client.abstractpresenter.FormState;
 import com.vypersw.finances.client.abstractpresenter.VyperFormPresenter;
 import com.vypersw.finances.client.actions.AccountAction;
+import com.vypersw.finances.client.actions.DeleteAction;
 import com.vypersw.finances.client.actions.GetAccountAction;
 import com.vypersw.finances.client.application.ApplicationPresenter;
+import com.vypersw.finances.client.content.ContentType;
 import com.vypersw.finances.client.results.AccountActionResult;
+import com.vypersw.finances.client.results.DeleteResult;
 import com.vypersw.finances.client.results.GetAccountResult;
 import com.vypersw.finances.client.widget.MoveEvent;
+import com.vypersw.finances.dto.TransactionDTO;
 import com.vypersw.finances.dto.user.AccountDTO;
 
 import javax.inject.Inject;
+import java.util.Collections;
+import java.util.HashMap;
 
 public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPresenter.MyView, AccountDTO> implements AccountEditorUIHandlers, MoveEvent.MoveEventHandler {
 
@@ -77,6 +83,32 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
     @Override
     public AccountDTO getData() {
         return super.getData();
+    }
+
+    @Override
+    public void delete(TransactionDTO transactionDTO) {
+        setLoading(true);
+        DeleteAction deleteAction = new DeleteAction();
+        deleteAction.setDto(transactionDTO);
+        dispatchAsync.execute(deleteAction, new AsyncCallback<DeleteResult>() {
+            @Override
+            public void onFailure(Throwable throwable) {
+                setLoading(false);
+                getContainer().warn(throwable.getMessage());
+            }
+
+            @Override
+            public void onSuccess(DeleteResult deleteResult) {
+                setLoading(false);
+                getContainer().success("Transaction deleted successfully");
+                initaliseForm();
+            }
+        });
+    }
+
+    @Override
+    public void edit(TransactionDTO transactionDTO) {
+        getContainer().move(ContentType.ADD, new HashMap<>(Collections.singletonMap("id", String.valueOf(transactionDTO.getId()))));
     }
 
     @Override

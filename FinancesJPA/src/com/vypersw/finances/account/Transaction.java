@@ -17,14 +17,14 @@ public class Transaction implements VyperJPA {
     @Column(name = "AMOUNT")
     private BigDecimal amount;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "ACCOUNT_ID")
     private Account account;
 
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 

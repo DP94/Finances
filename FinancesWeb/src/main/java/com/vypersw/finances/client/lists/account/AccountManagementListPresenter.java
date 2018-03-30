@@ -6,10 +6,12 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.vypersw.finances.client.accountmanagement.accountmanagementlist.AccountDataProvider;
 import com.vypersw.finances.client.actions.AccountAction;
+import com.vypersw.finances.client.actions.DeleteAction;
 import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.client.content.ContentType;
 import com.vypersw.finances.client.lists.VyperListPresenter;
 import com.vypersw.finances.client.results.AccountActionResult;
+import com.vypersw.finances.client.results.DeleteResult;
 import com.vypersw.finances.dto.user.AccountDTO;
 
 import java.util.Collections;
@@ -37,6 +39,27 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountDT
 	@Override
 	public void onCreate() {
 		getContainer().move(ContentType.ACCOUNT_EDITING, null);
+	}
+
+	@Override
+	public void delete(AccountDTO accountDTO) {
+		setLoading(true);
+		DeleteAction deleteAction = new DeleteAction();
+		deleteAction.setDto(accountDTO);
+		dispatchAsync.execute(deleteAction, new AsyncCallback<DeleteResult>() {
+			@Override
+			public void onFailure(Throwable throwable) {
+				setLoading(false);
+				getContainer().warn(throwable.getMessage());
+			}
+
+			@Override
+			public void onSuccess(DeleteResult accountActionResult) {
+				setLoading(false);
+				getContainer().success("Account deleted successfully");
+				initTable();
+			}
+		});
 	}
 
 	@Override

@@ -126,12 +126,21 @@ public class AccountEditorView extends ViewWithUiHandlers<AccountEditorUIHandler
             case REFRESH:
                 getUiHandlers().onRefresh();
                 break;
+            case DELETE:
+                if (transactionsGrid.getSelectedRow() != null) {
+                    getUiHandlers().delete(transactionsGrid.getSelectedRow());
+                }
+                break;
+            case EDIT:
+                if (transactionsGrid.getSelectedRow() != null) {
+                    getUiHandlers().edit(transactionsGrid.getSelectedRow());
+                }
         }
     }
 
     @Override
     public void onGridDoubleClick(GridDoubleClickEvent event) {
-
+        getUiHandlers().edit(((TransactionDTO)event.getCurrentRow()));
     }
 
 

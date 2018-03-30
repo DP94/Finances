@@ -121,6 +121,13 @@ public class AccountBean extends AbstractBean implements AccountService {
         return account.getAccountId();
     }
 
+    @Override
+    public void delete(long id) {
+        AccountJPAHelper accountJPAHelper = new AccountJPAHelper(entityManager);
+        Account account = accountJPAHelper.findById(Account.class, id);
+        accountJPAHelper.delete(account);
+    }
+
     private CategoryDTO getCategoryDTO(Category category) {
         CategoryDTO categoryDTO = new CategoryDTO();
         categoryDTO.setId(category.getId());

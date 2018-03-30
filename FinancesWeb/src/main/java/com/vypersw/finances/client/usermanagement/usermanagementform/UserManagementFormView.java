@@ -55,6 +55,7 @@ public class UserManagementFormView extends ViewWithUiHandlers<UserManagementFor
         toolbar.addToolbarButtonClickedHandler(this);
         toolbar.getEdit().removeFromParent();
         toolbar.getCreate().removeFromParent();
+        toolbar.getDelete().removeFromParent();
         init();
     }
     

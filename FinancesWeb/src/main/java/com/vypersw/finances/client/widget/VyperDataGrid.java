@@ -38,7 +38,7 @@ public class VyperDataGrid<T extends VyperDTO> extends Composite implements Grid
 
 
 
-
+    private T selectedRow;
     private SimplePager simplePager = new SimplePager();
     private AbstractDataProvider<T> abstractDataProvider;
 
@@ -52,6 +52,7 @@ public class VyperDataGrid<T extends VyperDTO> extends Composite implements Grid
         final Column<T, Boolean> checkbox = new Column<T, Boolean>(new CheckboxCell()) {
             @Override
             public Boolean getValue(T t) {
+                selectedRow = t;
                 return null;
             }
         };
@@ -98,5 +99,9 @@ public class VyperDataGrid<T extends VyperDTO> extends Composite implements Grid
 
     public Toolbar getToolbar() {
         return toolbar;
+    }
+
+    public T getSelectedRow() {
+        return selectedRow;
     }
 }

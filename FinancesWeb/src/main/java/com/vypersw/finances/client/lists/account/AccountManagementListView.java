@@ -25,10 +25,24 @@ public class AccountManagementListView extends VyperListView<AccountDTO, Account
 
     @Override
     public void onToolbarButtonClicked(ToolbarButtonClickedEvent event) {
-        if (event.getEventType() == ToolbarButtonClickedEvent.ToolbarEventType.REFRESH) {
-            getUiHandlers().refresh();
-        } else if (event.getEventType() == ToolbarButtonClickedEvent.ToolbarEventType.CREATE) {
-            getUiHandlers().onCreate();
+        switch (event.getEventType()) {
+            case REFRESH:
+                getUiHandlers().refresh();
+                break;
+            case CREATE:
+                getUiHandlers().onCreate();
+                break;
+            case DELETE:
+                if (vyperDataGrid.getSelectedRow() != null) {
+                    getUiHandlers().delete(vyperDataGrid.getSelectedRow());
+                }
+                break;
+            case EDIT:
+                if (vyperDataGrid.getSelectedRow() != null) {
+                    getUiHandlers().onEditPressed(vyperDataGrid.getSelectedRow().getAccountId());
+                }
+            default:
+                break;
         }
     }
 }

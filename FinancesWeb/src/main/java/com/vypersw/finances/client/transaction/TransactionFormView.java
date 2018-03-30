@@ -9,6 +9,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.vypersw.finances.client.widget.Toolbar;
 import com.vypersw.finances.client.widget.ToolbarButtonClickedEvent;
 import com.vypersw.finances.dto.CategoryDTO;
+import com.vypersw.finances.dto.TransactionDTO;
 import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.enumeration.TransactionType;
 import org.gwtbootstrap3.client.ui.ListBox;
@@ -91,6 +92,29 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
                 treeItem.addItem(treeItem1);
             }
             categoryTree.addItem(treeItem);
+        }
+    }
+
+    @Override
+    public void buildTransactionData(TransactionDTO transactionDTO) {
+        if (transactionDTO != null) {
+            for (int i = 0; i < account.getItemCount(); i++) {
+                String s = account.getValue(i);
+                if (s.equals(String.valueOf(transactionDTO.getAccountDTO().getAccountId()))) {
+                    account.setSelectedIndex(i);
+                    break;
+                }
+            }
+            for (int i = 0; i < transactionType.getItemCount(); i++) {
+                String s = transactionType.getValue(i);
+                if (s.equals(String.valueOf(transactionDTO.getTransactionType().name()))) {
+                    transactionType.setSelectedIndex(i);
+                    break;
+                }
+            }
+            amount.setText(transactionDTO.getAmount().toString());
+            description.setText(transactionDTO.getDescription());
+            date.setValue(transactionDTO.getDate());
         }
     }
 
