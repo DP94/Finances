@@ -73,13 +73,17 @@ public class AccountBean extends AbstractBean implements AccountService {
                 TransactionDTO transactionDTO = new TransactionDTO();
                 transactionDTO.setId(transaction.getId());
                 transactionDTO.setAmount(transaction.getAmount());
-                transactionDTO.setCategoryId(transaction.getCategory().getId());
+                if (transaction.getCategory() != null) {
+                    transactionDTO.setCategoryId(transaction.getCategory().getId());
+                }
                 transactionDTO.setDescription(transaction.getDescription());
                 transactionDTO.setTransactionType(TransactionType.forValue(transaction.getTransactionType()));
                 transactionDTO.setAccountDTO(dto);
                 transactionDTO.setDate(transaction.getDate());
                 dto.getTransactions().add(transactionDTO);
-                transactionDTO.setCategoryDTO(getCategoryDTO(transaction.getCategory()));
+                if (transaction.getCategory() != null) {
+                    transactionDTO.setCategoryDTO(getCategoryDTO(transaction.getCategory()));
+                }
             }
             dto.getTransactions().sort(Comparator.comparing(TransactionDTO::getDate));
         }

@@ -2,12 +2,12 @@ package com.vypersw.finances.client.transaction;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.vypersw.finances.client.widget.Toolbar;
 import com.vypersw.finances.client.widget.ToolbarButtonClickedEvent;
+import com.vypersw.finances.client.widget.VyperTree;
 import com.vypersw.finances.dto.CategoryDTO;
 import com.vypersw.finances.dto.TransactionDTO;
 import com.vypersw.finances.dto.user.AccountDTO;
@@ -57,9 +57,6 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
     DatePicker date;
 
     @UiField
-    Tree categoryTree;
-
-    @UiField
     FormGroup treeGroup;
 
     @UiField
@@ -70,6 +67,9 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
 
     @UiField
     Div noData;
+
+    @UiField
+    VyperTree<CategoryDTO> vyperTree;
 
     private Map<Long, AccountDTO> accountDTOMap = new HashMap<>();
 
@@ -96,6 +96,9 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
         transactionType.addChangeHandler(changeEvent -> getUiHandlers().getData().setTransactionType(TransactionType.valueOf(transactionType.getSelectedValue())));
         amount.addValueChangeHandler(valueChangeHandler -> {
             getUiHandlers().getData().setAmount(new BigDecimal(amount.getValue()));
+        });
+        amount.setAutoComplete(false);
+        amount.addKeyUpHandler(keyUpEvent -> {
             Long accountId = Long.valueOf(account.getSelectedValue());
             if (transactionType.getSelectedValue().equals(String.valueOf(TransactionType.EXPENSE.name()))) {
                 amountLabel.setType(LabelType.DANGER);
@@ -141,7 +144,7 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
                 treeItem1.setText(child.getName());
                 treeItem.addItem(treeItem1);
             }
-            categoryTree.addItem(treeItem);
+            vyperTree.getTree().addItem(treeItem);
         }
     }
 
@@ -178,15 +181,15 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
     }
 
     private void buildAccountChart(AccountDTO accountDTO) {
+        chartContainer.clear();
+        Chart chart = new Chart();
+        chart.createSeries().setName(accountDTO.getName());
+        Series series = chart.createSeries().setName("Account transactions in £s");
         if (accountDTO.getAccountType() == AccountType.SAVINGS || accountDTO.getAccountType() == AccountType.ISA) {
-            chartContainer.clear();
-            Chart chart = new Chart()
-                    .setType(Series.Type.LINE)
-                    .setChartTitleText(accountDTO.getName())
+            chart.setType(Series.Type.LINE)
                     .setMarginRight(10)
                     .setSeriesPlotOptions(new SeriesPlotOptions().setCursor(PlotOptions.Cursor.POINTER));
             chart.getXAxis().setType(Axis.Type.DATE_TIME);
-            Series series = chart.createSeries().setName("Account transactions in £s");
             for (TransactionDTO transactionDTO : accountDTO.getTransactions()) {
                 Point point = new Point(transactionDTO.getDate().getTime(), transactionDTO.getAmount().doubleValue());
                 if (transactionDTO.getTransactionType() == TransactionType.EXPENSE) {
@@ -196,8 +199,16 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
                 }
                 series.addPoint(point);
             }
-            chart.addSeries(series);
-            chartContainer.add(chart);
+        } else {
+            chart.setType(Series.Type.PIE)
+                    .setMarginRight(10)
+                    .setSeriesPlotOptions(new SeriesPlotOptions().setCursor(PlotOptions.Cursor.POINTER));
+            for (TransactionDTO transactionDTO : accountDTO.getTransactions()) {
+                Point point = new Point(transactionDTO.getCategoryDTO().getName(), transactionDTO.getAmount().doubleValue());
+                series.addPoint(point);
+            }
         }
+        chart.addSeries(series);
+        chartContainer.add(chart);
     }
 }

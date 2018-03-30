@@ -61,8 +61,7 @@
                             <b:FormLabel for="formTree" text="{constants.category}" addStyleNames="col-md-2"/>
                             <g:FlowPanel addStyleNames="col-md-6">
                                 <b:html.Div addStyleNames="transaction-tree-container max-height" b:id="formTree">
-                                    <g:Tree ui:field="categoryTree" addStyleNames="category-tree">
-                                    </g:Tree>
+                                    <widget:VyperTree ui:field="vyperTree"/>
                                 </b:html.Div>
                             </g:FlowPanel>
                         </b:FormGroup>

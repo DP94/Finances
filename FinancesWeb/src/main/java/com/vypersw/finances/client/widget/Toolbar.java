@@ -16,8 +16,8 @@ public class Toolbar extends Composite implements HasToolbarButtonClickedHandler
 
 	private static Binder binder = GWT.create(Binder.class);
 
-    interface Binder extends UiBinder<Widget, Toolbar> {
-    }
+	interface Binder extends UiBinder<Widget, Toolbar> {
+	}
     
     @UiField
     ToolbarButton save;

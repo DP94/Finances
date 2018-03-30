@@ -1,0 +1,18 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
+>
+    <ui:with field="constants" type="com.vypersw.finances.client.i18n.FinancesConstants"/>
+    <g:HTMLPanel>
+        <b:html.Div addStyleNames="tree-container">
+            <b:html.Div addStyleNames="tree-div">
+                <g:Tree ui:field="tree" addStyleNames="category-tree">
+                </g:Tree>
+            </b:html.Div>
+            <b:html.Div addStyleNames="tree-buttons">
+                <b:Button ui:field="add" addStyleNames="glyphicon glyphicon-plus"/>
+            </b:html.Div>
+        </b:html.Div>
+    </g:HTMLPanel>
+</ui:UiBinder>

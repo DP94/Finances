@@ -88,3 +88,7 @@
     position: relative;
     top: 40%;
 }
+
+.tree-buttons {
+    float: right;
+}
