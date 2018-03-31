@@ -10,8 +10,12 @@
                 <g:Tree ui:field="tree" addStyleNames="category-tree">
                 </g:Tree>
             </b:html.Div>
-            <b:html.Div addStyleNames="tree-buttons">
-                <b:Button ui:field="add" addStyleNames="glyphicon glyphicon-plus"/>
+            <b:html.Div addStyleNames="tree-button-container">
+                <b:TextBox ui:field="name" addStyleNames="tree-textbox"/>
+                <b:html.Div addStyleNames="tree-buttons">
+                    <b:Button ui:field="delete" addStyleNames="tree-button glyphicon glyphicon-trash"/>
+                    <b:Button ui:field="add" addStyleNames="tree-button glyphicon glyphicon-plus"/>
+                </b:html.Div>
             </b:html.Div>
         </b:html.Div>
     </g:HTMLPanel>

@@ -8,13 +8,9 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.vypersw.finances.client.abstractpresenter.FormState;
 import com.vypersw.finances.client.abstractpresenter.VyperFormPresenter;
-import com.vypersw.finances.client.actions.AccountAction;
-import com.vypersw.finances.client.actions.GetCategoriesAction;
-import com.vypersw.finances.client.actions.TransactionAction;
+import com.vypersw.finances.client.actions.*;
 import com.vypersw.finances.client.application.ApplicationPresenter;
-import com.vypersw.finances.client.results.AccountActionResult;
-import com.vypersw.finances.client.results.GetCategoriesResult;
-import com.vypersw.finances.client.results.TransactionResult;
+import com.vypersw.finances.client.results.*;
 import com.vypersw.finances.client.widget.MoveEvent;
 import com.vypersw.finances.dto.CategoryDTO;
 import com.vypersw.finances.dto.TransactionDTO;
@@ -136,6 +132,43 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
     @Override
     public TransactionDTO getData() {
         return super.getData();
+    }
+
+    @Override
+    public void categoryChange(CategoryDTO categoryDTO, boolean isCreate) {
+        setLoading(true);
+        if (isCreate) {
+            CategoryAction categoryAction = new CategoryAction();
+            categoryAction.setCreate(true);
+            categoryAction.setCategoryDTO(categoryDTO);
+            dispatchAsync.execute(categoryAction, new AsyncCallback<CategoryResult>() {
+                @Override
+                public void onFailure(Throwable throwable) {
+                    setLoading(false);
+                    getContainer().warn(throwable.getMessage());
+                }
+
+                @Override
+                public void onSuccess(CategoryResult categoryResult) {
+                    setLoading(false);
+                }
+            });
+        } else {
+            DeleteAction deleteAction = new DeleteAction();
+            deleteAction.setDto(categoryDTO);
+            dispatchAsync.execute(deleteAction, new AsyncCallback<DeleteResult>() {
+                @Override
+                public void onFailure(Throwable throwable) {
+                    setLoading(false);
+                    getContainer().warn(throwable.getMessage());
+                }
+
+                @Override
+                public void onSuccess(DeleteResult deleteResult) {
+                    setLoading(false);
+                }
+            });
+        }
     }
 
     @Override

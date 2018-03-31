@@ -27,6 +27,26 @@ public class CategoryBean extends AbstractBean implements CategoryService {
         return categories;
     }
 
+    @Override
+    public void delete(long categoryId) {
+        CategoryJPAHelper categoryJPAHelper = new CategoryJPAHelper(entityManager);
+        Category category = categoryJPAHelper.findById(Category.class, categoryId);
+        categoryJPAHelper.delete(category);
+    }
+
+    @Override
+    public void create(CategoryDTO categoryDTO) {
+        CategoryJPAHelper categoryJPAHelper = new CategoryJPAHelper(entityManager);
+        Category category = new Category();
+        category.setName(categoryDTO.getName());
+        if (categoryDTO.getParentCategory() != null) {
+            Category parent = categoryJPAHelper.findById(Category.class, categoryDTO.getParentCategory());
+            category.setParentCategory(parent);
+        }
+        category.setId(categoryJPAHelper.getNextCategoryId());
+        entityManager.persist(category);
+    }
+
 
     private CategoryDTO getCategoryDTO(Category category) {
         CategoryDTO categoryDTO = new CategoryDTO();

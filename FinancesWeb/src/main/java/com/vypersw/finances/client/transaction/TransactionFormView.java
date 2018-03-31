@@ -8,6 +8,7 @@ import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.vypersw.finances.client.widget.Toolbar;
 import com.vypersw.finances.client.widget.ToolbarButtonClickedEvent;
 import com.vypersw.finances.client.widget.VyperTree;
+import com.vypersw.finances.client.widget.VyperTreeNodeChangeEvent;
 import com.vypersw.finances.dto.CategoryDTO;
 import com.vypersw.finances.dto.TransactionDTO;
 import com.vypersw.finances.dto.user.AccountDTO;
@@ -33,7 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHandlers> implements TransactionFormPresenter.MyView, ToolbarButtonClickedEvent.ToolbarButtonClickedHandler {
+public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHandlers> implements TransactionFormPresenter.MyView, ToolbarButtonClickedEvent.ToolbarButtonClickedHandler, VyperTreeNodeChangeEvent.VyperTreeNodeChangeEventHandler {
 
     interface Binder extends UiBinder<Widget, TransactionFormView> {
     }
@@ -69,7 +70,7 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
     Div noData;
 
     @UiField
-    VyperTree<CategoryDTO> vyperTree;
+    VyperTree vyperTree;
 
     private Map<Long, AccountDTO> accountDTOMap = new HashMap<>();
 
@@ -113,6 +114,7 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
         date.addChangeDateHandler(changeDateEvent -> getUiHandlers().getData().setDate(date.getValue()));
         toolbar.getDelete().removeFromParent();
         toolbar.getEdit().removeFromParent();
+        vyperTree.addVyperTreeNodeChangeEventHandlers(this);
     }
 
     @Override
@@ -138,10 +140,12 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
     public void buildCategoriesTree(List<CategoryDTO> categoryDTOSet) {
         for (CategoryDTO categoryDTO : categoryDTOSet) {
             TreeItem treeItem = new TreeItem();
+            treeItem.setUserObject(categoryDTO);
             treeItem.setText(categoryDTO.getName());
             for (CategoryDTO child : categoryDTO.getChildCategories()) {
                 TreeItem treeItem1 = new TreeItem();
                 treeItem1.setText(child.getName());
+                treeItem1.setUserObject(child);
                 treeItem.addItem(treeItem1);
             }
             vyperTree.getTree().addItem(treeItem);
@@ -174,6 +178,7 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
     @Override
     public void onToolbarButtonClicked(ToolbarButtonClickedEvent event) {
         if (event.getEventType() == ToolbarButtonClickedEvent.ToolbarEventType.SAVE) {
+            getUiHandlers().getData().setCategoryDTO(vyperTree.getSelectedNode());
             getUiHandlers().save();
         } else {
             getUiHandlers().refresh();
@@ -210,5 +215,10 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
         }
         chart.addSeries(series);
         chartContainer.add(chart);
+    }
+
+    @Override
+    public void onTreeNodeChange(VyperTreeNodeChangeEvent event) {
+        getUiHandlers().categoryChange(event.getChangeItem(), event.isCreate());
     }
 }

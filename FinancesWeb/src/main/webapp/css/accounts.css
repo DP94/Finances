@@ -89,6 +89,22 @@
     top: 40%;
 }
 
+.tree-button-container {
+    width: calc(100% - 80px);
+}
+
+.tree-button {
+    display: inline-block !important;
+}
+
+.tree-textbox {
+    display: inline-block !important;
+}
+
+.tree-textbox {
+    width: inherit !important;
+}
+
 .tree-buttons {
-    float: right;
+    display: inline-block;
 }
