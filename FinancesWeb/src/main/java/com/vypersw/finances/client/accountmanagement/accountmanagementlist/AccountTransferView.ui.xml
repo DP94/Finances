@@ -7,31 +7,39 @@
 >
     <ui:with field="constants" type="com.vypersw.finances.client.i18n.FinancesConstants"/>
     <g:HTMLPanel ui:field="main" addStyleNames="max-height">
+        <widget:Toolbar ui:field="toolbar"/>
         <b:html.Div addStyleNames="row">
             <b:Form type="HORIZONTAL" addStyleNames="account-transfer-form">
+                <b.html:Div addStyleNames="col-md-1"/>
                 <b:FieldSet>
                     <b:FormGroup ui:field="accountNameGroup">
-                        <b:FormLabel for="formAccountName" text="{constants.sourceAccount}" addStyleNames="col-md-2"/>
-                        <g:FlowPanel addStyleNames="col-md-3">
+                        <g:FlowPanel addStyleNames="col-md-4">
                             <b:ListBox ui:field="sourceAccount" b:id="formAccountName"/>
                         </g:FlowPanel>
-                        <g:Label addStyleNames="col-md-2 glyphicon glyphicon-arrow-right account-transfer-icon"/>
-                        <b:FormLabel for="formTargetAccount" text="{constants.targetAccount}" addStyleNames="col-md-2"/>
-                        <g:FlowPanel addStyleNames="col-md-3">
+                        <b:TextBox addStyleNames="col-md-2 transfer-amount" ui:field="amount"/>
+                        <g:FlowPanel addStyleNames="col-md-4">
                             <b:ListBox ui:field="targetAccount" b:id="formTargetAccount"/>
                         </g:FlowPanel>
                     </b:FormGroup>
                 </b:FieldSet>
             </b:Form>
         </b:html.Div>
-        <b:html.Div addStyleNames="row widget-row">
-            <b.html:Div addStyleNames="col-md-4">
+        <b:html.Div addStyleNames="row widget-row max-height">
+            <b.html:Div addStyleNames="col-md-1"/>
+            <b.html:Div addStyleNames="col-md-4" visible="false" ui:field="sourceAccountDiv">
                 <widget:AccountWidget ui:field="sourceAccountWidget"/>
             </b.html:Div>
-            <b:TextBox addStyleNames="col-md-4 transfer-amount"/>
-            <b.html:Div addStyleNames="col-md-4">
+            <g:FlowPanel addStyleNames="col-md-4 max-height" ui:field="selectSourceAccount">
+                <g:Label text="Select an account" addStyleNames="chart-select-account"/>
+            </g:FlowPanel>
+            <g:Label addStyleNames="col-md-2 glyphicon glyphicon-retweet account-transfer-icon" ui:field="switchAccount"/>
+            <b.html:Div addStyleNames="col-md-4" visible="false" ui:field="targetAccountDiv">
                 <widget:AccountWidget ui:field="targetAccountWidget"/>
             </b.html:Div>
+            <g:FlowPanel addStyleNames="col-md-4 max-height" ui:field="selectTargetAccount">
+                <g:Label text="Select an account" addStyleNames="chart-select-account"/>
+            </g:FlowPanel>
+            <b.html:Div addStyleNames="col-md-2"/>
         </b:html.Div>
     </g:HTMLPanel>
 </ui:UiBinder>

@@ -102,7 +102,9 @@ html, body {
 
 .account-transfer-icon {
 	text-align: center;
-	font-size: 32px;
+	font-size: 50px;
+	position: relative;
+	top: 30px;
 }
 
 .widget-row {
@@ -110,5 +112,5 @@ html, body {
 }
 
 .transfer-amount {
-	width: inherit !important;
+	width: 25% !important;
 }

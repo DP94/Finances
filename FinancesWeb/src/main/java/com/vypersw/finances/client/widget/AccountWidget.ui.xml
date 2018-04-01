@@ -5,15 +5,13 @@
              xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
     <ui:with field="constants" type="com.vypersw.finances.client.i18n.FinancesConstants"/>
     <g:HTMLPanel ui:field="main">
-        <b.html:Div ui:field="div" addStyleNames="accounts-info-div row">
+        <b.html:Div ui:field="div" addStyleNames="accounts-info-div">
             <g:Label ui:field="icon" addStyleNames="accounts-info-icon"/>
             <g:Label ui:field="accountName" addStyleNames="accounts-info-name"/>
             <g:Label ui:field="accountBalance" addStyleNames="accounts-info-balance"/>
         </b.html:Div>
-        <b.html:Div addStyleNames="row">
-            <b:Progress addStyleNames="account-progress">
-                <b:ProgressBar ui:field="progress" type="SUCCESS" percent="0"/>
-            </b:Progress>
-        </b.html:Div>
+        <b:Progress addStyleNames="account-progress">
+            <b:ProgressBar ui:field="progress" type="SUCCESS" percent="0"/>
+        </b:Progress>
     </g:HTMLPanel>
 </ui:UiBinder>
