@@ -10,14 +10,17 @@ import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.enumeration.AccountType;
 import com.vypersw.finances.enumeration.TransactionType;
 import com.vypersw.finances.jpahelpers.AccountJPAHelper;
+import com.vypersw.finances.jpahelpers.TransactionJPAHelper;
 import com.vypersw.finances.jpahelpers.UserJPAHelper;
 import com.vypersw.finances.services.AccountService;
 import com.vypersw.finances.user.User;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -135,6 +138,20 @@ public class AccountBean extends AbstractBean implements AccountService {
         accountJPAHelper.delete(account);
     }
 
+    @Override
+    public void transfer(long source, long target, long amount) {
+        AccountJPAHelper accountJPAHelper = new AccountJPAHelper(entityManager);
+        Account s = accountJPAHelper.findById(Account.class, source);
+        Account t = accountJPAHelper.findById(Account.class, target);
+        s.setBalance(s.getBalance().subtract(new BigDecimal(amount)));
+        t.setBalance(t.getBalance().add(new BigDecimal(amount)));
+        entityManager.merge(s);
+        entityManager.merge(t);
+        entityManager.persist(createTransaction(TransactionType.EXPENSE, s, t, amount, true));
+        entityManager.persist(createTransaction(TransactionType.INCOME, s, t, amount, false));
+    }
+
+
     private CategoryDTO getCategoryDTO(Category category) {
         CategoryDTO categoryDTO = new CategoryDTO();
         categoryDTO.setId(category.getId());
@@ -147,5 +164,23 @@ public class AccountBean extends AbstractBean implements AccountService {
             categoryDTO.getChildCategories().add(getCategoryDTO(child));
         }
         return categoryDTO;
+    }
+
+    private Transaction createTransaction(TransactionType transactionType, Account s, Account t, long amount, boolean source) {
+        TransactionJPAHelper transactionJPAHelper = new TransactionJPAHelper(entityManager);
+        Transaction transaction = new Transaction();
+        transaction.setId(transactionJPAHelper.getNextTransactionId());
+        if (source) {
+            transaction.setAccount(s);
+            transaction.setAmount(new BigDecimal(-amount));
+        } else {
+            transaction.setAccount(t);
+            transaction.setAmount(new BigDecimal(amount));
+        }
+        transaction.setDate(new Date());
+        transaction.setDescription("Transfer from " + s.getName() + " to " + t.getName());
+        transaction.setCategory(null);
+        transaction.setTransactionType(transactionType.getValue());
+        return transaction;
     }
 }

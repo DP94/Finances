@@ -6,7 +6,7 @@ import java.util.Map;
 
 public enum TransactionType implements Serializable {
 
-    EXPENSE(1), INCOME(2);
+    EXPENSE(1), INCOME(2), TRANSFER(3);
 
     private static final Map<Integer, TransactionType> values = new HashMap<>();
 

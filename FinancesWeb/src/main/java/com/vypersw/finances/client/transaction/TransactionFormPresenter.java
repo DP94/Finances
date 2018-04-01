@@ -80,7 +80,7 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
     public void initaliseForm() {
         setLoading(false);
         AccountAction accountAction = new AccountAction();
-        accountAction.setGetAll(true);
+        accountAction.setActionType(VyperAction.ActionType.GET_ALL);
         dispatchAsync.execute(accountAction, new AsyncCallback<AccountActionResult>() {
             @Override
             public void onFailure(Throwable caught) {

@@ -95,12 +95,22 @@ public class AccountTransferView extends ViewWithUiHandlers<AccountTransferUIHan
 
     @Override
     public void setFormData(List<AccountDTO> accountDTOList) {
+        int currentSource = sourceAccount.getSelectedIndex();
+        int currentTarget = targetAccount.getSelectedIndex();
+        sourceAccount.clear();
+        targetAccount.clear();
         sourceAccount.addItem("", "0");
         targetAccount.addItem("", "0");
         for (AccountDTO accountDTO : accountDTOList) {
             sourceAccount.addItem(accountDTO.getName(), String.valueOf(accountDTO.getAccountId()));
             targetAccount.addItem(accountDTO.getName(), String.valueOf(accountDTO.getAccountId()));
             accountDTOMap.put(accountDTO.getAccountId(), accountDTO);
+        }
+        if (currentSource > 0 && currentTarget > 0) {
+            sourceAccount.setSelectedIndex(currentSource);
+            targetAccount.setSelectedIndex(currentTarget);
+            sourceAccountWidget.init(accountDTOMap.get(Long.valueOf(sourceAccount.getSelectedValue())));
+            targetAccountWidget.init(accountDTOMap.get(Long.valueOf(targetAccount.getSelectedValue())));
         }
     }
 
@@ -124,6 +134,15 @@ public class AccountTransferView extends ViewWithUiHandlers<AccountTransferUIHan
 
     @Override
     public void onToolbarButtonClicked(ToolbarButtonClickedEvent event) {
-
+        switch (event.getEventType()) {
+            case SAVE:
+                getUiHandlers().save(sourceAccountWidget.getAccountDTO(), targetAccountWidget.getAccountDTO(), Long.valueOf(amount.getValue()));
+                break;
+            case REFRESH:
+                getUiHandlers().refresh();
+                break;
+            default:
+                break;
+        }
     }
 }

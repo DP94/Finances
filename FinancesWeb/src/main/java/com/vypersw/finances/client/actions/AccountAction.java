@@ -5,8 +5,7 @@ import com.vypersw.finances.dto.user.AccountDTO;
 
 public class AccountAction extends VyperAction<AccountActionResult> {
     private AccountDTO accountDTO;
-    private boolean getAll;
-    private boolean isCreate;
+    private long sourceId, targetId, amount;
     public AccountAction() {
     }
 
@@ -22,19 +21,27 @@ public class AccountAction extends VyperAction<AccountActionResult> {
         this.accountDTO = accountDTO;
     }
 
-    public boolean isGetAll() {
-        return getAll;
+    public long getSourceId() {
+        return sourceId;
     }
 
-    public void setGetAll(boolean getAll) {
-        this.getAll = getAll;
+    public void setSourceId(long sourceId) {
+        this.sourceId = sourceId;
     }
 
-    public boolean isCreate() {
-        return isCreate;
+    public long getTargetId() {
+        return targetId;
     }
 
-    public void setCreate(boolean create) {
-        isCreate = create;
+    public void setTargetId(long targetId) {
+        this.targetId = targetId;
+    }
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
     }
 }

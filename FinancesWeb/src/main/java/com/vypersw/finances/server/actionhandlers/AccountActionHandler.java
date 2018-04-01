@@ -7,7 +7,6 @@ import com.vypersw.finances.login.bean.LocalEJBServiceLocator;
 import com.vypersw.finances.services.AccountService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AccountActionHandler extends VyperActionHandler<AccountAction, AccountActionResult> {
 
@@ -16,20 +15,26 @@ public class AccountActionHandler extends VyperActionHandler<AccountAction, Acco
     @Override
     protected AccountActionResult executeAction(AccountAction action) {
         AccountActionResult accountActionResult = new AccountActionResult();
-        if (action.isCreate()) {
-            long id = accountService.create(action.getAccountDTO());
-            AccountDTO newAccountDTO = accountService.getById(id);
-            accountActionResult.setAccountDTO(newAccountDTO);
-            return accountActionResult;
+        switch (action.getActionType()) {
+            case SAVE:
+                long id = accountService.updateAccount(action.getAccountDTO());
+                AccountDTO newAccount = accountService.getById(id);
+                accountActionResult.setAccountDTO(newAccount);
+                return accountActionResult;
+            case CREATE:
+                id = accountService.create(action.getAccountDTO());
+                AccountDTO newAccountDTO = accountService.getById(id);
+                accountActionResult.setAccountDTO(newAccountDTO);
+                return accountActionResult;
+            case GET_ALL:
+                ArrayList<AccountDTO> accountDTOList = new ArrayList<>(accountService.getAll());
+                accountActionResult.setAccounts(accountDTOList);
+                return accountActionResult;
+            case ACCOUNT_TRANSFER:
+                accountService.transfer(action.getSourceId(), action.getTargetId(), action.getAmount());
+                return accountActionResult;
+            default:
+                return accountActionResult;
         }
-        if (action.isGetAll()) {
-            ArrayList<AccountDTO> accountDTOList = new ArrayList<>(accountService.getAll());
-            accountActionResult.setAccounts(accountDTOList);
-        } else {
-            long id = accountService.updateAccount(action.getAccountDTO());
-            AccountDTO newAccount = accountService.getById(id);
-            accountActionResult.setAccountDTO(newAccount);
-        }
-        return accountActionResult;
     }
 }

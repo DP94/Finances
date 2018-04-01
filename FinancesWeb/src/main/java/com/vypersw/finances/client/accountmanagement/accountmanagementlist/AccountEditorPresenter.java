@@ -11,6 +11,7 @@ import com.vypersw.finances.client.abstractpresenter.VyperFormPresenter;
 import com.vypersw.finances.client.actions.AccountAction;
 import com.vypersw.finances.client.actions.DeleteAction;
 import com.vypersw.finances.client.actions.GetAccountAction;
+import com.vypersw.finances.client.actions.VyperAction;
 import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.client.content.ContentType;
 import com.vypersw.finances.client.results.AccountActionResult;
@@ -116,7 +117,7 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
         setLoading(true);
         AccountAction accountAction = new AccountAction();
         if (accountId == 0) {
-            accountAction.setCreate(true);
+            accountAction.setActionType(VyperAction.ActionType.CREATE);
         }
         AccountDTO accountDTO = getData();
         accountDTO.setUserId(getContainer().getUserDTO().getId());

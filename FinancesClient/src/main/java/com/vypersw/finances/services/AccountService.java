@@ -10,4 +10,5 @@ public interface AccountService {
     long updateAccount(AccountDTO accountDTO);
     long create(AccountDTO accountDTO);
     void delete(long id);
+    void transfer(long source, long target, long amount);
 }

@@ -30,16 +30,18 @@ public class TransactionBean extends AbstractBean implements TransactionService 
 
         if (transactionDTO.getTransactionType() == TransactionType.EXPENSE) {
             account.setBalance(account.getBalance().subtract(transactionDTO.getAmount()));
-        } else {
+        } else if(transactionDTO.getTransactionType() == TransactionType.INCOME) {
             account.setBalance(account.getBalance().add(transactionDTO.getAmount()));
         }
 
         Transaction transaction = new Transaction();
         transaction.setAccount(account);
         transaction.setAmount(transactionDTO.getAmount());
-        CategoryJPAHelper categoryJPAHelper = new CategoryJPAHelper(entityManager);
-        Category category = categoryJPAHelper.findById(Category.class, transactionDTO.getCategoryDTO().getId());
-        transaction.setCategory(category);
+        if (transactionDTO.getCategoryDTO() != null) {
+            CategoryJPAHelper categoryJPAHelper = new CategoryJPAHelper(entityManager);
+            Category category = categoryJPAHelper.findById(Category.class, transactionDTO.getCategoryDTO().getId());
+            transaction.setCategory(category);
+        }
         if (transactionDTO.getDate() == null) {
             transaction.setDate(new Date());
         } else {
@@ -81,13 +83,17 @@ public class TransactionBean extends AbstractBean implements TransactionService 
 
         transactionDTO.setId(transaction.getId());
         transactionDTO.setAmount(transaction.getAmount());
-        transactionDTO.setCategoryId(transaction.getCategory().getId());
+        if (transaction.getCategory() != null) {
+            transactionDTO.setCategoryId(transaction.getCategory().getId());
+        }
         transactionDTO.setDescription(transaction.getDescription());
         transactionDTO.setTransactionType(TransactionType.forValue(transaction.getTransactionType()));
         transactionDTO.setAccountDTO(dto);
         transactionDTO.setDate(transaction.getDate());
         dto.getTransactions().add(transactionDTO);
-        transactionDTO.setCategoryDTO(getCategoryDTO(transaction.getCategory()));
+        if (transaction.getCategory() != null) {
+            transactionDTO.setCategoryDTO(getCategoryDTO(transaction.getCategory()));
+        }
         return transactionDTO;
     }
 

@@ -7,6 +7,7 @@ import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.vypersw.finances.client.accountmanagement.accountmanagementlist.AccountDataProvider;
 import com.vypersw.finances.client.actions.AccountAction;
 import com.vypersw.finances.client.actions.DeleteAction;
+import com.vypersw.finances.client.actions.VyperAction;
 import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.client.content.ContentType;
 import com.vypersw.finances.client.lists.VyperListPresenter;
@@ -70,7 +71,7 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountDT
     private void initTable() {
 		setLoading(true);
 		AccountAction accountAction = new AccountAction();
-		accountAction.setGetAll(true);
+		accountAction.setActionType(VyperAction.ActionType.GET_ALL);
 		dispatchAsync.execute(accountAction, new AsyncCallback<AccountActionResult>() {
 			@Override
 			public void onFailure(Throwable throwable) {
