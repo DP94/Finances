@@ -92,19 +92,7 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
                 getView().setViewData(result.getAccounts());
             }
         });
-        dispatchAsync.execute(new GetCategoriesAction(), new AsyncCallback<GetCategoriesResult>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                setLoading(false);
-                getContentContainerPresenter().getContainer().warn(caught.getMessage());
-            }
-
-            @Override
-            public void onSuccess(GetCategoriesResult result) {
-                setLoading(false);
-                getView().buildCategoriesTree(result.getCategoryDTOS());
-            }
-        });
+        initTree();
         if (transactionId != 0) {
             TransactionAction transactionAction = new TransactionAction();
             transactionAction.setGet(true);
@@ -151,6 +139,7 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
                 @Override
                 public void onSuccess(CategoryResult categoryResult) {
                     setLoading(false);
+                    initTree();
                 }
             });
         } else {
@@ -166,6 +155,7 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
                 @Override
                 public void onSuccess(DeleteResult deleteResult) {
                     setLoading(false);
+                    initTree();
                 }
             });
         }
@@ -176,5 +166,21 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
         PlaceRequest placeRequest = event.getPlaceRequest();
         transactionId = Long.valueOf(placeRequest.getParameter("id", "0"));
         initaliseForm();
+    }
+
+    private void initTree() {
+        dispatchAsync.execute(new GetCategoriesAction(), new AsyncCallback<GetCategoriesResult>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                setLoading(false);
+                getContentContainerPresenter().getContainer().warn(caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(GetCategoriesResult result) {
+                setLoading(false);
+                getView().buildCategoriesTree(result.getCategoryDTOS());
+            }
+        });
     }
 }

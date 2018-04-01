@@ -5,6 +5,7 @@ public enum ContentType {
     ADD("Add transaction"),
     ACCOUNT_EDITING("Account editing"),
 	ACCOUNT_MANAGEMENT("Account management"),
+	ACCOUNT_TRANSFER("Account transfer"),
 	REPORTS("Reports"),
 	USER_SETTINGS("User settings");
 	

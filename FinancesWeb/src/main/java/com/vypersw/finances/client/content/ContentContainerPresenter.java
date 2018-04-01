@@ -11,6 +11,7 @@ import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.vypersw.finances.client.abstractpresenter.VyperPresenterWidget;
 import com.vypersw.finances.client.accountmanagement.accountmanagementlist.AccountEditorPresenter;
+import com.vypersw.finances.client.accountmanagement.accountmanagementlist.AccountTransferPresenter;
 import com.vypersw.finances.client.application.ApplicationPresenter;
 import com.vypersw.finances.client.lists.account.AccountManagementListPresenter;
 import com.vypersw.finances.client.transaction.TransactionFormPresenter;
@@ -44,6 +45,8 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 	private AccountEditorPresenter accountEditorPresenter;
 	@Inject
 	private TransactionFormPresenter transactionFormPresenter;
+	@Inject
+	private AccountTransferPresenter accountTransferPresenter;
 
 	@Inject
 	public ContentContainerPresenter(EventBus eventBus, MyView view, ApplicationPresenter container) {
@@ -75,6 +78,10 @@ public class ContentContainerPresenter extends PresenterWidget<ContentContainerP
 				currentWidget = accountPresenter;
 				accountPresenter.setContentContainerPresenter(this);
 				break;
+			case ACCOUNT_TRANSFER:
+				setInSlot(SLOT_Perspective, accountTransferPresenter);
+				currentWidget = accountTransferPresenter;
+				accountTransferPresenter.setContentContainerPresenter(this);
 			case REPORTS:
 			default:
 				break;

@@ -36,16 +36,22 @@ public class AccountWidget extends Composite {
 	@UiField
 	ProgressBar progress;
 
+	public AccountWidget() {
+		initWidget(binder.createAndBindUi(this));
+	}
 
 	public AccountWidget(AccountDTO accountDTO) {
 		initWidget(binder.createAndBindUi(this));
+		init(accountDTO);
+	}
+
+	public void init(AccountDTO accountDTO) {
 		this.accountDTO = accountDTO;
 		progress.setText(String.valueOf(getPercentage()));
-		if (getPercentage() == 0) {
-			progress.setVisible(false);
-		}
+		setID(String.valueOf(accountDTO.getAccountId()));
 		accountName.setText(accountDTO.getName());
 		accountBalance.setText("£" + accountDTO.getBalance().toString());
+		animate("progress" + id, getPercentage());
 	}
 
 	public AccountDTO getAccountDTO() {

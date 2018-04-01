@@ -58,10 +58,8 @@ public class VyperTree extends Composite implements VyperTreeNodeChangeEvent.Has
             treeItem.setUserObject(categoryDTO);
             if (selectedNode != null) {
                 categoryDTO.setParentCategory(selectedNode.getId());
-                selectedTreeItem.addItem(treeItem);
             } else {
                 categoryDTO.setParentCategory(null);
-                tree.addItem(treeItem);
             }
             VyperTreeNodeChangeEvent.fire(categoryDTO,true, this);
         }
@@ -70,11 +68,6 @@ public class VyperTree extends Composite implements VyperTreeNodeChangeEvent.Has
     @UiHandler("delete")
     public void onDelete(ClickEvent clickEvent) {
         if (selectedTreeItem != null) {
-            if (selectedTreeItem.getParentItem() != null) {
-                selectedTreeItem.getParentItem().removeItem(selectedTreeItem);
-            } else {
-                tree.removeItem(selectedTreeItem);
-            }
             VyperTreeNodeChangeEvent.fire(selectedNode, false,this);
             selectedTreeItem = null;
             selectedNode = null;

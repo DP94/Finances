@@ -41,14 +41,15 @@ public class AccountBean extends AbstractBean implements AccountService {
             TransactionDTO transactionDTO = new TransactionDTO();
             transactionDTO.setId(transaction.getId());
             transactionDTO.setAmount(transaction.getAmount());
-            transactionDTO.setCategoryId(transaction.getCategory().getId());
+            if (transaction.getCategory() != null) {
+                transactionDTO.setCategoryId(transaction.getCategory().getId());
+                transactionDTO.setCategoryDTO(getCategoryDTO(transaction.getCategory()));
+            }
             transactionDTO.setDescription(transaction.getDescription());
             transactionDTO.setTransactionType(TransactionType.forValue(transaction.getTransactionType()));
             transactionDTO.setAccountDTO(dto);
             transactionDTO.setDate(transaction.getDate());
             dto.getTransactions().add(transactionDTO);
-            transactionDTO.setCategoryDTO(getCategoryDTO(transaction.getCategory()));
-
         }
         return dto;
     }
@@ -94,7 +95,7 @@ public class AccountBean extends AbstractBean implements AccountService {
     public long updateAccount(AccountDTO accountDTO) {
         AccountJPAHelper accountJPAHelper = new AccountJPAHelper(entityManager);
 
-        Account account = new Account();
+        Account account = accountJPAHelper.findById(Account.class, accountDTO.getAccountId());
         account.setAccountId(accountDTO.getAccountId());
         account.setName(accountDTO.getName());
         account.setAccountBalanceTarget(accountDTO.getAccountBalanceTarget());

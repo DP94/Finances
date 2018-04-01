@@ -61,6 +61,8 @@ public class ApplicationView extends ViewWithUiHandlers<ApplicationUiHandlers> i
     	reports.addClickHandler(event -> getUiHandlers().move(ContentType.REPORTS, null));
     	
     	userManagement.addClickHandler(event -> getUiHandlers().move(ContentType.USER_SETTINGS, null));
+
+    	transfer.addClickHandler(clickEvent -> getUiHandlers().move(ContentType.ACCOUNT_TRANSFER, null));
     }
     
     @Override

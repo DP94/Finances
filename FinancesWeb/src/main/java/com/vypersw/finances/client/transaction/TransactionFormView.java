@@ -138,6 +138,7 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
 
     @Override
     public void buildCategoriesTree(List<CategoryDTO> categoryDTOSet) {
+        vyperTree.getTree().clear();
         for (CategoryDTO categoryDTO : categoryDTOSet) {
             TreeItem treeItem = new TreeItem();
             treeItem.setUserObject(categoryDTO);
@@ -188,7 +189,7 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
     private void buildAccountChart(AccountDTO accountDTO) {
         chartContainer.clear();
         Chart chart = new Chart();
-        chart.createSeries().setName(accountDTO.getName());
+        chart.setChartTitleText(accountDTO.getName());
         Series series = chart.createSeries().setName("Account transactions in £s");
         if (accountDTO.getAccountType() == AccountType.SAVINGS || accountDTO.getAccountType() == AccountType.ISA) {
             chart.setType(Series.Type.LINE)

@@ -75,6 +75,9 @@ public interface FinancesConstants extends ConstantsWithLookup {
 	
 	@DefaultStringValue("Save")
 	public String save();
+
+	@DefaultStringValue("Source account")
+	public String sourceAccount();
 	
 	@DefaultStringValue("Successfully logged out")
 	public String successfullyLoggedOut();
@@ -84,6 +87,9 @@ public interface FinancesConstants extends ConstantsWithLookup {
 
     @DefaultStringValue("Target")
     public String target();
+
+	@DefaultStringValue("Target account")
+	public String targetAccount();
 
     @DefaultStringValue("Transfer")
     public String transfer();

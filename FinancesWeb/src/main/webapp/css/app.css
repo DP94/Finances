@@ -95,3 +95,20 @@ html, body {
 .alert {
 	height: 50px !important;
 }
+
+.account-transfer-form {
+	padding: 5%;
+}
+
+.account-transfer-icon {
+	text-align: center;
+	font-size: 32px;
+}
+
+.widget-row {
+	text-align: center;
+}
+
+.transfer-amount {
+	width: inherit !important;
+}
