@@ -5,6 +5,7 @@ import com.vypersw.finances.user.User;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -43,7 +44,7 @@ public class Account implements VyperJPA {
 	private List<AccountPermission> accountPermissions;
 
 	public Account() {
-		
+		accountPermissions = new ArrayList<>();
 	}
 	
 	public Long getAccountId() {

@@ -1,12 +1,13 @@
 package com.vypersw.finances.account;
 
+import com.vypersw.finances.VyperJPA;
 import com.vypersw.finances.user.User;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "TBL_ACCOUNT_PERMISSIONS")
-public class AccountPermission {
+public class AccountPermission implements VyperJPA {
 
     @Id
     @Column(name = "ID")

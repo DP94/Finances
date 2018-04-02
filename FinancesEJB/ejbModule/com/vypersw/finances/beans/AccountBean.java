@@ -2,6 +2,7 @@ package com.vypersw.finances.beans;
 
 import com.vypersw.finances.abstractbean.AbstractBean;
 import com.vypersw.finances.account.Account;
+import com.vypersw.finances.account.AccountPermission;
 import com.vypersw.finances.account.Category;
 import com.vypersw.finances.account.Transaction;
 import com.vypersw.finances.dto.CategoryDTO;
@@ -10,6 +11,7 @@ import com.vypersw.finances.dto.user.AccountDTO;
 import com.vypersw.finances.enumeration.AccountType;
 import com.vypersw.finances.enumeration.TransactionType;
 import com.vypersw.finances.jpahelpers.AccountJPAHelper;
+import com.vypersw.finances.jpahelpers.AccountPermissionJPAHelper;
 import com.vypersw.finances.jpahelpers.TransactionJPAHelper;
 import com.vypersw.finances.jpahelpers.UserJPAHelper;
 import com.vypersw.finances.services.AccountService;
@@ -115,7 +117,7 @@ public class AccountBean extends AbstractBean implements AccountService {
     @Override
     public long create(AccountDTO accountDTO) {
         AccountJPAHelper accountJPAHelper = new AccountJPAHelper(entityManager);
-
+        AccountPermissionJPAHelper accountPermissionJPAHelper = new AccountPermissionJPAHelper(entityManager);
         Account account = new Account();
         account.setAccountId(accountJPAHelper.getNextAccountId());
         account.setName(accountDTO.getName());
@@ -126,8 +128,15 @@ public class AccountBean extends AbstractBean implements AccountService {
         UserJPAHelper userJPAHelper = new UserJPAHelper(entityManager);
         User user = userJPAHelper.findById(User.class, accountDTO.getUserId());
         account.setUser(user);
+        AccountPermission accountPermission = new AccountPermission();
+        accountPermission.setId(accountPermissionJPAHelper.getNextPermissionId());
+        accountPermission.setAccount(account);
+        accountPermission.setPermission(1L);
+        accountPermission.setUser(user);
+        account.getAccountPermissions().add(accountPermission);
 
         entityManager.persist(account);
+        entityManager.persist(accountPermission);
         return account.getAccountId();
     }
 
