@@ -5,7 +5,7 @@ import com.vypersw.finances.dto.user.AccountDTO;
 
 public class AccountAction extends VyperAction<AccountActionResult> {
     private AccountDTO accountDTO;
-    private long sourceId, targetId, amount;
+    private long sourceId, targetId, amount, userId;
     public AccountAction() {
     }
 
@@ -43,5 +43,13 @@ public class AccountAction extends VyperAction<AccountActionResult> {
 
     public void setAmount(long amount) {
         this.amount = amount;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

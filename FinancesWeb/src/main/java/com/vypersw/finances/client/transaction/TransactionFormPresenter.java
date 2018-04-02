@@ -81,6 +81,7 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
         setLoading(false);
         AccountAction accountAction = new AccountAction();
         accountAction.setActionType(VyperAction.ActionType.GET_ALL);
+        accountAction.setUserId(getContainer().getUserDTO().getId());
         dispatchAsync.execute(accountAction, new AsyncCallback<AccountActionResult>() {
             @Override
             public void onFailure(Throwable caught) {

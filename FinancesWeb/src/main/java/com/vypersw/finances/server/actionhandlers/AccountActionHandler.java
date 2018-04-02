@@ -27,7 +27,7 @@ public class AccountActionHandler extends VyperActionHandler<AccountAction, Acco
                 accountActionResult.setAccountDTO(newAccountDTO);
                 return accountActionResult;
             case GET_ALL:
-                ArrayList<AccountDTO> accountDTOList = new ArrayList<>(accountService.getAll());
+                ArrayList<AccountDTO> accountDTOList = new ArrayList<>(accountService.getAll(action.getUserId()));
                 accountActionResult.setAccounts(accountDTOList);
                 return accountActionResult;
             case ACCOUNT_TRANSFER:

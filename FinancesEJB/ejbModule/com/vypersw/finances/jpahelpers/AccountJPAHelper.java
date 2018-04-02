@@ -16,11 +16,11 @@ public class AccountJPAHelper extends JPAHelper<Account> {
         return typedQuery.getSingleResult() + 1;
     }
 
-    public List<Account> findAll() {
+    public List<Account> findAll(Long userId) {
         TypedQuery<Account> typedQuery = entityManager.createQuery("SELECT account FROM Account account LEFT JOIN account.accountPermissions accountPermission " +
                 "WHERE accountPermission.user.id = :userId " +
                 "AND accountPermission.permission = 1 " , Account.class);
-        typedQuery.setParameter("userId", 2L);
+        typedQuery.setParameter("userId", userId);
         return typedQuery.getResultList();
     }
 }
