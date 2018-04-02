@@ -70,7 +70,7 @@ public class AccountTransferView extends ViewWithUiHandlers<AccountTransferUIHan
         toolbar.getEdit().removeFromParent();
         amount.setPlaceholder("Enter an amount");
         sourceAccount.addChangeHandler(changeEvent -> {
-            long id = sourceAccount.getSelectedIndex();
+            long id = Long.valueOf(sourceAccount.getSelectedValue());
             if (id > 0) {
                 selectSourceAccount.setVisible(false);
                 sourceAccountDiv.setVisible(true);
@@ -81,7 +81,7 @@ public class AccountTransferView extends ViewWithUiHandlers<AccountTransferUIHan
             }
         });
         targetAccount.addChangeHandler(changeEvent -> {
-            long id = targetAccount.getSelectedIndex();
+            long id = Long.valueOf(targetAccount.getSelectedValue());
             if (id > 0) {
                 selectTargetAccount.setVisible(false);
                 targetAccountDiv.setVisible(true);
