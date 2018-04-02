@@ -39,6 +39,9 @@ public class Account implements VyperJPA {
 	@OneToMany(mappedBy = "account", orphanRemoval = true)
 	private List<Transaction> transactions;
 
+	@OneToMany(mappedBy = "account", orphanRemoval = true)
+	private List<AccountPermission> accountPermissions;
+
 	public Account() {
 		
 	}
@@ -105,5 +108,13 @@ public class Account implements VyperJPA {
 
 	public void setTransactions(List<Transaction> transactions) {
 		this.transactions = transactions;
+	}
+
+	public List<AccountPermission> getAccountPermissions() {
+		return accountPermissions;
+	}
+
+	public void setAccountPermissions(List<AccountPermission> accountPermissions) {
+		this.accountPermissions = accountPermissions;
 	}
 }

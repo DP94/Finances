@@ -116,6 +116,7 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
     public void onSave() {
         setLoading(true);
         AccountAction accountAction = new AccountAction();
+        accountAction.setActionType(VyperAction.ActionType.SAVE);
         if (accountId == 0) {
             accountAction.setActionType(VyperAction.ActionType.CREATE);
         }

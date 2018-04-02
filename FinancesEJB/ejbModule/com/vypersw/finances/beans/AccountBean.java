@@ -60,7 +60,7 @@ public class AccountBean extends AbstractBean implements AccountService {
     @Override
     public List<AccountDTO> getAll() {
         AccountJPAHelper accountJPAHelper = new AccountJPAHelper(entityManager);
-        List<Account> accounts = accountJPAHelper.getAll(Account.class);
+        List<Account> accounts = accountJPAHelper.findAll();
         List<AccountDTO> accountDTOS = new ArrayList<>();
         for (Account account : accounts) {
             AccountDTO dto = new AccountDTO();

@@ -210,8 +210,10 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
                     .setMarginRight(10)
                     .setSeriesPlotOptions(new SeriesPlotOptions().setCursor(PlotOptions.Cursor.POINTER));
             for (TransactionDTO transactionDTO : accountDTO.getTransactions()) {
-                Point point = new Point(transactionDTO.getCategoryDTO().getName(), transactionDTO.getAmount().doubleValue());
-                series.addPoint(point);
+                if (transactionDTO.getCategoryDTO() != null) {
+                    Point point = new Point(transactionDTO.getCategoryDTO().getName(), transactionDTO.getAmount().doubleValue());
+                    series.addPoint(point);
+                }
             }
         }
         chart.addSeries(series);
