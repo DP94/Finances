@@ -186,10 +186,13 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 		if (openSlots.size() > 1) {
 			openSlots.remove(presenter);
 			setInSlot(SLOT_content, openSlots.getLast());
+            perspectives.remove(type);
 		} else {
 			openSlots.remove(presenter);
+            perspectives.remove(type);
+            PlaceRequest request = new PlaceRequest.Builder().nameToken(NameTokens.home).with("username", userDTO.getUsername()).build();
+            placeManager.revealPlace(request);
 		}
-		perspectives.remove(type);
 	}
 
 	public UserDTO getUserDTO() {
