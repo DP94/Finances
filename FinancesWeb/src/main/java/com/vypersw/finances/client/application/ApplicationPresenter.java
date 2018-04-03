@@ -166,12 +166,17 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 	}
 
 	public void move(ContentType contentType, Map<String, String> params) {
-		if (params == null) {
-			params = new HashMap<>();
-		}
-		params.put("action", contentType.toString());
-		PlaceRequest request = new PlaceRequest.Builder().nameToken(NameTokens.home).with(params).build();
-		placeManager.revealPlace(request);
+        if (perspectives.containsKey(contentType)) {
+            ContentContainerPresenter presenter = perspectives.get(contentType);
+            setInSlot(SLOT_content, presenter);
+        } else {
+            if (params == null) {
+                params = new HashMap<>();
+            }
+            params.put("action", contentType.toString());
+            PlaceRequest request = new PlaceRequest.Builder().nameToken(NameTokens.home).with(params).build();
+            placeManager.revealPlace(request);
+        }
 	}
 	
 	@Override
