@@ -105,7 +105,4 @@ public interface FinancesConstants extends ConstantsWithLookup {
 	
 	@DefaultStringValue("Username")
 	public String username();
-	
-	@DefaultStringValue("Welcome, ")
-	public String welcomeX();
 }

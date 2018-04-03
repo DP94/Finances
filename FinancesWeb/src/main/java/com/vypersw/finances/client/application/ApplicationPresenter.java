@@ -190,7 +190,7 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 		} else {
 			openSlots.remove(presenter);
             perspectives.remove(type);
-            PlaceRequest request = new PlaceRequest.Builder().nameToken(NameTokens.home).with("username", userDTO.getUsername()).build();
+            PlaceRequest request = new PlaceRequest.Builder().nameToken(NameTokens.home).build();
             placeManager.revealPlace(request);
 		}
 	}

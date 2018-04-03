@@ -1,7 +1,5 @@
 package com.vypersw.finances.client.login;
 
-import javax.inject.Inject;
-
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
@@ -18,11 +16,15 @@ import com.vypersw.finances.client.actions.LoginAction;
 import com.vypersw.finances.client.place.NameTokens;
 import com.vypersw.finances.client.results.LoginActionResult;
 
+import javax.inject.Inject;
+
 public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresenter.MyProxy> implements LoginUiHandlers {
     public interface MyView extends View, HasUiHandlers<LoginUiHandlers> {
-    	public void login();
-    	public void updateFeedback(String text, String type);
-    	public void clearInputs();
+		void login();
+
+		void updateFeedback(String text, String type);
+
+		void clearInputs();
     }
     
     private String feedbackText = "";
@@ -70,7 +72,7 @@ public class LoginPresenter extends Presenter<LoginPresenter.MyView, LoginPresen
 		@Override
 		public void onSuccess(LoginActionResult result) {
 			if (result.getDto() != null) {
-				PlaceRequest request = new PlaceRequest.Builder().nameToken(NameTokens.home).with("username", result.getDto().getUsername()).build();
+				PlaceRequest request = new PlaceRequest.Builder().nameToken(NameTokens.home).build();
 				placeManager.revealPlace(request);
 			} else {
 				getView().updateFeedback("Invalid username or password", "error");
