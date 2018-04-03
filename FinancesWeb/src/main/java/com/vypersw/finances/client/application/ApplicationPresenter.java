@@ -15,6 +15,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+import com.vypersw.finances.client.ClientStorage;
 import com.vypersw.finances.client.actions.InitSessionAction;
 import com.vypersw.finances.client.actions.LogoutAction;
 import com.vypersw.finances.client.content.ContentContainerPresenter;
@@ -81,7 +82,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 			public void onSuccess(InitSessionActionResult result) {
 				userDTO = result.getDto();
 				if (userDTO == null) {
-					//Is this needed? Shouldn't we just leave it and let it clear from memory?
 					for (ContentContainerPresenter presenter : perspectives.values()) {
 						removeFromSlot(SLOT_content, presenter);
 					}
@@ -92,6 +92,7 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
 							.build();
 					placeManager.revealPlace(request);
 				}
+				ClientStorage.storeValue(ClientStorage.USER_ID, String.valueOf(userDTO.getId()));
 			}
 		});
 	}

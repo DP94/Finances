@@ -5,6 +5,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.View;
+import com.vypersw.finances.client.ClientStorage;
 import com.vypersw.finances.client.abstractpresenter.VyperFormPresenter;
 import com.vypersw.finances.client.actions.AccountAction;
 import com.vypersw.finances.client.actions.VyperAction;
@@ -36,7 +37,7 @@ public class AccountTransferPresenter extends VyperFormPresenter<AccountTransfer
     public void initaliseForm() {
         AccountAction accountAction = new AccountAction();
         accountAction.setActionType(VyperAction.ActionType.GET_ALL);
-        accountAction.setUserId(getContainer().getUserDTO().getId());
+        accountAction.setUserId(ClientStorage.getUserId());
         dispatchAsync.execute(accountAction, new AsyncCallback<AccountActionResult>() {
             @Override
             public void onFailure(Throwable caught) {

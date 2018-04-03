@@ -4,6 +4,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
+import com.vypersw.finances.client.ClientStorage;
 import com.vypersw.finances.client.accountmanagement.accountmanagementlist.AccountDataProvider;
 import com.vypersw.finances.client.actions.AccountAction;
 import com.vypersw.finances.client.actions.DeleteAction;
@@ -72,7 +73,7 @@ public class AccountManagementListPresenter extends VyperListPresenter<AccountDT
 		setLoading(true);
 		AccountAction accountAction = new AccountAction();
 		accountAction.setActionType(VyperAction.ActionType.GET_ALL);
-		accountAction.setUserId(getContainer().getUserDTO().getId());
+		accountAction.setUserId(ClientStorage.getUserId());
 		dispatchAsync.execute(accountAction, new AsyncCallback<AccountActionResult>() {
 			@Override
 			public void onFailure(Throwable throwable) {
