@@ -19,7 +19,7 @@ import java.util.List;
 public class AccountTransferPresenter extends VyperFormPresenter<AccountTransferPresenter.MyView, AccountDTO> implements AccountTransferUIHandlers {
 
     public interface MyView extends View, HasUiHandlers<AccountTransferUIHandlers> {
-        void setFormData(List<AccountDTO> accountDTOList);
+        void setFormData(List<AccountDTO> accountDTOList, boolean refresh);
     }
 
     @Inject
@@ -35,22 +35,7 @@ public class AccountTransferPresenter extends VyperFormPresenter<AccountTransfer
 
     @Override
     public void initaliseForm() {
-        AccountAction accountAction = new AccountAction();
-        accountAction.setActionType(VyperAction.ActionType.GET_ALL);
-        accountAction.setUserId(ClientStorage.getUserId());
-        dispatchAsync.execute(accountAction, new AsyncCallback<AccountActionResult>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                setLoading(false);
-                getContentContainerPresenter().getContainer().warn(caught.getMessage());
-            }
-
-            @Override
-            public void onSuccess(AccountActionResult result) {
-                setLoading(false);
-                getView().setFormData(result.getAccounts());
-            }
-        });
+        getAccounts(false);
     }
 
     @Override
@@ -89,6 +74,25 @@ public class AccountTransferPresenter extends VyperFormPresenter<AccountTransfer
 
     @Override
     public void refresh() {
-        initaliseForm();
+        getAccounts(true);
+    }
+
+    private void getAccounts(boolean isRefresh) {
+        AccountAction accountAction = new AccountAction();
+        accountAction.setActionType(VyperAction.ActionType.GET_ALL);
+        accountAction.setUserId(ClientStorage.getUserId());
+        dispatchAsync.execute(accountAction, new AsyncCallback<AccountActionResult>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                setLoading(false);
+                getContentContainerPresenter().getContainer().warn(caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(AccountActionResult result) {
+                setLoading(false);
+                getView().setFormData(result.getAccounts(), isRefresh);
+            }
+        });
     }
 }

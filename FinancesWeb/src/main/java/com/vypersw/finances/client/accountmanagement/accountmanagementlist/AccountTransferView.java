@@ -94,7 +94,7 @@ public class AccountTransferView extends ViewWithUiHandlers<AccountTransferUIHan
     }
 
     @Override
-    public void setFormData(List<AccountDTO> accountDTOList) {
+    public void setFormData(List<AccountDTO> accountDTOList, boolean refresh) {
         int currentSource = sourceAccount.getSelectedIndex();
         int currentTarget = targetAccount.getSelectedIndex();
         sourceAccount.clear();
@@ -106,11 +106,16 @@ public class AccountTransferView extends ViewWithUiHandlers<AccountTransferUIHan
             targetAccount.addItem(accountDTO.getName(), String.valueOf(accountDTO.getAccountId()));
             accountDTOMap.put(accountDTO.getAccountId(), accountDTO);
         }
-        if (currentSource > 0 && currentTarget > 0) {
+        if (currentSource > 0 && currentTarget > 0 && !refresh) {
             sourceAccount.setSelectedIndex(currentSource);
             targetAccount.setSelectedIndex(currentTarget);
             sourceAccountWidget.init(accountDTOMap.get(Long.valueOf(sourceAccount.getSelectedValue())));
             targetAccountWidget.init(accountDTOMap.get(Long.valueOf(targetAccount.getSelectedValue())));
+        } else if (refresh) {
+            sourceAccountDiv.setVisible(false);
+            selectSourceAccount.setVisible(true);
+            targetAccountDiv.setVisible(false);
+            selectTargetAccount.setVisible(true);
         }
     }
 
