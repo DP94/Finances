@@ -80,10 +80,7 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
         account.addChangeHandler(changeEvent -> {
             Long id = Long.valueOf(account.getSelectedValue());
             if (id > 0) {
-                AccountDTO accountDTO = new AccountDTO();
-                accountDTO.setAccountId(Long.valueOf(account.getSelectedValue()));
-                getUiHandlers().getData().setAccountDTO(accountDTO);
-                buildAccountChart(accountDTOMap.get(accountDTO.getAccountId()));
+                buildAccountChart(accountDTOMap.get(Long.valueOf(account.getSelectedValue())));
                 if (accountDTOMap.get(id).getAccountType() == AccountType.SAVINGS || accountDTOMap.get(id).getAccountType() == AccountType.ISA) {
                     treeGroup.setVisible(false);
                 } else {
@@ -93,10 +90,6 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
                 chartContainer.clear();
                 chartContainer.add(noData);
             }
-        });
-        transactionType.addChangeHandler(changeEvent -> getUiHandlers().getData().setTransactionType(TransactionType.valueOf(transactionType.getSelectedValue())));
-        amount.addValueChangeHandler(valueChangeHandler -> {
-            getUiHandlers().getData().setAmount(new BigDecimal(amount.getValue()));
         });
         amount.setAutoComplete(false);
         amount.addKeyUpHandler(keyUpEvent -> {
@@ -109,9 +102,7 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
                 amountLabel.setText("The account's balance after this income will be: " + (accountDTOMap.get(accountId).getBalance().doubleValue() + (new BigDecimal(amount.getText()).doubleValue())));
             }
         });
-        description.addValueChangeHandler(event -> getUiHandlers().getData().setDescription(description.getValue()));
         toolbar.addToolbarButtonClickedHandler(this);
-        date.addChangeDateHandler(changeDateEvent -> getUiHandlers().getData().setDate(date.getValue()));
         toolbar.getDelete().removeFromParent();
         toolbar.getEdit().removeFromParent();
         vyperTree.addVyperTreeNodeChangeEventHandlers(this);
@@ -174,6 +165,20 @@ public class TransactionFormView extends ViewWithUiHandlers<TransactionFormUiHan
             description.setText(transactionDTO.getDescription());
             date.setValue(transactionDTO.getDate());
         }
+    }
+
+    @Override
+    public TransactionDTO getFormData() {
+        TransactionDTO transactionDTO = getUiHandlers().getData();
+        AccountDTO accountDTO = new AccountDTO();
+        accountDTO.setAccountId(Long.valueOf(account.getSelectedValue()));
+        transactionDTO.setAccountDTO(accountDTO);
+        transactionDTO.setTransactionType(TransactionType.valueOf(transactionType.getSelectedValue()));
+        transactionDTO.setAmount(new BigDecimal(amount.getValue()));
+        transactionDTO.setDescription(description.getValue());
+        transactionDTO.setDate(date.getValue());
+        transactionDTO.setCategoryDTO(vyperTree.getSelectedNode());
+        return transactionDTO;
     }
 
     @Override

@@ -33,6 +33,8 @@ public abstract class VyperFormPresenter<V extends View, D extends VyperDTO> ext
 	public abstract void setFormData(D data);
 	public abstract void initaliseForm();
 
+	public abstract D getFormData();
+
 	public D getData() {
 		return data;
 	}

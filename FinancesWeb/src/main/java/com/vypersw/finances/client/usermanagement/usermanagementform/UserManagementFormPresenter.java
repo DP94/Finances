@@ -76,6 +76,11 @@ public class UserManagementFormPresenter extends VyperFormPresenter<UserManageme
 	}
 
 	@Override
+	public UserDTO getFormData() {
+		return null;
+	}
+
+	@Override
 	public void setFormData(UserDTO data) {
 		initaliseForm();
 	}

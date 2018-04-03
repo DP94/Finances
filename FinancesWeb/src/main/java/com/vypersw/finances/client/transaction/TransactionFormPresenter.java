@@ -29,6 +29,8 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
         void buildCategoriesTree(List<CategoryDTO> categoryDTOSet);
 
         void buildTransactionData(TransactionDTO transactionDTO);
+
+        TransactionDTO getFormData();
     }
 
     private long transactionId;
@@ -42,7 +44,7 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
     @Override
     public void save() {
         setLoading(true);
-        TransactionAction accountAction = new TransactionAction(getData());
+        TransactionAction accountAction = new TransactionAction(getFormData());
         accountAction.setSave(true);
         dispatchAsync.execute(accountAction, new AsyncCallback<TransactionResult>() {
             @Override
@@ -116,6 +118,11 @@ public class TransactionFormPresenter extends VyperFormPresenter<TransactionForm
             setFormState(FormState.CREATE);
             setData(new TransactionDTO());
         }
+    }
+
+    @Override
+    public TransactionDTO getFormData() {
+        return getView().getFormData();
     }
 
     @Override

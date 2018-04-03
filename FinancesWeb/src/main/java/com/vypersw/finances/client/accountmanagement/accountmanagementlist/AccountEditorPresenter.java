@@ -82,6 +82,11 @@ public class AccountEditorPresenter extends VyperFormPresenter<AccountEditorPres
     }
 
     @Override
+    public AccountDTO getFormData() {
+        return null;
+    }
+
+    @Override
     public AccountDTO getData() {
         return super.getData();
     }

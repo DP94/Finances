@@ -53,6 +53,11 @@ public class AccountTransferPresenter extends VyperFormPresenter<AccountTransfer
     }
 
     @Override
+    public AccountDTO getFormData() {
+        return null;
+    }
+
+    @Override
     protected void onBind() {
         initaliseForm();
     }
